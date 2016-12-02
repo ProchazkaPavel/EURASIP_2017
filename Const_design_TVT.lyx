@@ -1,0 +1,7526 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{babel}
+
+\usepackage{cite}
+\usepackage{color}
+\usepackage{bigdelim,multirow}
+\usepackage{tikz}
+\usetikzlibrary[arrows,calc,decorations.pathmorphing,backgrounds,positioning,fit,petri,shapes,decorations.markings]
+\usepackage{pgfplots}
+\usepackage{babel}
+\usepackage{multirow}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\usepackage{nicefrac}
+
+\usepackage{setspace}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+%\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% unnumbered footnote
+\makeatletter
+\newcommand{\unfootnote}[1]{
+  \renewcommand{\@makefnmark}{}
+  \footnotetext{#1}
+  \renewcommand{\@makefnmark}{\mbox{$^{\@thefnmark}$}}
+}
+\makeatother
+
+\newcommand{\jj}{\operatorname{j}}      % imaginary unit
+\end_preamble
+\options 10pt
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics dvips
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing double
+\use_hyperref false
+\papersize letterpaper
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes true
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\author 270580279 "pajin" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Design of Adaptive Constellations and Error Protection Coding for Wireless
+ Network Coding in 5-node Butterfly Networks
+\end_layout
+
+\begin_layout Author
+Pavel Prochazka, Tomas Uricar, David Halls and Jan Sykora
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+The corresponding author D.
+ Halls is with the Toshiba -- Telecommunication Research Laboratory (email:
+ david.halls@toshiba-trel.com).
+ Pavel Prochazka, Tomas Uricar and Jan Sykora were with the Czech Technical
+ University in Prague, Czech Republic (e-mail: 
+\backslash
+{prochp10, uricatom, Jan.Sykora
+\backslash
+}@fel.cvut.cz).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+In this paper we focus on the design of a reliable communication scheme
+ for generic 5-node Wireless Butterfly Networks (WBN).
+ Since the WBN represents a natural extension of the basic 2-way relay communica
+tion channel, we follow the paradigm of 
+\emph on
+Wireless Physical Layer Network Coding
+\emph default
+ (WNC) and we show that the design of novel adaptive constellations
+\emph on
+ 
+\emph default
+is desirable to exploit the promising performance of WNC in WBN.
+ We introduce a 
+\emph on
+systematic constellation design
+\emph default
+ algorithm and we show that the proposed constellations are capable of outperfor
+ming conventional point-to-point modulations in WBN over the whole range
+ of channel SNRs.
+ To further support the applicability of the proposed constellations in
+ a practical system, we integrate a simple binary channel coding scheme,
+ providing a robust 
+\emph on
+adaptive modulation and coding scheme
+\emph default
+ for relaying in symmetric WBNs with arbitrary channel conditions.
+\end_layout
+
+\begin_layout Subsubsection*
+Keywords: Wireless Network Coding, Butterfly Network, Relaying, Superposition
+ Coding and Modulation
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+version P8 (1.12.2016).
+\backslash
+
+\backslash
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 270580279 1480623152
+The 
+\change_unchanged
+invention of Wireless Network Coding
+\emph on
+ 
+\emph default
+(WNC) has indeed provided a means for a significant enhancement in wireless
+ system performance 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Popovski-Yomo_2007a,Nazer-Gastpar_2011-IEEE-P,Zhang-Liew-Lu_2012"
+
+\end_inset
+
+.
+ However, WNC processing has also revealed several non-trivial research
+ problems which do not have counterparts in conventional point-to-point
+ or multi-user systems, like the sensitivity to channel paramet
+\change_inserted 270580279 1480623069
+e
+\change_unchanged
+rization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2008,Liu-Tao-Xu_2011-ICC,Yasami-Razi-Abedi_2011,Uricar-Sykora_2011"
+
+\end_inset
+
+ or challenging multi-source transmission synchronization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang-Liew-Lam_2006b-ITW,Rosetto-Zorzi_2009-SPAWC,Huang-Wang-Song-Guo-Jamalipour_2012-IEEE-T-WC"
+
+\end_inset
+
+.
+ Furthermore, the specific characteristics of multi-node WNC systems can
+ call also for novel constellation design approaches (see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Sykora_2011,Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+In WNC the transmitted information symbols are allowed to interact directly
+ in the constellation space, inducing a specific set of requirements on
+ the constellations' properties and characteristics (see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Sykora_2011,Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+).
+ Generally we can declare 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+ that any constellation suitable for the specific nature of WNC processing
+ should be able to form
+\emph on
+ a superimposed constellation
+\emph default
+ with an appropriate structure at all receiving nodes (allowing direct decoding
+ of specific WNC functions of user data from the received non-orthogonal
+ signals 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nazer-Gastpar_2008-ISIT,Sykora-Burr_2011-TVT"
+
+\end_inset
+
+) and simultaneously it should be able to exploit the 
+\emph on
+broadcast nature 
+\emph default
+of wireless channels (allowing a reduction in the consumption of channel
+ resources in the system 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Popovski-Yomo_2007a"
+
+\end_inset
+
+).
+ Since both of these properties hinge on the actual SNR conditions in the
+ system, the constellation design itself can become a relatively challenging
+ task.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/2-SRN-sc_principle_BC-TWT_v4.eps
+	width 60col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Symmetric WBN model with half-duplex constraint and 2-phase communication.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Information_flows"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One of the first attempts to design a suitable multi-source constellation
+ for communication in a multi-node WNC system was introduced in our previous
+ work 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+, where the 
+\emph on
+adaptive 2-source constellations
+\emph default
+ for WNC-based communication in a 5-node 
+\emph on
+Wireless Butterfly Network
+\emph default
+ (WBN) were developed.
+ However, the results presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+ are limited to an uncoded system, which significantly limits its practical
+ applicability.
+ 
+\end_layout
+
+\begin_layout Standard
+In this paper we extend the communication scheme from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+ by appending appropriate 
+\emph on
+error protection coding
+\emph default
+ to the system, resulting in a practical channel-coded adaptive communication
+ scheme for WBN.
+ We provide the following results and contributions:
+\end_layout
+
+\begin_layout Enumerate
+We summarize the 
+\emph on
+systematic constellation design algorithm
+\emph default
+ from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+ and we provide additional numerical results analysing its promising performance.
+\end_layout
+
+\begin_layout Enumerate
+We revise and extend the results discussing the 
+\emph on
+adaptive capabilities of the constellations, 
+\emph default
+including 
+\emph on
+the constellation mapping regions
+\emph default
+ for adaptive WBN relaying
+\emph on
+.
+\end_layout
+
+\begin_layout Enumerate
+We validate the proposed design in a 
+\emph on
+real-world HW setup
+\emph default
+, including the HW evaluation of adaptive system performance.
+\end_layout
+
+\begin_layout Enumerate
+We show how the 
+\emph on
+channel coding
+\emph default
+ can be integrated into the proposed constellation design, including the
+ analysis of proper source transmission rates.
+\end_layout
+
+\begin_layout Enumerate
+We evaluate numerically the performance of the resulting 
+\emph on
+adaptive modulation and coding
+\emph default
+ scheme for a wide range of channel conditions in the WBN.
+\end_layout
+
+\begin_layout Enumerate
+We show that the proposed design is viable even if the real-world conditions
+ induce some deviation from the assumed system model.
+\end_layout
+
+\begin_layout Standard
+The rest of the paper is organized as follows.
+ The system model, including all necessary definitions and details about
+ WNC processing in WBNs is summarized in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_SystemModel"
+
+\end_inset
+
+.
+ A systematic 
+\emph on
+constellation design algorithm
+\emph default
+ for WBNs is revised in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_Euclidean-Distance-based-Constel"
+
+\end_inset
+
+.
+ The performance analysis of the proposed constellations (including the
+ HW evaluation) in an uncoded system is available in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_Performance-Analysis-Uncoded"
+
+\end_inset
+
+.
+ Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_Adaptive-Constellation-Design"
+
+\end_inset
+
+ discusses an adaptive constellation design and Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_Channel-Coding"
+
+\end_inset
+
+ introduces the channel coding extension to the system.
+ The performance of the novel adaptive modulation and coding scheme is analyzed
+ in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_Performance-Analysis-Coded"
+
+\end_inset
+
+, including a simple robustness analyzis.
+ Concluding remarks are summarized in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_DiscussionConclusions-etc"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+WNC Relaying in Wireless Butterfly Network
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CTUpp_SystemModel"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We assume a 
+\emph on
+symmetric
+\emph default
+ WBN model 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Qian-Sykora-Mow_2013-WCNC,Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+ with a half-duplex constraint (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information_flows"
+
+\end_inset
+
+).
+ An example practical scenario complying with the WBN model is a communication
+ among vehicles and road-side infrastructure nodes for traffic information
+ exchange on a bidirectional highway within two time slots 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ho-Liew-Lu"
+
+\end_inset
+
+.
+ The direct channels between the intended source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destination pairs are not available in WBN and thus the help of the intermediate
+ relay node is necessary to enable end-to-end communication.
+ Please note that in this paper we do not limit our attention to the above
+ mentioned special example of a high-speed, vehicle-based WBN.
+\end_layout
+
+\begin_layout Subsection
+Relaying Strategy
+\end_layout
+
+\begin_layout Standard
+An information-theoretic relaying strategy (based on Superposition Coding
+ (SC) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cover-Thomas_ElemInfTheory,Han-Kobayashi_1981,Shende-Rajan-2012-NCC,Popovski-Carvalho_2008"
+
+\end_inset
+
+) for WBNs was proposed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Qian-Sykora-Mow_2013-WCNC,Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+.
+ The fundamental idea of the SC-approach is to split each data symbol 
+\begin_inset Formula $\mathbf{d}_{i}$
+\end_inset
+
+ at source 
+\begin_inset Formula $i\in\left\{ A,B\right\} $
+\end_inset
+
+ into the 
+\emph on
+basic part
+\emph default
+ 
+\begin_inset Formula $\mathbf{d}_{i}^{b}=[d_{i,0}^{b},\dots,d_{i,N_{b}-1}^{b}]$
+\end_inset
+
+ and the 
+\emph on
+superposed part
+\emph default
+ 
+\begin_inset Formula $\mathbf{d}_{i}^{s}=[d_{i,0}^{s},\dots,d_{i,N_{s}-1}^{s}]$
+\end_inset
+
+, 
+\begin_inset Formula $d_{i,n}^{b},\,d_{i,n}^{s}\in\left\{ 0,1\right\} $
+\end_inset
+
+, and then process each of the resulting data streams separately throughout
+ the system (see Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information_flows"
+
+\end_inset
+
+).
+ While the basic part represents a "true WNC" information stream (limited
+ by the amount of available HSI) in the system, the superposed part defines
+ the "routed" information which is appended on top of the WNC stream to
+ exploit any potential spare capacity of related channels in the system
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Qian-Sykora-Mow_2013-WCNC,Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+ for more details).
+ A simplified description of SC-based relaying in an uncoded WBN system
+ is summarized in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+ and depicted in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-uncoded-block-scheme"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/butterfly-2level_processing_principleTWC-uncoded.eps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relaying scheme for the uncoded 
+\change_deleted 270580279 1480626810
+WBN
+\change_inserted 270580279 1480626810
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "WBN"
+description "Wireless Butterfly Network"
+
+\end_inset
+
+
+\change_unchanged
+ system.
+ DEM stands for a hard decision demodulator, IC is the interference canceler.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Information-flow-uncoded-block-scheme"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="95col%">
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Step 1: Source transmission
+\end_layout
+
+\begin_layout Itemize
+Source 
+\begin_inset Formula $S_{i},\,i\in\left\{ A,B\right\} $
+\end_inset
+
+ maps its data symbol 
+\begin_inset Formula $\mathbf{d}_{i}=\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]$
+\end_inset
+
+ into a 
+\begin_inset Formula $\left(N_{b}+N_{s}\right)$
+\end_inset
+
+-bit superposition modulation symbol
+\begin_inset Formula 
+\begin{equation}
+s_{i}=\mathcal{A}^{i}\left(\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]\right),\label{eq:CTUpp_OverallSourceStreams}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $S_{A},\,S_{B}$
+\end_inset
+
+ simultaneously transmit their signals to the relay and unintended destinations
+ (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information_flows"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+Relay receives
+\begin_inset Formula 
+\begin{equation}
+x=h_{AR}\mathcal{A}^{A}\left(\left[\mathbf{d}_{A}^{b};\mathbf{d}_{A}^{s}\right]\right)+h_{BR}\mathcal{A}^{B}\left(\left[\mathbf{d}_{B}^{b};\mathbf{d}_{B}^{s}\right]\right)+w_{R}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Plain Layout
+and decodes 
+\begin_inset Formula $\left[\mathbf{d}_{A}^{s};\mathbf{d}_{B}^{s};f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})\right]$
+\end_inset
+
+, where 
+\begin_inset Formula $f$
+\end_inset
+
+ is a hierarchical WNC function 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sykora-Burr_2011-TVT"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Formula $D_{j}$
+\end_inset
+
+ receives
+\begin_inset Formula 
+\begin{equation}
+z_{j}=h_{ij}\mathcal{A}^{i}\left(\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]\right)+w_{j},\label{eq:CTUpp_Dj_received}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $i,\,j\in\left\{ A,B\right\} ,\,i\neq j$
+\end_inset
+
+ and stores the signal for further processing.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Step 2: Relay broadcast
+\end_layout
+
+\begin_layout Itemize
+Relay sends 
+\begin_inset Formula $N_{R}=2N_{s}+N_{b}$
+\end_inset
+
+-bit modulation symbol to both destinations:
+\begin_inset Formula 
+\begin{equation}
+s_{R}=\mathcal{A}^{R}\left(\left[\mathbf{d}_{A}^{s};\mathbf{d}_{B}^{s};f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})\right]\right).\label{eq:CTUpp_relay_output}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $D_{j}$
+\end_inset
+
+ (
+\begin_inset Formula $i,\,j\in\left\{ A,B\right\} ,\,i\neq j$
+\end_inset
+
+) decodes:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $\left[\mathbf{d}_{A}^{s};\mathbf{d}_{B}^{s};f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})\right]$
+\end_inset
+
+ (from the relay signal (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_relay_output"
+
+\end_inset
+
+))
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathbf{d}_{i}^{b}$
+\end_inset
+
+ (from the stored signal 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_Dj_received"
+
+\end_inset
+
+), after interference cancellation (IC) of known 
+\begin_inset Formula $\mathbf{d}_{i}^{s}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathbf{d}_{j}^{b}$
+\end_inset
+
+ (from 
+\begin_inset Formula $\mathbf{d}_{i}^{b}$
+\end_inset
+
+ and 
+\begin_inset Formula $f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})$
+\end_inset
+
+, using a standard WNC decoding 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sykora-Burr_2011-TVT"
+
+\end_inset
+
+)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Formula $D_{j}$
+\end_inset
+
+ merges 
+\begin_inset Formula $\mathbf{d}_{j}^{b}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mathbf{d}_{j}^{s}$
+\end_inset
+
+ to obtain the desired 
+\begin_inset Formula $\left[\mathbf{d}_{j}^{b};\mathbf{d}_{j}^{s}\right]$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip1ex
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+SC-based relaying scheme in uncoded 
+\change_deleted 270580279 1480626814
+WBN
+\change_inserted 270580279 1480626814
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "WBN"
+description "Wireless Butterfly Network"
+
+\end_inset
+
+
+\change_unchanged
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+System Model
+\end_layout
+
+\begin_layout Standard
+For the sake of simplicity of the constellation design analysis, we provisionall
+y assume that the system is uncoded
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+ Modification of the system model for the coded case will be provided in
+ Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CTUpp_Channel-Coding"
+
+\end_inset
+
+, together with a discussion on the design of individual channel encoders
+ for particular information streams in the system.
+\end_layout
+
+\end_inset
+
+.
+ The signal space representations of the transmitted channel symbols are
+ 
+\begin_inset Formula $s_{A}=\mathcal{A}^{A}\left(\mathbf{d}_{A}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $s_{B}=\mathcal{A}^{B}\left(\mathbf{d}_{B}\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathcal{A}^{i}\left(\centerdot\right)$
+\end_inset
+
+ is the memoryless constellation mapper and 
+\begin_inset Formula $\mathbf{d}_{i}$
+\end_inset
+
+ is the source 
+\begin_inset Formula $i\in\left\{ A,B\right\} $
+\end_inset
+
+ data symbol.
+ Each communication round can be divided into two phases (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information_flows"
+
+\end_inset
+
+).
+ In the first phase (Multiple Access – MA phase) both sources 
+\begin_inset Formula $S_{A},\,S_{B}$
+\end_inset
+
+ simultaneously transmit their signal to the relay, which receives a noisy
+ superimposed constellation:
+\begin_inset Formula 
+\begin{equation}
+x=h_{AR}s_{A}+h_{BR}s_{B}+w_{R}.\label{eq:CTUpp_relay-received}
+\end{equation}
+
+\end_inset
+
+Additionally, the source 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ (
+\begin_inset Formula $i\in\{A,B\}$
+\end_inset
+
+) transmission is overheard (at no cost) by its "unintended" destination
+ 
+\begin_inset Formula $D_{j}$
+\end_inset
+
+ (
+\begin_inset Formula $j\in\{A,B\},\,j\neq i$
+\end_inset
+
+) as:
+\begin_inset Formula 
+\begin{align}
+z_{j} & =h_{ij}s_{i}+w_{j}\label{eq:CTUpp_HSI_observation}
+\end{align}
+
+\end_inset
+
+Even though the overheard information (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_HSI_observation"
+
+\end_inset
+
+) does not carry the desired data for the respective destination, it can
+ be efficiently exploited to enable WNC-based processing in 
+\change_deleted 270580279 1480626821
+WBN
+\change_inserted 270580279 1480626821
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "WBN"
+description "Wireless Butterfly Network"
+
+\end_inset
+
+
+\change_unchanged
+s 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Qian-Sykora-Mow_2013-WCNC"
+
+\end_inset
+
+.
+ We denote the specific overheard information as the 
+\emph on
+Hierarchical Side Information
+\emph default
+ (HSI) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The relay performs WNC-based decoding 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sykora-Burr_2011-TVT"
+
+\end_inset
+
+ of the received signal and broadcasts the decoded WNC (hierarchical) informatio
+n as 
+\begin_inset Formula $s_{R}$
+\end_inset
+
+ to 
+\begin_inset Formula $D_{A},\,D_{B}$
+\end_inset
+
+ in the second phase (Broadcast – BC phase).
+ Both destinations are able to decode the desired data using the relay's
+ (hierarchical) signal (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_relay-received"
+
+\end_inset
+
+) and the overheard HSI (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_HSI_observation"
+
+\end_inset
+
+) if a proper WNC processing is employed in the system.
+\end_layout
+
+\begin_layout Standard
+Scalar complex channel coefficients 
+\begin_inset Formula $h_{ij}$
+\end_inset
+
+, 
+\begin_inset Formula $i,j\in\{A,B,R\}$
+\end_inset
+
+, 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ are assumed to be constant during the communication round and known at
+ the respective receiving node.
+ Zero mean i.i.d.
+ complex Gaussian noise sample 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i\in\{A,B,R\}$
+\end_inset
+
+ has variance 
+\begin_inset Formula $\sigma_{i}^{2}$
+\end_inset
+
+.
+ Signal to Noise Ratios (SNRs) in the system are given by (
+\begin_inset Formula $\gamma_{{\rm {MAC}}}$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+), where 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}$
+\end_inset
+
+ is the SNR on the source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+relay multiple-access channel – MAC (
+\begin_inset Formula $\left(S_{A},\,S_{B}\right)\rightarrow R$
+\end_inset
+
+), 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ is the SNR on the unintended source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destination (HSI) channels (
+\begin_inset Formula $S_{A}\rightarrow D_{B}$
+\end_inset
+
+, 
+\begin_inset Formula $S_{B}\rightarrow D_{A}$
+\end_inset
+
+) and 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+ is the SNR on the relay
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+sources broadcast channel (
+\begin_inset Formula $R\rightarrow\left(D_{A},\,D_{B}\right)$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Superposition Modulation Design
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CTUpp_Euclidean-Distance-based-Constel"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this section we summarize the design of constellation mappers 
+\begin_inset Formula $\mathcal{A}^{A},\,\mathcal{A}^{B}$
+\end_inset
+
+ as presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+.
+ The output constellation is created as
+\begin_inset Formula 
+\begin{equation}
+s=\mathcal{A}\left(\left[\mathbf{d}^{b};\mathbf{d}^{s}\right]\right)=\sum_{n_{s}=0}^{N_{s}-1}L_{n_{s}}^{s}(2d_{n_{s}}^{s}-1)+\sum_{n_{b}=0}^{N_{b}-1}L_{n_{b}}^{b}(2d_{n_{b}}^{b}-1),\label{eq:CTUpp_superpositionModulation}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $L_{n}^{b},\,L_{n}^{s}$
+\end_inset
+
+ are 
+\emph on
+Superposition Modulation
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hoeher-Wo_2011-IEEE-M-COM"
+
+\end_inset
+
+ 
+\emph on
+scaling coefficients.
+\end_layout
+
+\begin_layout Standard
+The coefficients 
+\begin_inset Formula $L_{n}^{b},\,L_{n}^{s}$
+\end_inset
+
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_superpositionModulation"
+
+\end_inset
+
+) are generally taken from the set of complex numbers.
+ However, for the sake of simplicity we limit the scaling coefficients 
+\begin_inset Formula $L_{n}^{b},\,L_{n}^{s}$
+\end_inset
+
+ to a purely imaginary or real numbers.
+ Even though that this simplified approach can potentially result in a sub-optim
+al performance in fading channels (complex channel coefficients 
+\begin_inset Formula $h_{iR}$
+\end_inset
+
+, 
+\begin_inset Formula $i\in\{A,B\}$
+\end_inset
+
+ can rotate the component superposition constellations), we follow this
+ simplification to show the basic ideas of the proposed superposition modulation
+ design.
+ The extension to general complex 
+\begin_inset Formula $L_{n}^{b},\,L_{n}^{s}$
+\end_inset
+
+ can naturally embrace the source phase pre-rotation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2009a,Zhang-Liew_2010,Anxin-Yuan-Kayama_2008"
+
+\end_inset
+
+, which virtually reverts the fading channel to the conventional Additive
+ White Gaussian Noise (AWGN) channel with 
+\begin_inset Formula $\varangle h_{ij}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+, the basic and superposed parts of the source information are processed
+ in a different way through the system and so we will discuss the constellation
+ design for these two specific information streams separately.
+ We briefly introduce the incentives and main ideas of the design for the
+ superposed and basic parts, and then we summarize the complete multi-source
+ constellation design in a systematic algorithm.
+\end_layout
+
+\begin_layout Subsection
+Constellation Design: Basic part
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CTUpp_basic-part"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A specific WNC function 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ has to be decoded by the relay (Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+) and hence some overlapping of symbols in the superimposed constellation
+ (observed by the relay node) can be allowed, resulting in improved Euclidean
+ distance properties.
+ More precisely, two (or more) pairs of basic information symbols 
+\begin_inset Formula $\left(\mathbf{d}_{A}^{b},\,\mathbf{d}_{B}^{b}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left(\mathbf{d'}_{A}^{b},\,\mathbf{d'}_{B}^{b}\right)$
+\end_inset
+
+ can be allowed to fall into the same point in the superimposed constellation:
+\begin_inset Formula 
+\begin{equation}
+s_{A}\left(\mathbf{d}_{A}^{b}\right)+s_{B}\left(\mathbf{d}_{B}^{b}\right)=s'_{A}\left(\mathbf{d'}_{A}^{b}\right)+s'_{B}\left(\mathbf{d'}_{B}^{b}\right),\label{eq:CTUpp_exclusive-law}
+\end{equation}
+
+\end_inset
+
+if and only if they belong to the same WNC function output, i.e.
+ iff 
+\begin_inset Formula $f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})=f(\mathbf{d'}_{A}^{b},\mathbf{d'}_{B}^{b})$
+\end_inset
+
+, where 
+\begin_inset Formula $f(\centerdot,\centerdot)$
+\end_inset
+
+ is the hierarchical WNC function
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sykora-Burr_2011-TVT"
+
+\end_inset
+
+.
+ In this case the overlapping symbols produce the 
+\emph on
+same hierarchical output
+\emph default
+, which can be successfully resolved by the destination, if matching HSI
+ information is available (Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+).
+ The particular choice of the scaling coefficients 
+\begin_inset Formula $L_{A,n}^{b},\,L_{B,n}^{b}$
+\end_inset
+
+ generally depends on the particular choice of the hierarchical WNC function
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Modulo-sum 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hekrdla-Sykora_2013,Prochazka-Uricar-Halls-Sykora_2015-ICC,Prochazka-2016"
+
+\end_inset
+
+ and bit-wise exclusive-or (XOR) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2009a,Zhang-Liew-Lu_2012"
+
+\end_inset
+
+ hierarchical functions are commonly discussed in the WNC literature, however,
+ unlike the bit-wise XOR, implementation of channel coding for the Modulo-sum
+ mapping is a standalone research problem and hence it is out of the scope
+ of this paper.
+\end_layout
+
+\end_inset
+
+.
+ In the rest of this paper we discuss the constellation design for the 
+\emph on
+bit-wise exclusive-or
+\emph default
+ WNC function (
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})=\mathbf{d}_{A}^{b}\oplus\mathbf{d}_{B}^{b}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+, where 
+\begin_inset Formula $\oplus$
+\end_inset
+
+ is the bit-wise XOR operation) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang-Liew-Lu_2012"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Suitable overlapping of constellation symbols at the relay is provided by
+ letting both sources transmit at the same power level, i.e.
+ 
+\begin_inset Formula $L_{A,n}^{b}=L_{B,n}^{b}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+.
+ It can be easily shown that if these superposition modulation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_superpositionModulation"
+
+\end_inset
+
+) coefficients are chosen as 
+\begin_inset Formula $L_{A,n}^{b}=L_{B,n}^{b}=3^{\left\lfloor n/2\right\rfloor }$
+\end_inset
+
+ (for even 
+\begin_inset Formula $n$
+\end_inset
+
+) and 
+\begin_inset Formula $L_{A,n}^{b}=L_{B,n}^{b}=\jj3^{\left\lfloor n/2\right\rfloor }$
+\end_inset
+
+ (for odd 
+\begin_inset Formula $n$
+\end_inset
+
+), the received superimposed constellation at the relay will have overlaps
+ only among those constellation symbols (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_exclusive-law"
+
+\end_inset
+
+) which have the same hierarchical WNC output i.e.
+ 
+\begin_inset Formula $f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})=f(\mathbf{d'}_{A}^{b},\mathbf{d'}_{B}^{b})=\mathbf{d}_{A}^{b}\oplus\mathbf{d}_{B}^{b}=\mathbf{d'}_{A}^{b}\oplus\mathbf{d'}_{B}^{b}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Constellation Design: Superposed part
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CTUpp_superposed-part"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The superposed information given by 
+\begin_inset Formula $\mathbf{d}_{A}^{s},\,\mathbf{d}_{B}^{s}$
+\end_inset
+
+ has to be decoded separately by the relay (Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+), and hence a source constellation avoiding all potential overlaps in the
+ superimposed constellation (observed by the relay node) is desirable.
+ In an AWGN channel (
+\begin_inset Formula $h_{AR}=h_{BR}=1$
+\end_inset
+
+ in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information_flows"
+
+\end_inset
+
+) this can be simply achieved by mapping the information bits to the real-valued
+ Amplitude Shift Keying (ASK) constellation at 
+\begin_inset Formula $S_{A}$
+\end_inset
+
+ and purely imaginary-valued ASK constellation at 
+\begin_inset Formula $S_{B}$
+\end_inset
+
+ (or vice versa).
+ Hence, in AWGN, the resulting superimposed constellation at the relay will
+ form a regular QAM constellation without any overlapping of constellation
+ symbols.
+ For the assumed superposition modulation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_superpositionModulation"
+
+\end_inset
+
+), this can be easily achieved by setting the coefficients as 
+\begin_inset Formula $L_{A,n}^{s}=2^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{B,n}^{s}=\jj\cdot2^{n}$
+\end_inset
+
+.
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{alg4_final_TWC.tex}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Constellation design for fixed 
+\begin_inset Formula $N_{b},\,N_{s}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Systematic Constellation Design Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CTUpp_const_design"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To accommodate both the basic and superposed information streams into a
+ joint source constellation, the scaling coefficients of basic information
+ streams (
+\begin_inset Formula $L_{n}^{b}$
+\end_inset
+
+) must be pre-scaled by a factor 
+\begin_inset Formula $2^{N_{s}}$
+\end_inset
+
+ to ensure that they lie above the largest scaling coefficient of the superposed
+ part.
+ The basic stream (WNC) is thus preferred over the superposed one (routing)
+ in order to maximize the overall throughput of the system.
+ The systematic constellation design for arbitrary 
+\begin_inset Formula $N_{b},\,N_{s}$
+\end_inset
+
+ is summarized in Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The basic principle of source constellation design is illustrated in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_ConstellationDesignExample"
+
+\end_inset
+
+ (
+\begin_inset Formula $N_{b}=2,\,N_{s}=1$
+\end_inset
+
+) and some example sets of source constellations with constant 
+\begin_inset Formula $N_{b}+N_{s}=2$
+\end_inset
+
+ are depicted in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_ConstellationDesign_NbNs2"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Performance Analysis I: Uncoded System
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CTUpp_Performance-Analysis-Uncoded"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the sake of simplicity of the theoretical performance analysis, we assume
+ that source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+relay channels in WBN are AWGN
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note that this also includes the system with perfect source phase prerotation
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2009a,Zhang-Liew_2010,Anxin-Yuan-Kayama_2008"
+
+\end_inset
+
+, which can be obtained by a generalization of the scaling coefficients
+ as 
+\begin_inset Formula $L'_{n}=L_{n}e^{-\jj\measuredangle h_{SR}}$
+\end_inset
+
+, where 
+\begin_inset Formula $h_{SR}$
+\end_inset
+
+ is the corresponding source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+relay channel.
+\end_layout
+
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $h_{iR}=1$
+\end_inset
+
+ for 
+\begin_inset Formula $i\in\{A,B\}$
+\end_inset
+
+).
+ We evaluate the throughput analytically as 
+\begin_inset Formula $(N_{b}+N_{s})\cdot(1-P_{e}^{\mathrm{FER}})$
+\end_inset
+
+, where 
+\begin_inset Formula $P_{e}^{\mathrm{FER}}$
+\end_inset
+
+ denotes the frame error rate.
+ Due to the system symmetry we evaluate the throughput of 
+\begin_inset Formula $S_{A}\to D_{A}$
+\end_inset
+
+ only.
+ We set the frame length to 
+\begin_inset Formula $M=768$
+\end_inset
+
+ symbols (to match the HW evaluation) and the relay output mapper 
+\begin_inset Formula $\mathcal{A}^{R}$
+\end_inset
+
+ will be defined as a conventional (
+\begin_inset Formula $2^{N_{b}+2N_{s}}$
+\end_inset
+
+
+\begin_inset Formula $)$
+\end_inset
+
+-QAM constellation.
+ All performance metrics in the symmetric WBN are evaluated as a function
+ of the actual SNRs (
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}},\,\gamma_{{\rm {BC}}}$
+\end_inset
+
+).
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/d2_1.eps
+	width 80text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Source constellation design example for 
+\begin_inset Formula $N_{b}=2,\,N_{s}=1$
+\end_inset
+
+.
+ Resulting constellations are depicted as blue circles (
+\begin_inset Formula $S_{A}$
+\end_inset
+
+ output constellation), red circles (
+\begin_inset Formula $S_{B}$
+\end_inset
+
+ output constellation) and squares (received superimposed constellation
+ at 
+\begin_inset Formula $R$
+\end_inset
+
+).
+ Hierarchical function is 
+\begin_inset Formula $f\left(\mathbf{d}_{A}^{b},\,\mathbf{d}_{B}^{b}\right)=\mathbf{d}_{A}^{b}\oplus\mathbf{d}_{B}^{b}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_ConstellationDesignExample"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/const_all_2.eps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Proposed constellation design for 
+\begin_inset Formula $\left(N_{b},N_{s}\right)=\left\{ \left(2,0\right);\left(1,1\right);\left(0,2\right)\right\} $
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_ConstellationDesign_NbNs2"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Analytical Performance Evaluation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CTUpp_Numerical_Evaluation_uncoded"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since all constellations points lie on a regular QAM grid, it is straightforward
+ to evaluate the exact Symbol Error Rate (SER) for all channels analytically.
+ The symbol error probability 
+\begin_inset Formula $P_{e}^{\mathrm{SER}}$
+\end_inset
+
+ can be approximated by its upper-bound
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The evaluated 
+\begin_inset Formula $P_{e,\mathrm{UB}}^{SER}$
+\end_inset
+
+ is an upper-bound of 
+\begin_inset Formula $P_{e}^{\mathrm{SER}}$
+\end_inset
+
+, since an error in MA/BC phase does not necessarily induce an error in
+ the overall communication chain of the uncoded system.
+ This is especially true if the error occurs in the superposed bits 
+\begin_inset Formula $\mathbf{d}_{B}^{s}$
+\end_inset
+
+ used for interference cancellation processing at 
+\begin_inset Formula $D_{A}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $P_{e,\mathrm{UB}}^{\mathrm{SER}}=1-((1-P_{e}^{{\rm MAC}})(1-P_{e}^{{\rm HSI}})(1-P_{e}^{\mathrm{BC}}))$
+\end_inset
+
+, where 
+\begin_inset Formula $P_{e}^{{\rm MAC}}$
+\end_inset
+
+, 
+\begin_inset Formula $P_{e}^{{\rm HSI}}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{e}^{{\rm BC}}$
+\end_inset
+
+ are the probabilities of symbol error in the MAC, HSI and BC channels (respecti
+vely).
+ Since the system is memoryless, the overall FER is given by 
+\begin_inset Formula $P_{e}^{\mathrm{FER}}=1-(1-P_{e}^{\mathrm{SER}})^{M}$
+\end_inset
+
+, which can be approximated by 
+\begin_inset Formula $P_{e,\mathrm{UB}}^{\mathrm{FER}}=1-(1-P_{e,\mathrm{UB}}^{\mathrm{SER}})^{M}$
+\end_inset
+
+.
+ Nearest neighbor pairwise error approximation can be used for efficient
+ error rate evaluation.
+ The lower-bound of the throughput can be then evaluated analytically as:
+\begin_inset Formula 
+\begin{equation}
+T_{\mathrm{LB}}=(N_{b}+N_{s})\cdot(1-P_{e,\mathrm{UB}}^{\mathrm{FER}}).\label{eq:CTUpp_T-LB}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Hardware Implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CTUpp_Hardware_Verification"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In addition to the analytical evaluation of throughput, we validate the
+ results in a real-world setup.
+ The hardware performance is evaluated using Ettus Research Universal Software
+ Radio Peripherals (USRPs) which are computer-hosted Software Defined Radios
+ (SDRs).
+ The USRPs connect to a host computer via a Gigabit Ethernet link, which
+ the host-based software uses to receive and transmit the baseband IQ stream.
+ The host controls the USRP using USRP Hardware Driver (UHD) commands, including
+ setting parameters such as amplifier gain.
+ The USRP then performs the necessary baseband processing then up/down-conversio
+n and transmission/reception.
+ The Ettus Research N210 USRP is used, which consists of a motherboard and
+ a Radio Frequency (RF) daughterboard; more details can be found in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{Ettus_flyer}
+\end_layout
+
+\end_inset
+
+.
+ In these experiments the XCVR2450 daughterboards are used, these are dual-band
+ transceivers with 100 mW output at 2.4 - 2.5 GHz and 50 mW output at 4.9 -
+ 5.85 GHz.
+ In this paper GNURadio 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{GNURadio}
+\end_layout
+
+\end_inset
+
+, which is an open-source tool-kit, is used as the host-processing software.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/20150109_143009.jpg
+	display false
+	width 95col%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Setup for 
+\change_deleted 270580279 1480626314
+HW
+\change_inserted 270580279 1480626314
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "HW"
+description "Hardware"
+
+\end_inset
+
+
+\change_unchanged
+ evaluation (Ettus Research USRPs).
+ Source transmissions are prerotated 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2009a,Zhang-Liew_2010,Anxin-Yuan-Kayama_2008"
+
+\end_inset
+
+ to imitate the AWGN channel conditions (as used in the numerical evaluation).
+ To allow a strict control of HSI channels SNR in the 
+\change_deleted 270580279 1480626321
+HW
+\change_inserted 270580279 1480626321
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "HW"
+description "Hardware"
+
+\end_inset
+
+
+\change_unchanged
+ setup, the HSI channels are emulated by adding a Gaussian noise to the
+ respective source signal and the resulting emulated HSI is passed to destinatio
+ns via UDP.
+ This also avoids the problem of node visibility where direct links 
+\begin_inset Formula $S_{A}\rightarrow D_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{B}\rightarrow D_{B}$
+\end_inset
+
+ exist in the laboratory environment.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_HW_setup"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+OFDM Parameters
+\end_layout
+
+\begin_layout Standard
+An OFDM solution is employed with 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$N_{FFT}=64$
+\end_layout
+
+\end_inset
+
+ subcarriers.
+ There are 48 data subcarriers, with a DC carrier, 11 guard carriers and
+ 4 pilot carriers at -21, -7, 7 and 21.
+ A CP of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{1}{4}$
+\end_layout
+
+\end_inset
+
+, i.e.
+ 16 samples, is employed and a center frequency of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f_c=2.4$GHz
+\end_layout
+
+\end_inset
+
+ is used.
+ The USRP N210 is limited (by the Gigabit Ethernet link) to support an RF
+ bandwidth up to 25 MHz with 14-bit resolution, though a 1 MHz bandwidth,
+ i.e.
+ 1 MS/s sampling rate, is used here.
+ Each packet contains 16 OFDM symbols of payload with 48 data carriers per
+ symbol and constellation parameters 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$N_{b}$
+\end_layout
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$N_{s}$
+\end_layout
+
+\end_inset
+
+ are set to the desired values.
+ The payload is random data and no channel coding is currently implemented
+ in the system.
+\end_layout
+
+\begin_layout Subsubsection
+Node Placement, Synchronization and Channel Estimation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CTUpp_frame-1-2"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A 5-node, 2x1x2 topology with two sources, one relay and two destinations,
+ is used as shown in Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_HW_setup"
+
+\end_inset
+
+.
+ The USRPs each have a single 3dBi omni-directional antenna (at 2.4 - 2.5
+ GHz and 4.9 - 5.85 GHz).
+ The first source transmitter (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_A$
+\end_layout
+
+\end_inset
+
+) USRP is connected to a powerful Core i7 laptop, running a single instance
+ of GNURadio, by a Gigabit Ethernet link.
+ The second source transmitter (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_B$
+\end_layout
+
+\end_inset
+
+) USRP is connected to the first by the MIMO expansion cable.
+ This provides the second transmitter with baseband data from GNURadio as
+ well as synchronization signals from the first transmitter.
+ The relay, 
+\begin_inset Formula $D_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $D_{B}$
+\end_inset
+
+ USRPs are connected to further laptops running GNURadio by Gigabit Ethernet
+ links.
+ More details about synchronization, carrier frequency offset and timing
+ offset estimation can be found in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{Hynek-etal_2014-EW}
+\end_layout
+
+\end_inset
+
+.
+ In this paper, the MIMO cable is used to synchronize the frequency of the
+ two source USRPs, as well as to achieve sample-level timing synchronization.
+ The latter avoids asynchronism in the superimposed constellations at the
+ relays; more details about the impact of asynchronism in WNC can be found
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Diwine_D512"
+
+\end_inset
+
+.
+ Furthermore an Ettus Octoclock clock distribution system 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{Ettus_OctoClock}
+\end_layout
+
+\end_inset
+
+ is used to provide external frequency synchronization signals to all nodes.
+ This allows us to show system performance, and compare with the theoretical
+ and simulation cases, without the impact of asynchronism affecting the
+ results.
+ Results with additional real-world impairments are a focus for future work,
+ as discussed in the final section of this paper.
+ Channel tracking using pilots is implemented as detailed in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{Hynek-etal_2014-EW}
+\end_layout
+
+\end_inset
+
+, however, due to the static indoor environment (used to mimic the AWGN
+ channel used in the theoretical work as closely as possible) the channel
+ does not change significantly over the frame duration.
+ The USRPs are closely located in line-of-sight to ensure the channel between
+ them is fairly static, without fading, thus mimicking the channel used
+ in the theoretical work.
+ Moreover as cabled synchronisation is used, it is desirable to minimize
+ the cable length.
+ Low SNRs are achieved between the USRPs using low transmit powers.
+\end_layout
+
+\begin_layout Subsection
+Uncoded System Throughput
+\end_layout
+
+\begin_layout Standard
+To analyze the performance of the proposed constellations, we evaluate the
+ throughput for fixed 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+.
+ We analyze all permissible constellations for a fixed 
+\begin_inset Formula $N_{b}+N_{s}=2$
+\end_inset
+
+ (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_ConstellationDesign_NbNs2"
+
+\end_inset
+
+) and compare their performance with the throughput 
+\begin_inset Formula $T_{\mathrm{ref}}$
+\end_inset
+
+ of the 
+\emph on
+reference
+\emph default
+ 
+\begin_inset Quotes eld
+\end_inset
+
+conventional" multi-user detection with regular QAM constellation.
+ Note again that the hierarchical function is set to the bit-wise XOR, i.e.
+ 
+\begin_inset Formula $f\left(\mathbf{d}_{A}^{b},\,\mathbf{d}_{B}^{b}\right)=\mathbf{d}_{A}^{b}\oplus\mathbf{d}_{B}^{b}$
+\end_inset
+
+ in the evaluations.
+\end_layout
+
+\begin_layout Standard
+In addition to the analytically evaluated throughput (lower-bound) 
+\begin_inset Formula $T_{\mathrm{LB}}$
+\end_inset
+
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_T-LB"
+
+\end_inset
+
+) we also include the result of a numerical Monte-Carlo evaluation of throughput
+ (
+\begin_inset Formula $T_{\mathrm{sim}}$
+\end_inset
+
+) over 
+\begin_inset Formula $10^{4}$
+\end_inset
+
+ frames (Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput16_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput17_17"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+) and throughput 
+\begin_inset Formula $T_{\mathrm{USRP}}$
+\end_inset
+
+ evaluated by the 
+\change_deleted 270580279 1480626327
+HW
+\change_inserted 270580279 1480626327
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "HW"
+description "Hardware"
+
+\end_inset
+
+
+\change_unchanged
+ real world setup (Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+).
+ The particular related assumptions employed in the evaluations are summarized
+ in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:UncodedSystemSummary"
+
+\end_inset
+
+ to improve the reader's perception.
+ One can see that the reference scenario with conventional QPSK (4-QAM)
+ provides zero throughput (
+\begin_inset Formula $T_{\mathrm{ref}}$
+\end_inset
+
+) in the whole range of analyzed SNRs in all plots
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In AWGN channel, the resulting superimposed constellation has too many overlaps
+ for the reference source QPSK constellations, preventing a successful multi-use
+r decoding of both of the separate user data streams in the uncoded system.
+\end_layout
+
+\end_inset
+
+.
+ The performance of conventional WNC (in the specific 4-ary case the conventiona
+l WNC constellations are identical to 
+\begin_inset Formula $(N_{b},N_{s})=(2,0)$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2008"
+
+\end_inset
+
+) is, on the other hand, inevitably limited to high 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ regions in WBN as it requires perfect HSI to enable the decoding of WNC
+ functions at the destination nodes 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+.
+ Remarkably, the novel proposed constellations provide a 
+\emph on
+non-zero throughput
+\emph default
+ even in the 
+\emph on
+low-to-medium SNR
+\emph default
+ region of HSI channels.
+ The resulting SNR and throughput gains are highlighted in Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput16_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput17_17"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+.
+ Note also extremely close agreement of HW performance evaluation 
+\begin_inset Formula $T_{\mathrm{USRP}}$
+\end_inset
+
+ in all cases (Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+).
+ Even in this simple case (
+\begin_inset Formula $N_{b}+N_{s}$
+\end_inset
+
+ fixed to 
+\begin_inset Formula $2$
+\end_inset
+
+) there are several interesting phenomena which can be observed in the throughpu
+t performance:
+\begin_inset Float table
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\size small
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $T_{\mathrm{LB}}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $T_{\mathrm{sim}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $T_{\mathrm{USRP}}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Communication channel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+AWGN
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+AWGN
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Wireless channel
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Time synchronization
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Perfect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Perfect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+External (Octoclock)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Phase pre-rotation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Perfect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Perfect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Feedback channel (UDP)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Direct link
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Not considered
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Not considered
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Bridged by cable
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Channel symmetry
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Perfect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Perfect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Node placement
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Throughput evaluation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Lower bound
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Numerical
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Numerical
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace 1ex
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Summary of assumptions in the uncoded system analysis.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:UncodedSystemSummary"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\size small
+
+\begin_inset VSpace -3ex*
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The constellations with (
+\begin_inset Formula $N_{b}=0,\,N_{s}>0$
+\end_inset
+
+) assume full multi-user detection at the relay and hence they do not exploit
+ the HSI channels (Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+).
+ Consequently, their throughput does not depend on 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+.
+ However, their performance worsens with decreasing 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}$
+\end_inset
+
+ (compare Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput16_20"
+
+\end_inset
+
+) and deteriorates quite dramatically with decreasing 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+ (compare Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+The constellations with (
+\begin_inset Formula $N_{b}>0,\,N_{s}=0$
+\end_inset
+
+) require a reliable HSI channel and hence their throughput is zero for
+ low 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ and grows up to 
+\begin_inset Formula $N_{b}$
+\end_inset
+
+ for high 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ and sufficiently high 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}}$
+\end_inset
+
+ (all Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput16_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput17_17"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+The performance of all constellations with (
+\begin_inset Formula $N_{b}>0,\,N_{s}>0$
+\end_inset
+
+) is influenced by all system SNRs (
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+).
+ Remarkably, for some particular values of 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}}$
+\end_inset
+
+ these constellations significantly outperform those with 
+\begin_inset Formula $N_{b}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $N_{s}=0$
+\end_inset
+
+ in the medium 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ region (Figs.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput17_17"
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+).
+ Note that this is a direct consequence of superior 
+\begin_inset Formula $\rho_{\mathrm{HSI}}^{2}$
+\end_inset
+
+ performance of these constellations
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+It can be shown that for constant 
+\begin_inset Formula $N_{b}+N_{s}$
+\end_inset
+
+ the minimum Euclidean distance 
+\begin_inset Formula $\rho_{\mathrm{HSI}}^{2}$
+\end_inset
+
+ grows with decreasing 
+\begin_inset Formula $N_{b}$
+\end_inset
+
+, resulting in a more efficient utilization of "imperfect" HSI channels
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Sykora_2012,Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+ and consequently in a more reliable overheard HSI for the constellations
+ with lower (non-zero) 
+\begin_inset Formula $N_{b}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ for constant 
+\begin_inset Formula $N_{b}+N_{s}$
+\end_inset
+
+, i.e.
+ for constant bits/constellation symbol transmitted by the sources.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space \hspace*{}
+\length -4col%
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/Throughput_HSI_XOR_MAC16_BC20_N2.eps
+	width 95col%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip-2ex
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of throughput as a function of 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}=16\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
+\end_inset
+
+ and given 
+\begin_inset Formula $(N_{b},N_{s})$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Throughput16_20"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space \hspace*{}
+\length -4col%
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/Throughput_HSI_XOR_MAC17_BC17_N2.eps
+	width 95col%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip-2ex
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of throughput as a function of 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}=17\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=17\,\mathrm{dB}$
+\end_inset
+
+ and given 
+\begin_inset Formula $(N_{b},N_{s})$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Throughput17_17"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space \hspace*{}
+\length -4col%
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/Throughput_HSI_XOR_MAC20_BC20_N2.eps
+	width 95col%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip-2ex
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of throughput as a function of 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}=20\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
+\end_inset
+
+ and given 
+\begin_inset Formula $(N_{b},N_{s})$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Throughput20_20"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space \hspace*{}
+\length -4col%
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/Throughput_HSI_XOR_MAC20_BC16_N2.eps
+	width 95col%
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip-2ex
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of throughput as a function of 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}=20\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=16\,\mathrm{dB}$
+\end_inset
+
+ and given 
+\begin_inset Formula $(N_{b},N_{s})$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Throughput20_16"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Adaptive Constellation Design
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CTUpp_Adaptive-Constellation-Design"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As discussed in the previous section, the throughput of the system depends
+ heavily on the actual SNR conditions (given by 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+).
+ By itself, this observation calls naturally for an
+\emph on
+ adaptive constellation design
+\emph default
+.
+ To generate a multi-source constellation able to 
+\emph on
+maximize the throughput
+\emph default
+ given the current SNR conditions in the WBN system, the source nodes 
+\begin_inset Formula $S_{A},\,S_{B}$
+\end_inset
+
+ must be acquainted with the particular mapping operation 
+\begin_inset Formula $(\hat{\gamma}_{{\rm {MAC}}},\,\hat{\gamma}_{{\rm {BC}}},\,\hat{\gamma}_{{\rm {HSI}}})\mapsto(N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}),$
+\end_inset
+
+ providing the constellation parameters 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ (input arguments to the Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+) for the given (available) SNR estimates
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The estimated SNR parameters (
+\begin_inset Formula $\hat{\gamma}_{{\rm {MAC}}},\,\hat{\gamma}_{{\rm {BC}}},\,\hat{\gamma}_{{\rm {HSI}}}$
+\end_inset
+
+) must be delivered to both sources by a feedback channel from the relay
+ and/or destinations.
+ The particular implementation of this feedback transmission is beyond the
+ scope of this paper and hence (for the sake of simplicity) we assume that
+ these parameters are made available at both sources by a genie.
+ Note that in the HW evaluation, the required feedback is provided via UDP
+ connection.
+\end_layout
+
+\end_inset
+
+ (
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\hat{\gamma}_{{\rm {MAC}}},\,\hat{\gamma}_{{\rm {BC}}},\,\hat{\gamma}_{{\rm {HSI}}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+).
+ The desired 
+\emph on
+SNR mapping regions
+\emph default
+ (a three-dimensional look-up table in WBN) can be generated numerically
+ in advance and stored at both source nodes to enable the adaptive constellation
+ mapping.
+\end_layout
+
+\begin_layout Standard
+Due to the numerical complexity of Monte-Carlo evaluation of throughput
+ 
+\begin_inset Formula $T_{\text{sim}}$
+\end_inset
+
+ we use the analytically evaluated lower bound 
+\begin_inset Formula $T_{\text{LB}}$
+\end_inset
+
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_T-LB"
+
+\end_inset
+
+) to generate the SNR mapping regions for a wide range of 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+.
+ The optimal constellation parameters (maximizing the throughput 
+\begin_inset Formula $T_{\mathrm{LB}}$
+\end_inset
+
+ for a given SNR triplet 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+) are found by performing an exhaustive search over the constellation parameters
+ as 
+\begin_inset Formula $(N_{b}^{{\rm I}},\,N_{s}^{{\rm I}})=\arg\max_{(N_{b},N_{s})}T_{\mathrm{LB}}(\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The SNR mapping regions, including the resulting throughput for the optimal
+ choice of 
+\begin_inset Formula $N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$
+\end_inset
+
+, are shown as a function of 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma_{{\rm {BC}}}\in\{15\,\mathrm{dB},\,17\,\mathrm{dB},20\,\mathrm{dB},25\,\mathrm{dB}\}$
+\end_inset
+
+ in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_SNR_map_BC15-17-20-25"
+
+\end_inset
+
+.
+ Several interesting phenomenas can be again observed in the figure:
+\end_layout
+
+\begin_layout Itemize
+Since the transmission schemes with (
+\begin_inset Formula $N_{b}=0,\,N_{s}>0$
+\end_inset
+
+) constellations can ignore the HSI channels (Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CTUpp_SC-relaying-scheme"
+
+\end_inset
+
+), these constellations are optimal in the low 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ region (
+\begin_inset Formula $\gamma_{{\rm {HSI}}}<8\,\mathrm{dB}$
+\end_inset
+
+), regardless of the other channels' SNRs 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The constellations with (
+\begin_inset Formula $N_{b}>0,\,N_{s}=0$
+\end_inset
+
+) provide the best performance in a substantial part of the medium-to-high
+ 
+\begin_inset Formula $\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ regions, depending on the actual 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The "combined" constellations (
+\begin_inset Formula $N_{b}>0,\,N_{s}>0$
+\end_inset
+
+) provide the maximal throughput (for sufficiently high 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+) in relatively large regions of 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ (see the dominant throughput regions of 
+\begin_inset Formula $(N_{b}^{{\rm I}},\,N_{s}^{{\rm I}})=(2,1)$
+\end_inset
+
+ for 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\gamma_{{\rm {BC}}}=\left\{ 20\,\mathrm{dB},\,25\,\mathrm{dB}\right\} $
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+).
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Note that these constellations have a great potential for application in
+ systems with limited or partial HSI (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+).
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_BC15.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+quad
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_BC17.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_BC20.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+quad
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_BC25.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Throughput performance 
+\begin_inset Formula $T_{\mathrm{LB}}$
+\end_inset
+
+ and SNR mapping regions (including the optimal const.
+ parameters (
+\begin_inset Formula $N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$
+\end_inset
+
+)) for 
+\begin_inset Formula $\gamma_{{\rm {BC}}}\in\{15\,\mathrm{dB},\,17\,\mathrm{dB},20\,\mathrm{dB},25\,\mathrm{dB}\}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_SNR_map_BC15-17-20-25"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_deleted 270580279 1480625677
+\begin_inset VSpace -2ex*
+\end_inset
+
+
+\change_unchanged
+
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_BC20.eps
+	display false
+	width 48text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+quad
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_USRP_BC20.eps
+	display false
+	width 48text%
+
+\end_inset
+
+
+\change_deleted 270580279 1480625679
+
+\begin_inset VSpace -2ex*
+\end_inset
+
+
+\change_unchanged
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of 
+\begin_inset Formula $T_{\mathrm{LB}}$
+\end_inset
+
+ and the throughput performance evaluated in a real world adaptive HW setup
+ (
+\begin_inset Formula $T_{\mathrm{USRP}}$
+\end_inset
+
+) for 
+\begin_inset Formula $\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
+\end_inset
+
+.
+ The SNR mapping regions (including the optimal const.
+ parameters (
+\begin_inset Formula $N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$
+\end_inset
+
+)) used in the HW evaluation are also emphasized in the figure.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_SNR_map_BC20_USRP"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace -4ex*
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The BC channel SNR 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+(
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+) can significantly limit the performance of the system, even in the case
+ where both 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ are relatively high (compare the results
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ for 
+\begin_inset Formula $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ and 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ for 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\gamma_{{\rm {MAC}}}=\gamma_{{\rm {HSI}}}\apprge15\,\mathrm{dB}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+).
+ This behavior originates in the fact that 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\rho_{\mathrm{BC}}^{2}$
+\end_inset
+
+ decreases with growing 
+\begin_inset Formula $N_{b}+2N_{s}$
+\end_inset
+
+ and hence low 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ essentially limits the maximum efficiently applicable cardinality of the
+ relay output (
+\begin_inset Formula $2^{N_{b}+2N_{s}}$
+\end_inset
+
+-QAM) constellation.
+ Equivalently, the optimal source constellation parameters 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+(
+\begin_inset Formula $N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$
+\end_inset
+
+)
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ can become limited by the bottleneck induced by weak relay
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destination (BC) channels.
+ 
+\end_layout
+
+\begin_layout Itemize
+The constellations with odd 
+\begin_inset Formula $N_{b}$
+\end_inset
+
+ are rarely dominant over the other strategies with identical 
+\begin_inset Formula $N_{b}+N_{s}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ This is a direct consequence of their relatively poor 
+\begin_inset Formula $\rho_{\mathrm{MAC}}^{2}$
+\end_inset
+
+ Euclidean distance properties.
+\end_layout
+
+\begin_layout Standard
+To support a viability of the adaptive constellation mapping scheme, we
+ again evaluate the system performance in the HW real world setup.
+ Since the HW evaluation is heavily time-consuming, we analyze the throughput
+ 
+\begin_inset Formula $T_{\mathrm{USRP}}$
+\end_inset
+
+ only for 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
+\end_inset
+
+ and 
+\begin_inset Formula $0\,\mathrm{dB}\leq\gamma_{{\rm {MAC}}},\gamma_{{\rm {HSI}}}\leq30\,\mathrm{dB}$
+\end_inset
+
+ with a step-size 
+\begin_inset Formula $3\,\mathrm{dB}$
+\end_inset
+
+.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+The measured 
+\begin_inset Formula $T_{\mathrm{USRP}}$
+\end_inset
+
+ performance is available in 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_SNR_map_BC20_USRP"
+
+\end_inset
+
+.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Close agreement between the 
+\begin_inset Formula $T_{\mathrm{USRP}}$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{\text{LB}}$
+\end_inset
+
+ can be observed again in the whole range of analyzed 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_SNR_map_BC20_USRP"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Channel Coding
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CTUpp_Channel-Coding"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have shown that Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+ is a strong tool for the design of source constellations suitable for arbitrary
+ channel SNRs in the WBN system.
+ However, even though the proposed constellations provide promising performance
+ in the uncoded scenario, the extension to a coded system is desirable for
+ practical wireless applications.
+\end_layout
+
+\begin_layout Standard
+Considering the communication in uncoded WBNs (Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-uncoded-block-scheme"
+
+\end_inset
+
+), there are many ways to improve its reliability through channel coding.
+ In this paper we propose one particular solution, based on the assumption
+ that each source node splits its data into the basic and superposed part
+ and then encodes these parts separately by two constituent channel encoders
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In a more general approach, each source data word is split into 
+\begin_inset Formula $N_{b}+N_{s}$
+\end_inset
+
+ parallel data sub-words that are encoded separately using the principles
+ of multilevel coding (see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wachsmann-Fischer-Huber-1999-IEEE-T-IT"
+
+\end_inset
+
+).
+ However, the development of a general multilevel coding scheme for WBN
+ is beyond the scope of this paper.
+\end_layout
+
+\end_inset
+
+.
+ We believe that this approach provides the best insight into the channel-coding
+ extension of WBN systems and hence we focus on its development in the rest
+ of this section.
+\end_layout
+
+\begin_layout Subsection
+Per-link Channel Coding Scheme for Symmetric 
+\change_deleted 270580279 1480626874
+WBN
+\change_inserted 270580279 1480626874
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "WBN"
+description "Wireless Butterfly Network"
+
+\end_inset
+
+
+\change_unchanged
+ with Superposition Modulations
+\end_layout
+
+\begin_layout Standard
+In general, it is desirable to protect
+\emph on
+ all individual transmissions
+\emph default
+ in the system with error correction coding
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Alternatively, a primitive end-to-end coding scheme can be designed, performing
+ the channel coding solely at sources 
+\begin_inset Formula $S_{A},\,S_{B}$
+\end_inset
+
+ and channel decoding (potentially computationally intensive) solely at
+ destinations 
+\begin_inset Formula $D_{A},\,D_{B}$
+\end_inset
+
+, while leaving the relay 
+\begin_inset Formula $R$
+\end_inset
+
+ to operate on a symbol-by-symbol basis (as in the uncoded system).
+ Unfortunately, this approach is only sub-optimal, as in this case the particula
+r transmissions on source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+relay and relay
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destination channels are not individually protected by channel coding.
+\end_layout
+
+\end_inset
+
+.
+ Accordingly, the relay node has to decode the desired data (including the
+ particular WNC function) from its observation and then it should perform
+ an additional re-encoding in order to protect the subsequent relay
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destinations transmission.
+ The resulting channel coding scheme (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-coded-block-scheme"
+
+\end_inset
+
+) is introduced in the following text.
+\end_layout
+
+\begin_layout Subsubsection
+Source processing
+\end_layout
+
+\begin_layout Standard
+Source 
+\begin_inset Formula $S_{A}$
+\end_inset
+
+ (likewise for 
+\begin_inset Formula $S_{B}$
+\end_inset
+
+) wants to transmit a binary data word 
+\begin_inset Formula $\mathbf{D}_{A}$
+\end_inset
+
+ of length 
+\begin_inset Formula $\left|\mathbf{D}_{A}\right|=\left|\mathbf{D}_{B}\right|=k_{\mathbf{D}}$
+\end_inset
+
+ to its respective destination 
+\begin_inset Formula $D_{A}$
+\end_inset
+
+.
+ Each data word 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{D}_{A}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is split into the basic and superposed part (similarly as in the uncoded
+ case), i.e.: 
+\begin_inset Formula 
+\[
+\mathbf{D}_{A}=[\mathbf{D}_{A}^{b},\mathbf{D}_{A}^{s}]=[d_{A,0}^{b},d_{A,1}^{b},\dots d_{A,k_{\mathbf{D}}^{b}-1}^{b},d_{A,0}^{s},d_{A,1}^{s},\dots d_{A,k_{\mathbf{D}}^{s}-1}^{s}],
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+where 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $d_{A,n}^{b},\,d_{A,n}^{s}\in\left\{ 0,1\right\} $
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ and 
+\begin_inset Formula $k_{\mathbf{D}}^{b},\,k_{\mathbf{D}}^{s}$
+\end_inset
+
+ are the lengths of the basic and superposed data sub-words 
+\begin_inset Formula $\mathbf{D}_{A}^{b},\,\mathbf{D}_{A}^{s}$
+\end_inset
+
+ (respectively).
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Subsequently, individual 
+\begin_inset Formula $\mathbf{D}_{A}^{b},\mathbf{\,D}_{A}^{s}$
+\end_inset
+
+ are encoded by two separate linear binary encoders 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\mathcal{C}_{b}(\centerdot),\,\mathcal{C}_{s}(\centerdot)$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ (assumed identical at both sources), producing the constituent codewords
+ as:
+\begin_inset Formula 
+\begin{align}
+\mathcal{C}_{b}(\mathbf{D}_{A}^{b}) & =\mathbf{C}_{A}^{b}=[\mathbf{c}_{A,0}^{b},\mathbf{c}_{A,1}^{b},\dots,\mathbf{c}_{A,\mathcal{N}-1}^{b}],\\
+\mathcal{C}_{s}(\mathbf{D}_{A}^{s}) & =\mathbf{C}_{A}^{s}=[\mathbf{c}_{A,0}^{s},\mathbf{c}_{A,1}^{s},\dots,\mathbf{c}_{A,\mathcal{N}-1}^{s}],
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ is the number of codeword symbols (equivalently the number of channel uses
+ required to transmit the codeword) and 
+\begin_inset Formula $\mathbf{c}_{A,j}^{b}=[c_{A,j_{0}}^{b},\dots,c_{A,j_{N_{b}-1}}^{b}]$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{c}_{A,j}^{s}=[c_{A,j_{0}}^{s},\dots,c_{A,j_{N_{s}-1}}^{s}]$
+\end_inset
+
+ are codeword symbols of length 
+\begin_inset Formula $N_{b}$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $N_{s}$
+\end_inset
+
+) bits.
+ The dimensionality of binary codewords is thus 
+\begin_inset Formula $\left|\mathbf{C}_{A}^{b}\right|=\left|\mathbf{C}_{B}^{b}\right|=n_{\mathbf{C}}^{b}=\mathcal{N}\cdot N_{b}$
+\end_inset
+
+, 
+\begin_inset Formula $\left|\mathbf{C}_{A}^{s}\right|=\left|\mathbf{C}_{B}^{s}\right|=n_{\mathbf{C}}^{s}=\mathcal{N}\cdot N_{s}$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The constituent codewords 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\mathbf{C}_{A}^{b},\,\mathbf{C}_{A}^{s}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ are then forwarded to the joint constellation mapper 
+\begin_inset Formula $\mathcal{A}^{A}\left(\centerdot\right)$
+\end_inset
+
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+(provided by Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+)
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+, which produces a sequence of 
+\begin_inset Formula $(N_{s}+N_{b})$
+\end_inset
+
+-bit constellation symbols 
+\begin_inset Formula $s_{A,j}=\mathcal{A}^{A}\left(\left[\mathbf{c}_{A,j}^{b};\mathbf{c}_{A,j}^{s}\right]\right)$
+\end_inset
+
+.
+ Note that in the encoded system it is the codeword symbols that are mapped
+ to the desired constellation (instead of data symbols), but since 
+\begin_inset Formula $\left|\mathbf{c}_{A}^{b}\right|=\left|\mathbf{c}_{B}^{b}\right|=N_{b}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|\mathbf{c}_{A}^{s}\right|=\left|\mathbf{c}_{B}^{s}\right|=N_{s}$
+\end_inset
+
+, it is sufficient to formally substitute the codeword symbol 
+\begin_inset Formula $\mathbf{c}_{i}=\left[\mathbf{c}_{i}^{b};\mathbf{c}_{i}^{s}\right]$
+\end_inset
+
+ for the data symbol 
+\begin_inset Formula $\mathbf{d}_{i}=\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]$
+\end_inset
+
+ in Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+ (lines
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{alg_line:CTUpp_input_data}
+\end_layout
+
+\end_inset
+
+,
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{alg_line:CTUpp_const_symbols}
+\end_layout
+
+\end_inset
+
+).
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The resulting constellation symbols are successively transmitted by 
+\begin_inset Formula $S_{A}$
+\end_inset
+
+ (simultaneously with 
+\begin_inset Formula $s_{B,j}$
+\end_inset
+
+ from 
+\begin_inset Formula $S_{B}$
+\end_inset
+
+) towards the relay node.
+\end_layout
+
+\begin_layout Subsubsection
+Relay processing
+\end_layout
+
+\begin_layout Standard
+The crucial part of the encoded WBN system processing is based at the relay
+ node.
+ Like the uncoded case, the relay must decode jointly the 
+\emph on
+superposed
+\emph default
+ data sub-words (
+\begin_inset Formula $\mathbf{D}_{A}^{s},\,\mathbf{D}_{B}^{s}$
+\end_inset
+
+) along with the 
+\emph on
+WNC function 
+\emph default
+of 
+\emph on
+basic
+\emph default
+ data sub-words (
+\begin_inset Formula $f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})=\mathbf{D}_{A}^{b}\oplus\mathbf{D}_{B}^{b}$
+\end_inset
+
+).
+ Whilst both 
+\begin_inset Formula $\mathbf{D}_{A}^{s},\,\mathbf{D}_{B}^{s}$
+\end_inset
+
+ can be decoded straightforwardly by the relay (using conventional single
+ user decoders 
+\begin_inset Formula $\mathcal{C}_{s}^{-1}$
+\end_inset
+
+), the fundamental question is how to decode the WNC function 
+\begin_inset Formula $f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})$
+\end_inset
+
+ since both 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{D}_{A}^{b},\,\mathbf{D}_{B}^{b}$
+\end_inset
+
+ are encoded separately at sources 
+\begin_inset Formula $S_{A},\,S_{B}$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Note that separate decoding of 
+\begin_inset Formula $\mathbf{D}_{A}^{b},\,\mathbf{D}_{B}^{b}$
+\end_inset
+
+ and subsequent evaluation of 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ (i.e.
+ conventional joint/multi-user decoding concatenated with traditional network
+ coding
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yeung-Li-etal_NetworkCodingTheory"
+
+\end_inset
+
+) can significantly limit the performance of the system 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sykora-Burr_2011-TVT"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Fortunately, as proven in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sykora-Burr_2011-TVT"
+
+\end_inset
+
+, the WNC function 
+\begin_inset Formula $f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})$
+\end_inset
+
+ can be decoded directly from the relay observation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_relay-received"
+
+\end_inset
+
+), if the particular source data words are encoded by the same linear encoder
+ 
+\begin_inset Formula $\mathcal{C}_{b}$
+\end_inset
+
+, since
+\begin_inset Formula 
+\begin{align}
+\mathcal{C}_{b}\left(f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})\right) & =\mathcal{C}_{b}\left(\mathbf{D}_{A}^{b}\oplus\mathbf{D}_{B}^{b}\right)\nonumber \\
+ & =\mathcal{C}_{b}(\mathbf{D}_{A}^{b})\oplus\mathcal{C}_{b}(\mathbf{D}_{B}^{b})\nonumber \\
+ & =\mathbf{C}_{A}^{b}\oplus\mathbf{C}_{B}^{b},
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{C}_{A}^{b}\oplus\mathbf{C}_{B}^{b}$
+\end_inset
+
+ itself is again a valid codeword and hence the WNC function 
+\begin_inset Formula $f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})$
+\end_inset
+
+ can be decoded directly from the relay observation 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+(using a conventional single user decoder 
+\begin_inset Formula $\mathcal{C}_{b}^{-1}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+After decoding all required data streams (
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{\hat{D}}_{A}^{s},\,\hat{\mathbf{D}}_{B}^{s},\,\hat{f}(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+), the relay creates a joint data word 
+\begin_inset Formula $\mathbf{D}_{R}=[\mathbf{\hat{D}}_{A}^{s},\hat{\mathbf{D}}_{B}^{s},\hat{f}(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})]$
+\end_inset
+
+ and re-encodes it as 
+\begin_inset Formula $\mathcal{C}_{R}(\mathbf{D}_{R})=\mathbf{C}_{R}=[\mathbf{c}_{R,0},\mathbf{c}_{R,1},\dots,\mathbf{c}_{R,\mathcal{N}-1}]$
+\end_inset
+
+.
+ The encoded data are then mapped to the output 
+\begin_inset Formula $2^{N_{R}}$
+\end_inset
+
+-QAM (where 
+\begin_inset Formula $N_{R}=2N_{s}+N_{b}$
+\end_inset
+
+) constellation
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ symbols 
+\begin_inset Formula $s_{R,j}=\mathcal{A}^{R}\left(\mathbf{c}_{r,j}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $j\in\{0,1,\dots,\mathcal{N}-1\}$
+\end_inset
+
+ and
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ broadcast by the relay to both destination nodes.
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/butterfly-2level_processing_principleTWC-coded.eps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relaying scheme in the encoded WBN system.
+ SODEM stands for a soft-output demodulator, IC is the interference canceler.
+ The channel encoders/decoders which are appended to the uncoded system
+ are emphasized.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Information-flow-coded-block-scheme"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace -3ex*
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Destination processing
+\end_layout
+
+\begin_layout Standard
+As in the uncoded case, destinations 
+\begin_inset Formula $D_{A},\,D_{B}$
+\end_inset
+
+ firstly store the signal received in the MA phase, and then, after decoding
+ the relay data word 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{D}_{R}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ (from the signal received in the BC phase), both destinations can perform
+ IC to remove the unintended superposed codewords from the MA phase signal
+ to get the desired HSI and then finally recover the desired data (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-coded-block-scheme"
+
+\end_inset
+
+ for the details).
+\end_layout
+
+\begin_layout Subsection
+Analysis of Transmission Rates
+\end_layout
+
+\begin_layout Standard
+The last step in the design of a feasible modulation and coding scheme for
+ WBN (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-coded-block-scheme"
+
+\end_inset
+
+) is to identify the range of permissible transmission rates for the basic
+ (
+\begin_inset Formula $r_{b}$
+\end_inset
+
+), superposed (
+\begin_inset Formula $r_{s}$
+\end_inset
+
+) and relay output (
+\begin_inset Formula $r_{R}$
+\end_inset
+
+) data streams.
+ To achieve this goal, we analyze the Constellation Constrained (CC) capacities
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Biglieri_CodWirelessChan"
+
+\end_inset
+
+ of the proposed source constellations, including the CC capacity of the
+ conventional relay output 
+\begin_inset Formula $2^{N_{R}}$
+\end_inset
+
+-QAM alphabets (used in the BC phase of communication).
+\end_layout
+
+\begin_layout Standard
+The transmission rates are defined in bits per channel use, and hence 
+\begin_inset Formula $r_{i}=N_{i}\cdot\nicefrac{k_{\mathbf{D}}^{i}}{n_{\mathbf{C}}^{i}}$
+\end_inset
+
+, where 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+ is the number of bits per channel symbol/use in the data stream 
+\begin_inset Formula $i,$
+\end_inset
+
+ 
+\begin_inset Formula $i\in\{b,s,R\}$
+\end_inset
+
+.
+ In accordance with the definition of source and relay codewords, we assume
+ that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+each communication round requires 
+\begin_inset Formula $2\mathcal{N}$
+\end_inset
+
+ channel uses, where the length of both MA and BC phase is set to 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ channel uses.
+ Note that the assumption that BC and MA phases have identical length is
+ generally only suboptimal (see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Popovski-Yomo_2007a,Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC"
+
+\end_inset
+
+), but nevertheless it is a common assumption in practical systems and hence
+ we limit our attention to this particular case.
+\end_layout
+
+\begin_layout Subsubsection
+Relay observation
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+After splitting the source data streams, the whole system can be interpreted
+ as a 4-user system where the relay has to decode the data 
+\begin_inset Formula $\mathbf{D}_{A}^{s},\,\mathbf{D}_{B}^{s},\,f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})$
+\end_inset
+
+ from the 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+virtual 3-user 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+(
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $S_{A}^{s},\,S_{B}^{s},\,S_{AB}^{b}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+) 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+multiple-access channel
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ observation (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-coded-block-scheme"
+
+\end_inset
+
+).
+ Unfortunately, since one of the users (
+\begin_inset Formula $S_{AB}^{b}$
+\end_inset
+
+) is only virtual, we cannot simply claim that the region of achievable
+ rates in this virtual channel can be derived directly from the conventional
+ cut-set bound analysis (see e.g.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cover-Thomas_ElemInfTheory,Harshan-Rajan-2011-IEEE-T-IT"
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+), but rather a careful information-theoretic analysis would be required
+ to identify the exact rate region.
+ However, such analysis is far beyond the scope of this paper, and hence,
+ for simplicity reasons, we only conjecture that the eligible source rates
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+(
+\begin_inset Formula $r_{b},\,r_{s}$
+\end_inset
+
+) are limited by the conventional CC multiple-access capacity region 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cover-Thomas_ElemInfTheory,Harshan-Rajan-2011-IEEE-T-IT"
+
+\end_inset
+
+, which can be defined by the following set of mutual informations 
+\begin_inset Formula $I(\centerdot;\centerdot)$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+2r_{s}+r_{b} & \leq I(x;\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})),\label{eq:CTUpp_CSB_3}\\
+2r_{s} & \leq I(x;\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s}|f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})),\label{eq:CTUpp_CSB_2a}\\
+r_{s}+r_{b} & \leq I(x;\mathbf{c}_{A}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})|\mathbf{c}_{B}^{s}),\label{eq:CTUpp_CSB_2b}\\
+r_{s}+r_{b} & \leq I(x;\mathbf{c}_{B}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})|\mathbf{c}_{A}^{s}),\label{eq:CTUpp_CSB_2c}\\
+r_{s} & \leq I(x;\mathbf{c}_{A}^{s}|\mathbf{c}_{B}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})),\label{eq:CTUpp_CSB_1a}\\
+r_{s} & \leq I(x;\mathbf{c}_{B}^{s}|\mathbf{c}_{A}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})),\label{eq:CTUpp_CSB_1b}\\
+r_{b} & \leq I(x;f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})|\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s}),\label{eq:CTUpp_CSB_1c}
+\end{align}
+
+\end_inset
+
+where (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_3"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_2a"
+
+\end_inset
+
+)-(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_2c"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1a"
+
+\end_inset
+
+)-(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1c"
+
+\end_inset
+
+) are the corresponding third, second and first order cut-set bounds (respective
+ly).
+ As we show later, the CC MAC region (as defined by (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_3"
+
+\end_inset
+
+)-(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-HSI-A"
+
+\end_inset
+
+)) provides a reasonable estimate of the maximal achievable source transmission
+ rate pair (
+\begin_inset Formula $r_{b},\,r_{s}$
+\end_inset
+
+) in WBN.
+\end_layout
+
+\begin_layout Standard
+Since the superposed data sub-words 
+\begin_inset Formula $\mathbf{D}_{A}^{s},\,\mathbf{D}_{B}^{s}$
+\end_inset
+
+ are mapped to orthogonal ASK sets (Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+), the 2nd order cut-set bound 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $I(x;\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s}|f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b}))$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_2a"
+
+\end_inset
+
+) is equivalent to 
+\begin_inset Formula $I(x;\mathbf{c}_{A}^{s}|\mathbf{c}_{B}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b}))+I(x;\mathbf{c}_{B}^{s}|\mathbf{c}_{A}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b}))$
+\end_inset
+
+ (defined in eqs.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1a"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1b"
+
+\end_inset
+
+)), which can be proven easily by the chain rule for mutual information
+ of orthogonal signal sets (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cover-Thomas_ElemInfTheory"
+
+\end_inset
+
+).
+ Moreover, due to the assumed WBN system symmetry, the cut-set bounds defined
+ in equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1a"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1b"
+
+\end_inset
+
+) are identical, and the same is true for the pair of cut-set bounds defined
+ in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_2b"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_2c"
+
+\end_inset
+
+).
+ Consequently, the CC multiple-access capacity region is completely defined
+ by the four inequalities in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_3"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_2b"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1a"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1c"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Effective HSI channels
+\end_layout
+
+\begin_layout Standard
+In addition to the successful relay decoding, the transmission rate of the
+ basic information stream 
+\begin_inset Formula $r_{b}$
+\end_inset
+
+ must guarantee that the HSI (given by the unintended data sub-words 
+\begin_inset Formula $\mathbf{D}_{A}^{b}$
+\end_inset
+
+ at 
+\begin_inset Formula $D_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{D}_{B}^{b}$
+\end_inset
+
+ at 
+\begin_inset Formula $D_{A}$
+\end_inset
+
+) can be decoded at both destinations (after perfect IC of superposed data
+ codewords 
+\begin_inset Formula $\mathbf{C}_{A}^{s}$
+\end_inset
+
+ at 
+\begin_inset Formula $D_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{C}_{B}^{s}$
+\end_inset
+
+ at 
+\begin_inset Formula $D_{A}$
+\end_inset
+
+ from the stored MA phase signal).
+ Note that since we assume that the relay 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+has already successfully decoded 
+\begin_inset Formula $f(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})$
+\end_inset
+
+ at this step, it can be efficiently exploited in the decoding process,
+ resulting in the following upper-bounds on the source rate 
+\begin_inset Formula $r_{b}$
+\end_inset
+
+:
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\begin{align}
+r_{b} & \leq I(z_{B}^{\text{IC}};\mathbf{c}_{A}^{b}|f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})),\label{eq:CTUpp_CSB-HSI-B}\\
+r_{b} & \leq I(z_{A}^{\text{IC}};\mathbf{c}_{B}^{b}|f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})),\label{eq:CTUpp_CSB-HSI-A}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $z_{A}^{\text{IC}},\,z_{B}^{\text{IC}}$
+\end_inset
+
+ are the efficient HSI observations (after perfect IC) at 
+\begin_inset Formula $D_{A},\,D_{B}$
+\end_inset
+
+ (respectively) – see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-coded-block-scheme"
+
+\end_inset
+
+.
+ Both (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-HSI-B"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-HSI-A"
+
+\end_inset
+
+) are identical in the symmetric WBN system.
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space \hspace*{}
+\length -1.5em
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/Rate_Regions_XOR_map_BC10_MAC12_HSI8.eps
+	display false
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/Rate_Regions_XOR_map_BC5_MAC5_HSI0.eps
+	display false
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Numerically evaluated cut-set bounds (mutual information for finite input
+ constellations) for 
+\begin_inset Formula $(N_{b}=2,N_{s}=1)$
+\end_inset
+
+ source constellations and 
+\begin_inset Formula $16$
+\end_inset
+
+-QAM at the relay.
+ The particular SNR conditions are available in the titles of both sub-figures.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_CSB_eval"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Relay broadcast channel
+\end_layout
+
+\begin_layout Standard
+The relay rate 
+\begin_inset Formula $r_{R}$
+\end_inset
+
+ must guarantee that its data word 
+\begin_inset Formula $\mathbf{D}_{R}=[\mathbf{\hat{D}}_{A}^{s},\hat{\mathbf{D}}_{B}^{s},\hat{f}(\mathbf{D}_{A}^{b},\mathbf{D}_{B}^{b})]$
+\end_inset
+
+ with length 
+\begin_inset Formula $\left|\mathbf{D}_{R}\right|=2k_{\mathbf{D}}^{s}+k_{\mathbf{D}}^{b}=\mathcal{N}(2r_{s}+r_{b})$
+\end_inset
+
+ can be sent to both destinations in 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ channel uses.
+ In addition to this, to enable successful decoding of the relay data at
+ both destinations, the relay transmission rate 
+\begin_inset Formula $r_{R}$
+\end_inset
+
+ must be below the CC capacities of the corresponding relay
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destination channels.
+ Thus, the relay rate should be set to 
+\begin_inset Formula $r_{R}=r_{b}+2r_{s}$
+\end_inset
+
+, which gives us the last two inequalities for 
+\begin_inset Formula $r_{b},\,r_{s}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+r_{R}=2r_{s}+r_{b} & \leq I(y_{A};\mathbf{c}_{R}),\label{eq:CTUpp_CSB-D_A}\\
+r_{R}=2r_{s}+r_{b} & \leq I(y_{B};\mathbf{c}_{R}),\label{eq:CTUpp_CSB-D_B}
+\end{align}
+
+\end_inset
+
+where both cut-set bounds (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-D_A"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-D_B"
+
+\end_inset
+
+) are identical due to the system symmetry.
+\end_layout
+
+\begin_layout Subsection
+Transmission Rate Region for Fixed Source Constellation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CTUpp_Transmission-Rate-Region"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To identify the region 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(r_{b},\,r_{s}\right)\in\mathcal{R}^{(N_{b},N_{s})}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ of eligible transmission rates for a fixed 
+\begin_inset Formula $(N_{b},N_{s})$
+\end_inset
+
+ source constellation, we can evaluate numerically
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The (conditional) probability density function 
+\begin_inset Formula $p(x|\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b}))$
+\end_inset
+
+ which is required for the evaluation of particular mutual information in
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_3"
+
+\end_inset
+
+)-(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-HSI-A"
+
+\end_inset
+
+) can be obtained by a proper marginalization operation 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(x|\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s},f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b}))=\mathrm{Pr}\left\{ f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})\right\} \cdot\sum_{\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b}:f(\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})}p\left(x|\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s},\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b}\right)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+, where 
+\begin_inset Formula $p(x|\mathbf{c}_{A}^{s},\mathbf{c}_{B}^{s},\mathbf{c}_{A}^{b},\mathbf{c}_{B}^{b})$
+\end_inset
+
+ is the likelihood function.
+ For more details on the evaluation of CC capacity for finite input constellatio
+ns see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Harshan-Rajan-2011-IEEE-T-IT,Sykora-Burr_2011-TVT"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ the set of relevant cut-set bounds (i.e.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_3"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_2b"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1a"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB_1c"
+
+\end_inset
+
+), (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-HSI-B"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_CSB-D_A"
+
+\end_inset
+
+)) for given SNR conditions in the symmetric WBN system (
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+).
+ An example analysis of the source transmission rate region 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{R}^{(2,1)}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ for the 
+\begin_inset Formula $(N_{b}=2,\,N_{s}=1)$
+\end_inset
+
+ source constellation is visualized in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_CSB_eval"
+
+\end_inset
+
+ for two different SNR setups.
+ The cut-set bound rate region 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{R}^{(N_{b},N_{s})}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is emphasized by the shaded area and the rate pair with maximal 
+\begin_inset Formula $r_{b}+r_{s}$
+\end_inset
+
+ is identified in the figure.
+ We have assumed that the source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+relay channels are AWGN (or equivalently that perfect source phase prerotation
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2009a,Zhang-Liew_2010,Anxin-Yuan-Kayama_2008"
+
+\end_inset
+
+ is implemented) in the numerical evaluation.
+\end_layout
+
+\begin_layout Section
+Performance Analysis II: Adaptive Encoded System
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CTUpp_Performance-Analysis-Coded"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As shown in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_CSB_eval"
+
+\end_inset
+
+, the performance of the encoded WBN system is, like in the uncoded case,
+ influenced by the immediate SNR conditions (given by 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+) and hence an 
+\emph on
+adaptive modulation and coding scheme 
+\emph default
+is again of interest.
+ However, before we introduce the
+\emph on
+ SNR mapping operation
+\emph default
+ for the encoded system, we show that the cut-set bound rate regions 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{R}^{(N_{b},N_{s})}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ (as introduced in the preceding section) provide a reasonable approximation
+ of achievable source transmission rate pairs in the symmetric WBN system.
+ In the whole section we assume (for simplicity reasons) that perfect source
+ phase prerotation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koike-Popovski-Tarokh_2009a,Zhang-Liew_2010,Anxin-Yuan-Kayama_2008"
+
+\end_inset
+
+ is implemented in the system, virtually reverting the source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+relay channels to the AWGN case.
+\end_layout
+
+\begin_layout Subsection
+Numerical Simulation of Encoded WBN System Throughput
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Numerical-Simulation-of"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We implement all constituent channel encoders in the WBN system (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Information-flow-coded-block-scheme"
+
+\end_inset
+
+) as parallel concatenated turbo codes with random interleavers of length
+ 
+\begin_inset Formula $\mathcal{N}=10^{5}$
+\end_inset
+
+ symbols.
+ By proper puncturing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Schlegel-Perez_TrellisTurboCoding"
+
+\end_inset
+
+ of the channel encoders' outputs we are able to set the source transmission
+ rates (separately for the basic and superposed streams) to an almost arbitrary
+ value in the range (
+\begin_inset Formula $\nicefrac{1}{3}\rightarrow1$
+\end_inset
+
+).
+ We set the initial source transmission rates to the maximum 
+\begin_inset Formula $r_{b}+r_{s}\in\mathcal{R}^{(N_{b},N_{s})}$
+\end_inset
+
+ (as evaluated in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_CSB_eval"
+
+\end_inset
+
+) and by proper adjustment of the puncturing operation we successively decrease
+ the source transmission rates 
+\begin_inset Formula $r_{b},\,r_{s}$
+\end_inset
+
+ until the SER performance drops to zero.
+ As one can see in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_CSB_eval"
+
+\end_inset
+
+, the achieved transmission rate pairs are relatively close to the maximal
+ permissible values and hence we can consider the cut-set bound rate region
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{R}^{(N_{b},N_{s})}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ (as discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:CTUpp_Transmission-Rate-Region"
+
+\end_inset
+
+) to be a reasonable approximation of the achievable source transmission
+ rate region.
+\end_layout
+
+\begin_layout Subsection
+Maximal Throughput of the Adaptive Modulation-Coding Scheme
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Maximal-Throughput-of"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As in the uncoded case, the source nodes 
+\begin_inset Formula $S_{A},\,S_{B}$
+\end_inset
+
+ in the adaptive modulation-coding WBN system must be aware of the particular
+ mapping operation 
+\begin_inset Formula $(\hat{\gamma}_{{\rm {MAC}}},\,\hat{\gamma}_{{\rm {BC}}},\,\hat{\gamma}_{{\rm {HSI}}})\mapsto\left(N_{b}^{\mathrm{II}},\,N_{s}^{\mathrm{II}};\,r_{b}^{\mathrm{II}},\,r_{s}^{\mathrm{II}}\right),$
+\end_inset
+
+ providing the set of optimal (in the sense of maximal throughput) constellation
+/encoder parameters for the given SNR conditions (
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\hat{\gamma}_{{\rm {MAC}}},\,\hat{\gamma}_{{\rm {BC}}},\,\hat{\gamma}_{{\rm {HSI}}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+).
+ Note that, in general, all adaptive system parameters are functions of
+ the actual SNR conditions in the system.
+ However, we mostly omit the explicit notation in the following text for
+ to aid readability.
+\end_layout
+
+\begin_layout Standard
+The desired adaptive system parameters can be obtained in the following
+ two-step procedure.
+ First of all, we analyze the cut-set bound rate regions
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\mathcal{R}^{(N_{b},N_{s})}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ (as discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:CTUpp_Transmission-Rate-Region"
+
+\end_inset
+
+) to identify the maximal encoded system throughput 
+\begin_inset Formula $T_{C}^{(N_{b},N_{s})}$
+\end_inset
+
+ for a fixed source constellation 
+\begin_inset Formula $(N_{b},N_{s})$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+T_{C}^{(N_{b},N_{s})}(\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}) & =\max_{r_{b},r_{s}\in\mathcal{R}^{(N_{b},N_{s})}}(r_{b}+r_{s}),\\
+ & =r_{b}^{\mathrm{max}}(N_{b},N_{s})+r_{s}^{\mathrm{max}}(N_{b},N_{s}).\label{eq:CTUpp_opt_rates}
+\end{align}
+
+\end_inset
+
+ Then, an exhaustive search over the constellation parameters 
+\begin_inset Formula $N_{b},\,N_{s}$
+\end_inset
+
+ can be performed to find the maximum encoded system throughput 
+\begin_inset Formula $T_{C}^{\mathrm{max}}$
+\end_inset
+
+ for the given SNR conditions (
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{equation}
+T_{C}^{\mathrm{max}}(\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {BC}}},\,\gamma_{{\rm {HSI}}})=T_{C}^{(N_{b}^{\mathrm{II}},\,N_{s}^{\mathrm{II}})}=\max_{(N_{b},N_{s})}T_{C}^{(N_{b},N_{s})},\label{eq:CTUpp_Throughput_encoded}
+\end{equation}
+
+\end_inset
+
+where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $(N_{b}^{\mathrm{II}},\,N_{s}^{\mathrm{II}})$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ are the 
+\emph on
+optimal source constellation parameters
+\emph default
+.
+ The corresponding 
+\emph on
+optimal source transmission rates
+\emph default
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CTUpp_opt_rates"
+
+\end_inset
+
+) are given simply by 
+\emph on
+
+\begin_inset Formula $r_{b}^{\mathrm{II}}=r_{b}^{\mathrm{max}}(N_{b}^{\mathrm{II}},\,N_{s}^{\mathrm{II}})$
+\end_inset
+
+, 
+\begin_inset Formula $r_{s}^{\mathrm{II}}=r_{s}^{\mathrm{max}}(N_{b}^{\mathrm{II}},\,N_{s}^{\mathrm{II}})$
+\end_inset
+
+.
+\emph default
+
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/Adaptive_Maps_overall_BC_7.5.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/Adaptive_Maps_overall_BC_15.0.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Maximal encoded system throughput 
+\begin_inset Formula $T_{C}^{\mathrm{max}}$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Coded_SNR_map"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_coding_Gain7.5.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/XOR_map_Througput_coding_Gain15.0.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Throughput enhancement 
+\begin_inset Formula $\Delta T_{C}=T_{C}^{\mathrm{max}}-T_{\mathrm{LB}}$
+\end_inset
+
+ [bits/channel use] of the coded over uncoded WBN system for 
+\begin_inset Formula $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $0.75\leq\Delta T_{C}\leq2$
+\end_inset
+
+ in the analyzed range of channel SNRs.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Coded_ThroughputGain"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The SNR mapping regions (including the throughput 
+\begin_inset Formula $T_{C}^{\mathrm{max}}$
+\end_inset
+
+) for the adaptive modulation and coding scheme in WBN are evaluated as
+ a function of 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Coded_SNR_map"
+
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma_{{\rm {BC}}}\in\{7.5\,\mathrm{dB},\,15\,\mathrm{dB}\}$
+\end_inset
+
+.
+ As one can see in Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Coded_ThroughputGain"
+
+\end_inset
+
+, the increased reliability of transmissions on all individual channels
+ in WBN (as compared to the uncoded system) translates directly into a significa
+nt enhancement of throughput performance in the whole range of observed
+ SNRs.
+ This observation justifies the viability of the proposed channel coding
+ scheme.
+\end_layout
+
+\begin_layout Subsection
+Robustness Analysis
+\end_layout
+
+\begin_layout Standard
+In this section we show that the proposed modulation and coding scheme is
+ viable even if the real world conditions induce some deviations from the
+ system model assumed in this paper.
+ From a practical point of view, we would be interested mainly in the situation,
+ where a direct channel between a source and its desired destination is
+ present (see Fig.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_DirectChannel"
+
+\end_inset
+
+).
+ Even though that this "direct" channel can be relatively weak, it inevitably
+ affects the destinations' HSI observations.
+ In addition to this, we analyse the system where source phase pre-rotation
+ is switched off (or ineffective due to rapid channel dynamics), and thus
+ the relay faces a multiple-access channel with a varying source channel
+ phase offset.
+ This assumption is valid for a practical system where the applicability
+ of source phase pre-rotation is limited due to the unavailable ideal feedback
+ channel or because of the undesirable delay induced by the feedback in
+ the pre-rotation operation.
+ To demonstrate the robustness of the proposed modulation and coding strategy,
+ we compare the WBN performance results achieved by the Monte-Carlo numerical
+ evaluation (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Numerical-Simulation-of"
+
+\end_inset
+
+) with USRP HW measurements.
+ While in the numerical evaluation we still keep the idealized assumptions
+ as defined by our system model (i.e.
+ no direct source
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destination channels, perfect channel phase pre-rotation), in the HW measurement
+s we now let all data communication to be performed through real wireless
+ channels (compare with the HW setup in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:CTUpp_Hardware_Verification"
+
+\end_inset
+
+), introducing inevitably some direct channel observation at both destinations.
+ In addition, we allow the source phase pre-rotation to be switched off
+ in the HW measurements.
+ The channel SNRs 
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\gamma_{{\rm {HSI}}}$
+\end_inset
+
+ in the HW measurements can be controlled by the source transmit power adjustmen
+t and similarly, particular values of 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+ can be set up by the adjustment of the relay transmit power.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/2-SRN-sc_principle_BC-TWT_directLink.eps
+	width 75col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Direct channel at destination 
+\begin_inset Formula $D_{B}$
+\end_inset
+
+ in the robustness analysis (likewise, a direct channel is assumed to be
+ present also at 
+\begin_inset Formula $D_{A}$
+\end_inset
+
+).
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_DirectChannel"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To perform a comparison of the idealized numerical evaluation with the HW
+ robustness measurements, we evaluate the range of SNRs where a zero error
+ rate performance can be achieved for fixed constellations and channel encoder
+ rates 
+\begin_inset Formula $(N_{b},N_{s},r_{b},r_{s})$
+\end_inset
+
+.
+ To achieve this, we identify the triplet of SNRs (
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\gamma_{{\rm {HSI}}}$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+) providing a zero-error rate performance at both destinations.
+ This SNR triplet then defines the lower-most corner of the SNR region where
+ a zero error rate performance can be achieved (see Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CTUpp_Robustenss_analysis"
+
+\end_inset
+
+).
+ We can conclude that:
+\end_layout
+
+\begin_layout Itemize
+The presence of direct links requires only a slightly increased values of
+ (
+\begin_inset Formula $\gamma_{{\rm {MAC}}},\gamma_{{\rm {HSI}}}$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+) to ensure a zero error-rate performance for the fixed 
+\begin_inset Formula $(N_{B},N_{S},r_{b},r_{s})$
+\end_inset
+
+.
+ However, it is evident that a modification of the proposed modulation and
+ coding scheme could be desirable to fully harness the information transmitted
+ over direct source destination channels.
+\end_layout
+
+\begin_layout Itemize
+The source channel phase asynchrony in the system with direct links further
+ degrades the performance on the sources
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+relay channel and thus an additional increase of the source transmission
+ power (and consequently 
+\begin_inset Formula $\gamma_{{\rm {MAC}}}$
+\end_inset
+
+) is required to provide a zero-error rate.
+ However, 
+\begin_inset Formula $\gamma_{{\rm {BC}}}$
+\end_inset
+
+ is not affected in this case, as the channel pre-rotation does not have
+ any impact on the relay
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+destination performance.
+\end_layout
+
+\begin_layout Section
+Conclusions and Future Work
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CTUpp_DiscussionConclusions-etc"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this paper we have proposed a systematic algorithm for the design of
+ two-source constellations in the WBN system.
+ The Algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:CTUpp_ButterflyConstellationDesign"
+
+\end_inset
+
+ allows the matching of the constellation parameters to virtually any SNR
+ conditions in the system, enabling a direct implementation of the adaptive
+ constellation mapping scheme.
+ The viability of the proposed constellation design was verified by a means
+ of numerical analysis and simulations and also by a real-world HW experiment
+ (based on Ettus Research USRPs), including a HW-based robustness analysis.
+\end_layout
+
+\begin_layout Standard
+Even in the uncoded scenario, the proposed constellations are able to significan
+tly boost the WBN system throughput, and hence even their uncoded implementation
+ can be interesting, especially in some basic wireless networks where channel
+ coding is avoided to reduce complexity (e.g.
+ in sensor networks).
+ Furthermore, we have shown that the proposed source constellation design
+ can be readily extended with appropriately designed channel encoding/decoding
+ operations, significantly improving the reliability (including the throughput)
+ of the resulting adaptive modulation-coding scheme.
+\end_layout
+
+\begin_layout Standard
+In future work, we would like to focus on a full adaptive HW implementation
+ of the proposed system, where the impact of several other parameters (e.g.
+ channel fading and dynamics, asymmetry of channel gains etc.) can significantly
+ affect the system performance and possibly even require some modifications
+ of the adaptive system design.
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig/Robust_20.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename fig/Robust_21.eps
+	display false
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Robustness analysis for two fixed 
+\begin_inset Formula $(N_{b},N_{s},r_{b},r_{s})$
+\end_inset
+
+ scenarios.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CTUpp_Robustenss_analysis"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 270580279 1480625961
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Section*
+
+\change_inserted 270580279 1480624021
+Declarations
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 270580279 1480626096
+This work was partly reported in IEEE ICC 
+\backslash
+cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.
+\end_layout
+
+\begin_layout Section*
+
+\change_inserted 270580279 1480623974
+Funding
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 270580279 1480624043
+This work has been performed in the framework of the European research project
+ DIWINE, which is partly funded by the European Union under its FP7 ICT
+ Objective 1.1 - The Network of the Future.
+ Work of Pavel Prochazka and Tomas Uricar was also partially supported by
+ the Grant Agency of the Czech Technical University in Prague, SGS project
+ SGS16/094/OHK3/1T/13.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bib/bib,bib/uricar,bib/uricar-papers,bib/uricar-books,bib/sykora,bib/books"
+options "ieeetr"
+
+\end_inset
+
+
+\change_inserted 270580279 1480626511
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 270580279 1480626585
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_body
+\end_document
