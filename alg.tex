@@ -1,0 +1,30 @@
+  \begin{algorithmic}[1]
+    \State \algorithmicrequire{ $(\gamma_{\rm MAC},\, \gamma_{\rm HSI})$} from channel state
+    information
+    \State $(N_b$, $N_s) \gets F(\gamma_{\rm MAC},\gamma_{\rm HSI})$     
+    \For{ $n \in \{0,\dots,N_s-1\}$} \Comment{Superposed levels} 
+      \State  $L_{A,i}^s \gets 2^i$,  $L_{B,i}^s\gets \jj 2^i$, for even $i$
+      \label{alg_line:CTUpp_LAAssignment}
+      \State  $L_{A,i}^s \gets \jj 2^i$,  $L_{B,i}^s\gets 2^i$, for odd $i$
+      \label{alg_line:CTUpp_LBAssignment}
+    \EndFor
+    \For{$i \in \{0,\dots,N_b-1\}$} \Comment{Basic levels} 
+    \State \textbf{switch} hierarchical map:
+    \State ~~\textbf{case} Bitwise-XOR: 
+    \State ~~~~$L_{A,i}^b=L_{B,i}^b \gets 3^i $ for even $i$     
+    \label{alg_line:CTUpp_LAXORAssignment}
+    \State ~~~~$L_{A,i}^b=L_{B,i}^b \gets \jj 3^i$ for odd $i$ 
+    \label{alg_line:CTUpp_LBXORAssignment}
+    \State ~~\textbf{case} Modulo-Sum:
+    \State ~~~~$L_{A,i}^b=L_{B,i}^b \gets 2^i $ for even $i$ 
+    \label{alg_line:CTUpp_LAMSAssignment}
+    \State ~~~~$L_{A,i}^b=L_{B,i}^b \gets \jj 2^i $ for odd $i$ 
+    \label{alg_line:CTUpp_LBMSAssignment}
+    \State \textbf{end switch}
+    \EndFor
+    \State Evaluate $\alpha$ using (\ref{eq:CTUpp_EnergyConstraint}) \Comment{Unit energy constraint}
+    \State Evaluate $s_A$ and $s_B$ using 
+    (\ref{eq:CTUpp_OverallSourceStreams})     and    (\ref{eq:CTUpp_ParticularSourceStreams})
+    \State \algorithmicensure{ Check Figures \ref{fig:CTUpp_performance_XOR} or
+    \ref{fig:CTUpp_performance_MS} for resulting throughput}
+  \end{algorithmic}

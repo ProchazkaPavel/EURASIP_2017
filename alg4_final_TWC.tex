@@ -1,0 +1,24 @@
+ \begin{algorithmic}[1]
+    \State \algorithmicrequire{ $\left(N_{b},\,N_{s}\right)$}  
+    \State \textbf{for} $n_s \in \{0,\dots,N_s-1\}$ \Comment{"superposed levels"} 
+      \State  ~~~$L_{A,n_s}^s \gets 2^{n_s}$,  $L_{B,n_s}^s\gets \jj 2^{n_s}$
+      \label{alg_line:CTUpp_LAAssignment}
+    \State \textbf{end}
+    \State \textbf{for} $n_b \in \{0,\dots,N_b-1\}$ \Comment{"basic levels"} 
+    \State ~~~~~~$L_{A,n_b}^b=L_{B,n_b}^b \gets 2^{N_s} \cdot 3^{\left\lfloor \nicefrac{n_b}{2}\right\rfloor }$ for even $n_b$     
+    \label{alg_line:CTUpp_LAXORAssignment}
+    \State ~~~~~~$L_{A,n_b}^b=L_{B,n_b}^b \gets \jj 2^{N_s} \cdot 3^{\left\lfloor \nicefrac{n_b}{2}\right\rfloor }$ for odd $n_b$ 
+    \label{alg_line:CTUpp_LBXORAssignment}
+    \State \textbf{end}
+    \State $\alpha^{2}=\sum_{n_s=0}^{N_{s}-1}|L_{i,n_s}^{s}|^{2}+\sum_{n_b=0}^{N_{b}-1}|L_{i,n_b}^{b}|^{2}$ \Comment{"norm. coefficient"} \label{alg_line:CTUpp_normalization}
+    \State \textbf{for} $i \in \{A,B\}$ and $\forall \mathbf{d}_{i}=\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]$, $d^b_{i,n_b},\,d^s_{i,n_s}\in\{0,1\}$: \label{alg_line:CTUpp_input_data}
+    \State ~~~\textbf{for} $n_s \in \{0,N_s-1\}$,\, $n_b \in \{0,N_b-1\}$
+	\State ~~~~~~$s_{i,n_s}^{s}=L_{i,n_s}^{s}\left(2d_{i,n_s}^{s}-1\right)$
+	\State ~~~~~~$s_{i,n_b}^{b}=L_{i,n_b}^{b}\left(2d_{i,n_b}^{b}-1\right)$
+      \State ~~~\textbf{end}
+      \State ~~~$s_{i}=\mathcal{A}^{i}\left(\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]\right)=\alpha^{-1}\left(\sum_{n_s=0}^{N_{s}-1}s_{i,n_s}^{s}+\sum_{n_b=0}^{N_{b}-1}s_{i,n_b}^{b}\right)$  \Comment{"constellation symbols"}  \label{alg_line:CTUpp_const_symbols}
+	 \State \textbf{end}
+    
+	\State \algorithmicensure{ Constellation alphabets $\mathcal{A}^A,\,\mathcal{A}^B$.}
+  \end{algorithmic}
+ 

@@ -201,6 +201,13 @@ version P8 (1.12.2016).
 \end_inset
 
 
+\change_inserted 270580279 1480798932
+
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted 270580279 1480799088
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -208,6 +215,231 @@ version P8 (1.12.2016).
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 270580279 1480799088
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "WBN"
+description "Wireless Butterfly Network"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "WNC"
+description "Wireless Network Coding"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "HW"
+description "Hardware"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "SNR"
+description "Signal to Noise Ratio"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "SC"
+description "Superposition Coding"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "HSI"
+description "Hierarchical Side Information"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "DEM"
+description "Demodulator"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "IC"
+description "Interference Cancellation"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "MA"
+description "Multiple Access"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "AWGN"
+description "Aditive White Gaussian Channel"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "ASK"
+description "Amplitude Shift Keying"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "QAM"
+description "Quadrature Amplitude Modulation"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "SER"
+description "Symbol Error Rate"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "FER"
+description "Frame Error Rate"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "SDR"
+description "Software Defined Radio"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "USRP"
+description "Universal Software Radio Peripherals"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "UHD"
+description "USRP Hardware Driver "
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "CP"
+description "Cyclic Prefix"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "ODFD"
+description "Orthogonal Frequency Division Multiplexing"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "DC"
+description "Direct Current"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "MIMO"
+description "Multiple Input Multiple Output"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "QPSK"
+description "Quadrature Phase Shift Keying"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "UDP"
+description "User Datagram Protocol"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "BC"
+description "Broadcast Channel"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "MAC"
+description "Multiple Access Channel"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "CC"
+description "Constellation Constrained"
+
+\end_inset
+
+
+\begin_inset CommandInset nomencl_print
+LatexCommand printnomenclature
+set_width "auto"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Subsubsection*
+\begin_inset Newpage pagebreak
+\end_inset
+
 
 \end_layout
 
@@ -7469,10 +7701,15 @@ Declarations
 
 \begin_layout Standard
 
-\change_inserted 270580279 1480626096
+\change_inserted 270580279 1480799211
 This work was partly reported in IEEE ICC 
-\backslash
-cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prochazka-Uricar-Halls-Sykora_2015-ICC"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section*
@@ -7502,23 +7739,6 @@ options "ieeetr"
 
 
 \change_inserted 270580279 1480626511
-
-\end_layout
-
-\begin_layout Standard
-
-\change_inserted 270580279 1480626585
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
 
 \end_layout
 

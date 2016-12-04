@@ -1,0 +1,26 @@
+  \begin{algorithmic}[1]
+    \State \algorithmicrequire{ $\left(N_{b},\,N_{s}\right)$}  
+    \State \textbf{for} $n \in \{0,\dots,N_s-1\}$ \Comment{"superposed levels"} 
+      \State  ~~~$L_{A,n}^s \gets 2^n$,  $L_{B,n}^s\gets \jj 2^n$, for even $n$
+      \label{alg_line:CTUpp_LAAssignment}
+      \State  ~~~$L_{A,n}^s \gets \jj 2^n$,  $L_{B,n}^s\gets 2^n$, for odd $n$
+      \label{alg_line:CTUpp_LBAssignment}
+    \State \textbf{end}
+    \State \textbf{for} $n \in \{0,\dots,N_b-1\}$ \Comment{"basic levels"} 
+    \State ~~~\textbf{switch} hierarchical function $f$:
+    \State ~~~~~\textbf{case} "bitwise-XOR": 
+    \State ~~~~~~~$L_{A,n}^b=L_{B,n}^b \gets 3^{\left\lfloor \nicefrac{n}{2}\right\rfloor }$ for even $n$     
+    \label{alg_line:CTUpp_LAXORAssignment}
+    \State ~~~~~~~$L_{A,n}^b=L_{B,n}^b \gets \jj 3^{\left\lfloor \nicefrac{n}{2}\right\rfloor }$ for odd $n$ 
+    \label{alg_line:CTUpp_LBXORAssignment}
+    \State ~~~~~\textbf{case} "Modulo Sum":
+    \State ~~~~~~~$L_{A,n}^b=L_{B,n}^b \gets 2^{\left\lfloor \nicefrac{n}{2}\right\rfloor } $ for even $n$ 
+    \label{alg_line:CTUpp_LAMSAssignment}
+    \State ~~~~~~~$L_{A,n}^b=L_{B,n}^b \gets \jj 2^{\left\lfloor \nicefrac{n}{2}\right\rfloor } $ for odd $n$ 
+    \label{alg_line:CTUpp_LBMSAssignment}
+    \State ~~~\textbf{end}
+    \State \textbf{end}
+    \State Evaluate $\alpha$ using (\ref{eq:CTUpp_EnergyConstraint}). \Comment{"normalizing constant"}
+    \State By using (\ref{eq:CTUpp_OverallSourceStreams}) and (\ref{eq:CTUpp_ParticularSourceStreams}), evaluate $s_i\in\mathcal{A}^i_s$, $i\in\{A,B\}$ for all permissible $\mathbf{d}_{i}=\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]$, where $d^b_{i,n},\,d^s_{i,n}\in\{0,1\}$.
+	\State \algorithmicensure{ Constellation alphabets $\mathcal{A}^A_s,\,\mathcal{A}^B_s$.}
+  \end{algorithmic}
