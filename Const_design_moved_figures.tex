@@ -1,6 +1,6 @@
 %% LyX 2.1.5 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[letterpaper,english,10pt]{article}
+\documentclass[letterpaper,english,10pt]{bmc_template/bmcart}
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
@@ -75,65 +75,92 @@
 
 \usepackage{babel}
 \begin{document}
+\begin{frontmatter}
+
+\begin{fmbox}
+\dochead{Research Article}
 
 \title{Design of Adaptive Constellations and Error Protection Coding for
 Wireless Network Coding in 5-node Butterfly Networks}
 
+\author[
+   addressref={aff1},
+   email={pavel@prochazka.info}
+]{\inits{PP}\fnm{Pavel} \snm{Prochazka}}
+\author[
+   addressref={aff1},
+   email={uricatom@fel.cvut.cz}
+]{\inits{TU}\fnm{Tomas} \snm{Uricar}}
+\author[
+   addressref={aff2},                   % id's of addresses, e.g. {aff1,aff2}
+   corref={aff2},                       % id of corresponding address, if any
+   %noteref={n1},                        % id's of article notes, if any
+   email={david.halls@toshiba-trel.com}   % email address
+]{\inits{DH}\fnm{David} \snm{Halls}}
+\author[
+   addressref={aff1},
+   email={jan.sykora@fel.cvut.cz}
+]{\inits{JS}\fnm{Jan} \snm{Sykora}}
 
-\author{Pavel Prochazka, Tomas Uricar, David Halls and Jan Sykora}
 
-\maketitle
-{\footnotesize{}The corresponding author D. Halls is with the Toshiba
--- Telecommunication Research Laboratory (email: david.halls@toshiba-trel.com).
-Pavel Prochazka, Tomas Uricar and Jan Sykora were with the Czech Technical
-University in Prague, Czech Republic (e-mail: \textbackslash{}\{prochp10,
-uricatom, Jan.Sykora\textbackslash{}\}@fel.cvut.cz). }{\footnotesize \par}
+\address[id=aff1]{%                           % unique id
+  \orgname{Czech Technical University in Prague}, % university, etc
+  \street{Technicka 2},                     %
+  \postcode{16627}                                % post or zip code
+  \city{Prague},                              % city
+  \cny{CZ}                                    % country
+}
+\address[id=aff2]{%
+  \orgname{Toshiba -- Telecommunication Research Laboratory},
+  \street{32 Queen Square},
+  \postcode{BS1 4ND}
+  \city{Bristol,},
+  \cny{UK}
+}
+\end{fmbox}% comment this for two column layout
 
-\thispagestyle{empty}
 
-\pagebreak{}
-\begin{abstract}
+\begin{abstractbox}
+
+\begin{abstract} % abstract
 In this paper we focus on the design of a reliable communication scheme
 for generic 5-node Wireless Butterfly Networks (WBN). Since the WBN
 represents a natural extension of the basic 2-way relay communication
 channel, we follow the paradigm of \emph{Wireless Physical Layer Network
-Coding} (WNC) and we show that the design of novel adaptive constellations\emph{
-}is desirable to exploit the promising performance of WNC in WBN.
+Coding} and we show that the design of novel adaptive constellations\emph{
+} is desirable to exploit the promising performance of wireless network coding in WBN.
 We introduce a \emph{systematic constellation design} algorithm and
 we show that the proposed constellations are capable of outperforming
 conventional point-to-point modulations in WBN over the whole range
-of channel SNRs. To further support the applicability of the proposed
+of channel signal to noise ratios. To further support the applicability of the proposed
 constellations in a practical system, we integrate a simple binary
 channel coding scheme, providing a robust \emph{adaptive modulation
 and coding scheme} for relaying in symmetric WBNs with arbitrary channel
 conditions.
 \end{abstract}
 
-\subsubsection*{Keywords:}Wireless Network Coding, Butterfly Network, Relaying, Superposition
-Coding and Modulation
+\begin{keyword}
+\kwd{wireless network coding}
+\kwd{butterfly network}
+\kwd{relaying}
+\kwd{superposition coding}
+\kwd{superposition modulation}
+\end{keyword}
+
+% MSC classifications codes, if any
+%\begin{keyword}[class=AMS]
+%\kwd[Primary ]{}
+%\kwd{}
+%\kwd[; secondary ]{}
+%\end{keyword}
+
+\end{abstractbox}
+
+
+\end{frontmatter}
 
 
 
-
-
-
-\pagebreak
-\nomenclature{WBN}{Wireless Butterfly Network}\nomenclature{WNC}{Wireless Network
-Coding}\nomenclature{HW}{Hardware}\nomenclature{SNR}{Signal to Noise
-Ratio}\nomenclature{SC}{Superposition Coding}\nomenclature{HSI}{Hierarchical Side
-Information}\nomenclature{DEM}{Demodulator}\nomenclature{IC}{Interference
-Cancellation}\nomenclature{MA}{Multiple Access}\nomenclature{AWGN}{Additive White Gaussian
-Channel}\nomenclature{ASK}{Amplitude Shift Keying}\nomenclature{QAM}{Quadrature Amplitude
-Modulation}\nomenclature{SER}{Symbol Error Rate}\nomenclature{FER}{Frame Error
-Rate}\nomenclature{SDR}{Software Defined Radio}\nomenclature{USRP}{Universal Software Radio
-Peripherals}\nomenclature{UHD}{USRP Hardware Driver }\nomenclature{CP}{Cyclic
-Prefix}\nomenclature{ODFD}{Orthogonal Frequency Division Multiplexing}\nomenclature{DC}{Direct
-Current}\nomenclature{MIMO}{Multiple Input Multiple Output}\nomenclature{QPSK}{Quadrature Phase
-Shift Keying}\nomenclature{UDP}{User Datagram Protocol}\nomenclature{BC}{Broadcast
-Channel}\nomenclature{MAC}{Multiple Access Channel}\nomenclature{SODEM}{Soft Output Demodulator}\nomenclature{CC}{Constellation
-Constrained}%\settowidth{\nomlabelwidth}{AWGN} 
-\printnomenclature{} 
-\pagebreak
 
 
 
@@ -166,10 +193,6 @@ channel resources in the system \cite{Popovski-Yomo_2007a}). Since
 both of these properties hinge on the actual SNR conditions in the
 system, the constellation design itself can become a relatively challenging
 task.
-\begin{figure}
-\centering{}\includegraphics[width=0.6\columnwidth]{fig/2-SRN-sc_principle_BC-TWT_v4}
-\caption{Symmetric WBN model with half-duplex constraint and 2-phase communication.\label{fig:CTUpp_Information_flows}}
-\end{figure}
 
 
 One of the first attempts to design a suitable multi-source constellation
@@ -251,14 +274,6 @@ spare capacity of related channels in the system (see \cite{Uricar-Qian-Sykora-M
 for more details). A simplified description of SC-based relaying in
 an uncoded WBN system is summarized in Table~\ref{tab:CTUpp_SC-relaying-scheme}
 and depicted in Fig.~\ref{fig:CTUpp_Information-flow-uncoded-block-scheme}.
-\begin{figure*}
-\begin{centering}
-\includegraphics[width=1\textwidth]{fig/butterfly-2level_processing_principleTWC-uncoded}
-\par\end{centering}
-\caption{Relaying scheme for the uncoded WBN
-system. DEM stands for a hard decision demodulator, IC is the interference
-canceler.\label{fig:CTUpp_Information-flow-uncoded-block-scheme}}
-\end{figure*}
 \begin{table}
 \centering{}%
 \begin{tabular}{|>{\raggedright}p{0.95\columnwidth}|}
@@ -312,7 +327,7 @@ using a standard WNC decoding \cite{Sykora-Burr_2011-TVT})
 obtain the desired $\left[\mathbf{d}_{j}^{b};\mathbf{d}_{j}^{s}\right]$.\end{itemize}
 \tabularnewline
 \hline 
-\end{tabular}\vskip1ex\caption{SC-based relaying scheme in uncoded WBN}.\label{tab:CTUpp_SC-relaying-scheme}
+\end{tabular}vskip1ex\caption{SC-based relaying scheme in uncoded WBN}.\label{tab:CTUpp_SC-relaying-scheme}
 \end{table}
 
 
@@ -497,20 +512,6 @@ and the relay output mapper $\mathcal{A}^{R}$ will be defined as
 a conventional ($2^{N_{b}+2N_{s}}$$)$-QAM constellation. All performance
 metrics in the symmetric WBN are evaluated as a function of the actual
 SNRs ($\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}},\,\gamma_{{\rm {BC}}}$).
-\begin{figure*}
-\centering{}\includegraphics[width=0.8\textwidth]{fig/d2_1}\caption{Source constellation design example for $N_{b}=2,\,N_{s}=1$. Resulting
-constellations are depicted as blue circles ($S_{A}$ output constellation),
-red circles ($S_{B}$ output constellation) and squares (received
-superimposed constellation at $R$). Hierarchical function is $f\left(\mathbf{d}_{A}^{b},\,\mathbf{d}_{B}^{b}\right)=\mathbf{d}_{A}^{b}\oplus\mathbf{d}_{B}^{b}$.\label{fig:CTUpp_ConstellationDesignExample} }
-\end{figure*}
-\begin{figure*}
-\begin{centering}
-\includegraphics[width=1\textwidth]{fig/const_all_2}
-\par\end{centering}
-
-\caption{Proposed constellation design for $\left(N_{b},N_{s}\right)=\left\{ \left(2,0\right);\left(1,1\right);\left(0,2\right)\right\} $.\label{fig:CTUpp_ConstellationDesign_NbNs2} }
-\end{figure*}
-
 
 
 \subsection{Analytical Performance Evaluation\label{sub:CTUpp_Numerical_Evaluation_uncoded}}
@@ -555,18 +556,6 @@ the XCVR2450 daughterboards are used, these are dual-band transceivers
 with 100 mW output at 2.4 - 2.5 GHz and 50 mW output at 4.9 - 5.85
 GHz. In this paper GNURadio \cite{GNURadio}, which is an open-source
 tool-kit, is used as the host-processing software.
-\begin{figure}
-\centering{}\includegraphics[width=0.95\columnwidth]{fig/20150109_143009}\caption{Setup for HW evaluation (Ettus Research
-USRPs). Source transmissions are prerotated \cite{Koike-Popovski-Tarokh_2009a,Zhang-Liew_2010,Anxin-Yuan-Kayama_2008}
-to imitate the AWGN channel conditions (as used in the numerical evaluation).
-To allow a strict control of HSI channels SNR in the HW
-setup, the HSI channels are emulated by adding a Gaussian noise to
-the respective source signal and the resulting emulated HSI is passed
-to destinations via UDP. This also avoids the problem of node visibility
-where direct links $S_{A}\rightarrow D_{A}$ and $S_{B}\rightarrow D_{B}$
-exist in the laboratory environment.\label{fig:CTUpp_HW_setup}}
-\end{figure}
-
 
 
 \subsubsection{OFDM Parameters}
@@ -713,42 +702,6 @@ HSI channels \cite{Uricar-Sykora_2012,Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC}
 and consequently in a more reliable overheard HSI for the constellations
 with lower (non-zero) $N_{b}$.} for constant $N_{b}+N_{s}$, i.e. for constant bits/constellation
 symbol transmitted by the sources.
-\begin{figure}
-\begin{centering}
-\hspace*{-0.04\columnwidth}\includegraphics[width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC16_BC20_N2}\vskip-2ex
-\par\end{centering}
-
-\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
-for $\gamma_{{\rm {MAC}}}=16\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
-and given $(N_{b},N_{s})$. \label{fig:CTUpp_Throughput16_20}}
-\end{figure}
-\begin{figure}
-\begin{centering}
-\hspace*{-0.04\columnwidth}\includegraphics[width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC17_BC17_N2}\vskip-2ex
-\par\end{centering}
-
-\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
-for $\gamma_{{\rm {MAC}}}=17\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=17\,\mathrm{dB}$
-and given $(N_{b},N_{s})$.\label{fig:CTUpp_Throughput17_17}}
-\end{figure}
-\begin{figure}
-\begin{centering}
-\hspace*{-0.04\columnwidth}\includegraphics[width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC20_BC20_N2}\vskip-2ex
-\par\end{centering}
-
-\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
-for $\gamma_{{\rm {MAC}}}=20\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
-and given $(N_{b},N_{s})$. \label{fig:CTUpp_Throughput20_20}}
-\end{figure}
-\begin{figure}
-\begin{centering}
-\hspace*{-0.04\columnwidth}\includegraphics[clip,width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC20_BC16_N2}\vskip-2ex
-\par\end{centering}
-
-\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
-for $\gamma_{{\rm {MAC}}}=20\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=16\,\mathrm{dB}$
-and given $(N_{b},N_{s})$. \label{fig:CTUpp_Throughput20_16}}
-\end{figure}
 
 \end{itemize}
 
@@ -787,8 +740,8 @@ The SNR mapping regions, including the resulting throughput for the
 optimal choice of $N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$, are shown
 as a function of $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$ for
 $\gamma_{{\rm {BC}}}\in\{15\,\mathrm{dB},\,17\,\mathrm{dB},20\,\mathrm{dB},25\,\mathrm{dB}\}$
-in Fig.~\ref{fig:CTUpp_SNR_map_BC15-17-20-25}. Several interesting
-phenomenas can be again observed in the figure:
+in Fig.~\ref{fig:CTUpp_SNR_map_BC15-17-20-25}. %Several interesting
+%phenomenas can be again observed in the figure:
 \begin{itemize}
 \item Since the transmission schemes with ($N_{b}=0,\,N_{s}>0$) constellations
 can ignore the HSI channels (Table~\ref{tab:CTUpp_SC-relaying-scheme}),
@@ -805,23 +758,6 @@ in relatively large regions of $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$
 for $\gamma_{{\rm {BC}}}=\left\{ 20\,\mathrm{dB},\,25\,\mathrm{dB}\right\} $).
 Note that these constellations have a great potential for application
 in systems with limited or partial HSI (see \cite{Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC}).
-\begin{figure*}
-\begin{centering}
-\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC15}\quad\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC17}
-\par\end{centering}
-
-\centering{}\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC20}\quad\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC25}\caption{Throughput performance $T_{\mathrm{LB}}$ and SNR mapping regions
-(including the optimal const. parameters ($N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$))
-for $\gamma_{{\rm {BC}}}\in\{15\,\mathrm{dB},\,17\,\mathrm{dB},20\,\mathrm{dB},25\,\mathrm{dB}\}$.\label{fig:CTUpp_SNR_map_BC15-17-20-25}}
-\end{figure*}
-\begin{figure*}
-\centering{}\includegraphics[width=0.48\textwidth]{fig/XOR_map_Througput_BC20}\quad\includegraphics[width=0.48\textwidth]{fig/XOR_map_Througput_USRP_BC20}\caption{Comparison of $T_{\mathrm{LB}}$ and the throughput performance evaluated
-in a real world adaptive HW setup ($T_{\mathrm{USRP}}$) for $\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$.
-The SNR mapping regions (including the optimal const. parameters ($N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$))
-used in the HW evaluation are also emphasized in the figure.\label{fig:CTUpp_SNR_map_BC20_USRP}}
-\vspace*{-4ex}
-\end{figure*}
-
 \item The BC channel SNR ($\gamma_{{\rm {BC}}}$) can significantly limit
 the performance of the system, even in the case where both $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$
 are relatively high (compare the results for $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$
@@ -977,16 +913,6 @@ The encoded data are then mapped to the output $2^{N_{R}}$-QAM (where
 $N_{R}=2N_{s}+N_{b}$) constellation symbols $s_{R,j}=\mathcal{A}^{R}\left(\mathbf{c}_{r,j}\right)$,
 $j\in\{0,1,\dots,\mathcal{N}-1\}$ and broadcast by the relay to both
 destination nodes.
-\begin{figure*}
-\begin{centering}
-\includegraphics[width=1\textwidth]{fig/butterfly-2level_processing_principleTWC-coded}
-\par\end{centering}
-
-\caption{Relaying scheme in the encoded WBN system. SODEM stands for a soft-output
-demodulator, IC is the interference canceler. The channel encoders/decoders
-which are appended to the uncoded system are emphasized. \label{fig:CTUpp_Information-flow-coded-block-scheme}}
-\vspace*{-3ex}
-\end{figure*}
 
 
 
@@ -1094,21 +1020,6 @@ observations (after perfect IC) at $D_{A},\,D_{B}$ (respectively)
 \textendash{} see Fig.~\ref{fig:CTUpp_Information-flow-coded-block-scheme}.
 Both (\ref{eq:CTUpp_CSB-HSI-B}), (\ref{eq:CTUpp_CSB-HSI-A}) are
 identical in the symmetric WBN system.
-\begin{figure*}
-\begin{centering}
-\hspace*{-1.5em}\includegraphics[width=0.7\columnwidth]{fig/Rate_Regions_XOR_map_BC10_MAC12_HSI8}
-\par\end{centering}
-
-\begin{centering}
-\includegraphics[width=0.7\textwidth]{fig/Rate_Regions_XOR_map_BC5_MAC5_HSI0}
-\par\end{centering}
-
-\caption{Numerically evaluated cut-set bounds (mutual information for finite
-input constellations) for $(N_{b}=2,N_{s}=1)$ source constellations
-and $16$-QAM at the relay. The particular SNR conditions are available
-in the titles of both sub-figures.\label{fig:CTUpp_CSB_eval}}
-\end{figure*}
-
 
 
 \subsubsection{Relay broadcast channel}
@@ -1222,17 +1133,6 @@ source constellation parameters}. The corresponding \emph{optimal
 source transmission rates} (\ref{eq:CTUpp_opt_rates}) are given simply
 by \emph{$r_{b}^{\mathrm{II}}=r_{b}^{\mathrm{max}}(N_{b}^{\mathrm{II}},\,N_{s}^{\mathrm{II}})$,
 $r_{s}^{\mathrm{II}}=r_{s}^{\mathrm{max}}(N_{b}^{\mathrm{II}},\,N_{s}^{\mathrm{II}})$.}
-\begin{figure*}
-\centering{}\includegraphics[width=0.45\textwidth]{fig/Adaptive_Maps_overall_BC_7\lyxdot 5}~~~\includegraphics[width=0.45\textwidth]{fig/Adaptive_Maps_overall_BC_15\lyxdot 0}\caption{Maximal encoded system throughput $T_{C}^{\mathrm{max}}$ for $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
-and $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$.\label{fig:CTUpp_Coded_SNR_map} }
-\end{figure*}
-\begin{figure*}
-\centering{}\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_coding_Gain7\lyxdot 5}~~~\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_coding_Gain15\lyxdot 0}\caption{Throughput enhancement $\Delta T_{C}=T_{C}^{\mathrm{max}}-T_{\mathrm{LB}}$
-{[}bits/channel use{]} of the coded over uncoded WBN system for $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
-and $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$. Note that $0.75\leq\Delta T_{C}\leq2$
-in the analyzed range of channel SNRs.\label{fig:CTUpp_Coded_ThroughputGain}}
-\end{figure*}
-
 
 The SNR mapping regions (including the throughput $T_{C}^{\mathrm{max}}$)
 for the adaptive modulation and coding scheme in WBN are evaluated
@@ -1277,14 +1177,6 @@ in the HW measurements. The channel SNRs $\gamma_{{\rm {MAC}}},\gamma_{{\rm {HSI
 in the HW measurements can be controlled by the source transmit power
 adjustment and similarly, particular values of $\gamma_{{\rm {BC}}}$
 can be set up by the adjustment of the relay transmit power.
-\begin{figure}
-\begin{centering}
-\includegraphics[width=0.75\columnwidth]{fig/2-SRN-sc_principle_BC-TWT_directLink}
-\par\end{centering}
-
-\centering{}\caption{Direct channel at destination $D_{B}$ in the robustness analysis
-(likewise, a direct channel is assumed to be present also at $D_{A}$).\label{fig:CTUpp_DirectChannel}}
-\end{figure}
 
 
 To perform a comparison of the idealized numerical evaluation with
@@ -1338,31 +1230,191 @@ of the proposed system, where the impact of several other parameters
 (e.g. channel fading and dynamics, asymmetry of channel gains etc.)
 can significantly affect the system performance and possibly even
 require some modifications of the adaptive system design.
+
+
+\begin{backmatter}
+
+
+
+\nomenclature{WBN}{Wireless Butterfly Network}\nomenclature{WNC}{Wireless Network
+Coding}\nomenclature{HW}{Hardware}\nomenclature{SNR}{Signal to Noise
+Ratio}\nomenclature{SC}{Superposition Coding}\nomenclature{HSI}{Hierarchical Side
+Information}\nomenclature{DEM}{Demodulator}\nomenclature{IC}{Interference
+Cancellation}\nomenclature{MA}{Multiple Access}\nomenclature{AWGN}{Additive White Gaussian
+Channel}\nomenclature{ASK}{Amplitude Shift Keying}\nomenclature{QAM}{Quadrature Amplitude
+Modulation}\nomenclature{SER}{Symbol Error Rate}\nomenclature{FER}{Frame Error
+Rate}\nomenclature{SDR}{Software Defined Radio}\nomenclature{USRP}{Universal Software Radio
+Peripherals}\nomenclature{UHD}{USRP Hardware Driver }\nomenclature{CP}{Cyclic
+Prefix}\nomenclature{ODFD}{Orthogonal Frequency Division Multiplexing}\nomenclature{DC}{Direct
+Current}\nomenclature{MIMO}{Multiple Input Multiple Output}\nomenclature{QPSK}{Quadrature Phase
+Shift Keying}\nomenclature{UDP}{User Datagram Protocol}\nomenclature{BC}{Broadcast
+Channel}\nomenclature{MAC}{Multiple Access Channel}\nomenclature{SODEM}{Soft Output Demodulator}\nomenclature{CC}{Constellation
+Constrained}%\settowidth{\nomlabelwidth}{AWGN} 
+\printnomenclature{} 
+
+\section*{Declarations}
+
+This work was partly reported in IEEE ICC \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.
+
+\section*{Competing Interests}
+The authors hereby confirm, having read SpringerOpen's guidance on competing interests, that we have no competing interests in the manuscript.
+
+\section*{Funding}
+This work has been performed in the framework of the European research
+project DIWINE, which is partly funded by the European Union under
+its FP7 ICT Objective 1.1 - The Network of the Future. Work of Pavel
+Prochazka and Tomas Uricar was also partially supported by the Grant
+Agency of the Czech Technical University in Prague, SGS project SGS16/094/OHK3/1T/13.
+\section*{Figures}
+\begin{figure}
+\centering{}\includegraphics[width=0.6\columnwidth]{fig/2-SRN-sc_principle_BC-TWT_v4}
+\caption{Symmetric WBN model with half-duplex constraint and 2-phase communication.\label{fig:CTUpp_Information_flows}}
+\end{figure}
+
+\begin{figure*}
+\begin{centering}
+\includegraphics[width=1\textwidth]{fig/butterfly-2level_processing_principleTWC-uncoded}
+\par\end{centering}
+\caption{Relaying scheme for the uncoded WBN
+system. DEM stands for a hard decision demodulator, IC is the interference
+canceler.\label{fig:CTUpp_Information-flow-uncoded-block-scheme}}
+\end{figure*}
+\begin{figure*}
+\centering{}\includegraphics[width=0.8\textwidth]{fig/d2_1}\caption{Source constellation design example for $N_{b}=2,\,N_{s}=1$. Resulting
+constellations are depicted as blue circles ($S_{A}$ output constellation),
+red circles ($S_{B}$ output constellation) and squares (received
+superimposed constellation at $R$). Hierarchical function is $f\left(\mathbf{d}_{A}^{b},\,\mathbf{d}_{B}^{b}\right)=\mathbf{d}_{A}^{b}\oplus\mathbf{d}_{B}^{b}$.\label{fig:CTUpp_ConstellationDesignExample} }
+\end{figure*}
+\begin{figure*}
+\begin{centering}
+\includegraphics[width=1\textwidth]{fig/const_all_2}
+\par\end{centering}
+
+\caption{Proposed constellation design for $\left(N_{b},N_{s}\right)=\left\{ \left(2,0\right);\left(1,1\right);\left(0,2\right)\right\} $.\label{fig:CTUpp_ConstellationDesign_NbNs2} }
+\end{figure*}
+
+\begin{figure}
+\centering{}\includegraphics[width=0.95\columnwidth]{fig/20150109_143009}\caption{Setup for HW evaluation (Ettus Research
+USRPs). Source transmissions are prerotated \cite{Koike-Popovski-Tarokh_2009a,Zhang-Liew_2010,Anxin-Yuan-Kayama_2008}
+to imitate the AWGN channel conditions (as used in the numerical evaluation).
+To allow a strict control of HSI channels SNR in the HW
+setup, the HSI channels are emulated by adding a Gaussian noise to
+the respective source signal and the resulting emulated HSI is passed
+to destinations via UDP. This also avoids the problem of node visibility
+where direct links $S_{A}\rightarrow D_{A}$ and $S_{B}\rightarrow D_{B}$
+exist in the laboratory environment.\label{fig:CTUpp_HW_setup}}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+\hspace*{-0.04\columnwidth}\includegraphics[width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC16_BC20_N2}
+\par\end{centering}
+
+\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
+for $\gamma_{{\rm {MAC}}}=16\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
+and given $(N_{b},N_{s})$. \label{fig:CTUpp_Throughput16_20}}
+\end{figure}
+\begin{figure}
+\begin{centering}
+\hspace*{-0.04\columnwidth}\includegraphics[width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC17_BC17_N2}
+\par\end{centering}
+
+\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
+for $\gamma_{{\rm {MAC}}}=17\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=17\,\mathrm{dB}$
+and given $(N_{b},N_{s})$.\label{fig:CTUpp_Throughput17_17}}
+\end{figure}
+\begin{figure}
+\begin{centering}
+\hspace*{-0.04\columnwidth}\includegraphics[width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC20_BC20_N2}
+\par\end{centering}
+
+\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
+for $\gamma_{{\rm {MAC}}}=20\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$
+and given $(N_{b},N_{s})$. \label{fig:CTUpp_Throughput20_20}}
+\end{figure}
+\begin{figure}
+\begin{centering}
+\hspace*{-0.04\columnwidth}\includegraphics[clip,width=0.95\columnwidth]{fig/Throughput_HSI_XOR_MAC20_BC16_N2}
+\par\end{centering}
+
+\caption{Comparison of throughput as a function of $\gamma_{{\rm {HSI}}}$
+for $\gamma_{{\rm {MAC}}}=20\,\mathrm{dB},\,\gamma_{{\rm {BC}}}=16\,\mathrm{dB}$
+and given $(N_{b},N_{s})$. \label{fig:CTUpp_Throughput20_16}}
+\end{figure}
+
+
+\begin{figure*}
+\begin{centering}
+\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC15}\quad\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC17}
+\par\end{centering}
+
+\centering{}\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC20}\quad\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_BC25}\caption{Throughput performance $T_{\mathrm{LB}}$ and SNR mapping regions
+(including the optimal const. parameters ($N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$))
+for $\gamma_{{\rm {BC}}}\in\{15\,\mathrm{dB},\,17\,\mathrm{dB},20\,\mathrm{dB},25\,\mathrm{dB}\}$.\label{fig:CTUpp_SNR_map_BC15-17-20-25}}
+\end{figure*}
+\begin{figure*}
+\centering{}\includegraphics[width=0.48\textwidth]{fig/XOR_map_Througput_BC20}\quad\includegraphics[width=0.48\textwidth]{fig/XOR_map_Througput_USRP_BC20}\caption{Comparison of $T_{\mathrm{LB}}$ and the throughput performance evaluated
+in a real world adaptive HW setup ($T_{\mathrm{USRP}}$) for $\gamma_{{\rm {BC}}}=20\,\mathrm{dB}$.
+The SNR mapping regions (including the optimal const. parameters ($N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$))
+used in the HW evaluation are also emphasized in the figure.\label{fig:CTUpp_SNR_map_BC20_USRP}}
+\vspace*{-4ex}
+\end{figure*}
+
+\begin{figure*}
+\begin{centering}
+\includegraphics[width=1\textwidth]{fig/butterfly-2level_processing_principleTWC-coded}
+\par\end{centering}
+
+\caption{Relaying scheme in the encoded WBN system. SODEM stands for a soft-output
+demodulator, IC is the interference canceler. The channel encoders/decoders
+which are appended to the uncoded system are emphasized. \label{fig:CTUpp_Information-flow-coded-block-scheme}}
+\end{figure*}
+
+\begin{figure*}
+\begin{centering}
+\hspace*{-1.5em}\includegraphics[width=0.7\columnwidth]{fig/Rate_Regions_XOR_map_BC10_MAC12_HSI8}
+\par\end{centering}
+
+\begin{centering}
+\includegraphics[width=0.7\textwidth]{fig/Rate_Regions_XOR_map_BC5_MAC5_HSI0}
+\par\end{centering}
+
+\caption{Numerically evaluated cut-set bounds (mutual information for finite
+input constellations) for $(N_{b}=2,N_{s}=1)$ source constellations
+and $16$-QAM at the relay. The particular SNR conditions are available
+in the titles of both sub-figures.\label{fig:CTUpp_CSB_eval}}
+\end{figure*}
+
+\begin{figure*}
+\centering{}\includegraphics[width=0.45\textwidth]{fig/Adaptive_Maps_overall_BC_7\lyxdot 5}~~~\includegraphics[width=0.45\textwidth]{fig/Adaptive_Maps_overall_BC_15\lyxdot 0}\caption{Maximal encoded system throughput $T_{C}^{\mathrm{max}}$ for $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
+and $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$.\label{fig:CTUpp_Coded_SNR_map} }
+\end{figure*}
+\begin{figure*}
+\centering{}\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_coding_Gain7\lyxdot 5}~~~\includegraphics[width=0.45\textwidth]{fig/XOR_map_Througput_coding_Gain15\lyxdot 0}\caption{Throughput enhancement $\Delta T_{C}=T_{C}^{\mathrm{max}}-T_{\mathrm{LB}}$
+{[}bits/channel use{]} of the coded over uncoded WBN system for $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
+and $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$. Note that $0.75\leq\Delta T_{C}\leq2$
+in the analyzed range of channel SNRs.\label{fig:CTUpp_Coded_ThroughputGain}}
+\end{figure*}
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.75\columnwidth]{fig/2-SRN-sc_principle_BC-TWT_directLink}
+\par\end{centering}
+
+\centering{}\caption{Direct channel at destination $D_{B}$ in the robustness analysis
+(likewise, a direct channel is assumed to be present also at $D_{A}$).\label{fig:CTUpp_DirectChannel}}
+\end{figure}
+
 \begin{figure*}
 \centering{\includegraphics[width=1\textwidth]{fig/Robust_20}
 \includegraphics[width=1\textwidth]{fig/Robust_21}}
 \caption{Robustness analysis for two fixed $(N_{b},N_{s},r_{b},r_{s})$ scenarios.
 \label{fig:CTUpp_Robustenss_analysis}}
 \end{figure*}
+\section*{Availability of Data and Materials}
 
-
-\pagebreak{}
-
-
-\section*{Declarations}
-
-This work was partly reported in IEEE ICC \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.
-
-
-\section*{Funding}
-
-This work has been performed in the framework of the European research
-project DIWINE, which is partly funded by the European Union under
-its FP7 ICT Objective 1.1 - The Network of the Future. Work of Pavel
-Prochazka and Tomas Uricar was also partially supported by the Grant
-Agency of the Czech Technical University in Prague, SGS project SGS16/094/OHK3/1T/13.
-
-\bibliographystyle{ieeetr}
+\bibliographystyle{bmc_template/bmc-mathphys}
 \bibliography{bib/bib,bib/uricar,bib/uricar-papers,bib/uricar-books,bib/sykora,bib/books}
 
+\end{backmatter}
 \end{document}
