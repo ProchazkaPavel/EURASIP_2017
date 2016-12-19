@@ -190,15 +190,15 @@ def Draw_dec_Boundaries(ax, bords, hatches, mapping = None, Failures = None):
     '''       
     for i,  bord in enumerate(bords):
         #ax.plot(np.real(bord), np.imag(bord),'k-', lw=2)   
+        xy=np.vstack([np.real(bord), np.imag(bord)]).T
         if mapping is not None:
-            xy=np.vstack([np.real(bord), np.imag(bord)]).T
             if not Failures[i]:
                 bar = plt.Polygon(xy, ec='k',lw=2, hatch=hatches[mapping[i]], facecolor='white')
             else:
                 bar = plt.Polygon(xy, ec='k',lw=2, facecolor='red', fill=True, alpha=0.4)
             ax.add_artist(bar)      
         else:
-            bar = plt.Polygon(xy, color=col[i], ec='k',lw=2, label=str(i))
+            bar = plt.Polygon(xy, facecolor='white', ec='k',lw=2, label=str(i))
     #ax.plot(np.real(const), np.imag(const),'ok',ms=8)
     
 def Draw_Error_Circles(const, sigma2w, Pe):
@@ -212,12 +212,59 @@ def Draw_Error_Circles(const, sigma2w, Pe):
 
 
 
+def Draw_Relay_BC(ax, Nb, Ns):
+    const = QAM(Nb+2*Ns)[0]
+    base_hatch_Relay = ['o', 'O','.','*', '\\']
+    hatches_Relay = [''.join([base_hatch_Relay[int(i)] for i in np.base_repr(ind,len(base_hatch_Relay))]) for ind in range(2**Nb)]
+    col = cm.rainbow(np.linspace(0,1,2**Ns))
+    ax.grid()
+    ax.set_xlim([-1.5, 1.5])
+    ax.set_ylim([-1.5, 1.5])
+    ax.axis('equal')
+    for db in range(2**Nb):
+        for dAs in range(2**Ns):
+            for dBs in range(2**Ns):                                        
+                indH = dAs*2**(Ns+Nb) + dBs*2**(Nb) + db
+                c = const[indH]
+                ax.scatter(np.real(c), np.imag(c), s=1000, marker='s', hatch=hatches_Relay[db], facecolor='white')                
+                ax.plot(np.real(c), np.imag(c), 'o', color=col[dAs], mew=3, ms=16, fillstyle='left')
+                ax.plot(np.real(c), np.imag(c), 'o', color=col[dBs], mew=3, ms=16, fillstyle='right')                    
+    
+def Draw_Destination_BC(ax, Nb, Ns):
+    const = QAM(Nb+2*Ns)[0]
+    base_hatch_Relay = ['o', 'O','.','*', '\\']
+    hatches_Relay = [''.join([base_hatch_Relay[int(i)] for i in np.base_repr(ind,len(base_hatch_Relay))]) for ind in range(2**Nb)]
+    col = cm.rainbow(np.linspace(0,1,2**Ns))
+    ax.grid()
+    ax.axis('equal')
+    C2B = np.zeros(len(const), int)
+    for db in range(2**Nb):
+        for dAs in range(2**Ns):
+            for dBs in range(2**Ns):                                        
+                indH = dAs*2**(Ns+Nb) + dBs*2**(Nb) + db
+                C2B[indH] = db
+                
+    bords = Get_Dec_Region_Boundaries(const, 1.5) #prepare decision regions for relay constellatio
+    Draw_dec_Boundaries(ax, bords, hatches_Relay, C2B, np.zeros(len(const), bool))
+    for db in range(2**Nb):
+        for dAs in range(2**Ns):
+            for dBs in range(2**Ns):                                        
+                indH = dAs*2**(Ns+Nb) + dBs*2**(Nb) + db
+                c = const[indH]
+                ax.plot(np.real(c), np.imag(c), 'o', color=col[dAs], mew=3, ms=16, fillstyle='left')
+                ax.plot(np.real(c), np.imag(c), 'o', color=col[dBs], mew=3, ms=16, fillstyle='right')                    
+    ax.set_xlim([-1.5, 1.5])
+    ax.set_ylim([-1.5, 1.5])
 
-def Draw_Relay_Const(ax, Nb, Ns, h, mmax = 3):
+def Draw_Relay_Const(ax, Nb, Ns, h, mmax = 3.):
     (sourceA_const, sourceB_const, basic_part, superposed_part, relay_const, alpha) = const_design_XOR(Nb, Ns, h)    
     col = cm.rainbow(np.linspace(0,1,2**Ns))
     base_hatch_Relay = ['o', 'O','.','*', '\\']
     hatches_Relay = [''.join([base_hatch_Relay[int(i)] for i in np.base_repr(ind,len(base_hatch_Relay))]) for ind in range(2**Nb)]
+    ax.axis('equal')
+    #ax.set_xlim([-mmax,mmax])
+    #ax.set_ylim([-mmax,mmax])
+    ax.grid()    
     C2H, C2B, unique_const, Failures = check_excl_failures(relay_const, Nb, Ns, eq = 1e-5)
     bords = Get_Dec_Region_Boundaries(unique_const, mmax) #prepare decision regions for relay constellation
     Draw_dec_Boundaries(ax, bords, hatches_Relay, C2B, Failures)    
@@ -230,17 +277,17 @@ def Draw_Relay_Const(ax, Nb, Ns, h, mmax = 3):
                     c = basic_part[dAb] + h*basic_part[dBb] + superposed_part[dAs] + h*1j*superposed_part[dBs]
                     ax.plot(np.real(c), np.imag(c), 'o', color=col[dAs], mew=3, ms=16, fillstyle='left')
                     ax.plot(np.real(c), np.imag(c), 'o', color=col[dBs], mew=3, ms=16, fillstyle='right')                    
-    ax.grid()    
-    ax.set_xlim([-3,3])
-    ax.set_ylim([-3,3])
     
 def Draw_SRC_Const(ax, Nb, Ns, node = 'A'):
     (sourceA_const, sourceB_const, basic_part, superposed_part, relay_const, alpha) =    const_design_XOR(Nb, Ns, 1.)    
     col = cm.rainbow(np.linspace(0,1,2**Ns))
     base_hatch_SRC = ['/','-', '+', 'x']
     hatches_SRC = [''.join([base_hatch_SRC[int(i)] for i in np.base_repr(ind,len(base_hatch_SRC))]) for ind in range(2**Nb)]
-    ax.axis('equal')
  
+    ax.axis('equal')
+    ax.set_xlim([-1.5, 1.5])
+    #ax.set_ylim([-1.5, 1.5])
+    ax.grid()
     
     for db in range(2**Nb):
         for ds in range(2**Ns):
@@ -252,9 +299,54 @@ def Draw_SRC_Const(ax, Nb, Ns, node = 'A'):
             else:
                 ax.plot(np.real(sB), np.imag(sB), 'o', color=col[ds], mew=3, ms=16, fillstyle='right')
                 ax.scatter(np.real(sB), np.imag(sB), s=1000, marker='s', hatch=hatches_SRC[db], facecolor='white')                
-    ax.grid()
-    ax.set_xlim([-1.5, 1.5])
-    ax.set_ylim([-1.5, 1.5])
+
+def Draw_Received_Dest_MAC(ax, Nb, Ns, node='A'):
+    (sourceA_const, sourceB_const, basic_part, superposed_part, relay_const, alpha) = const_design_XOR(Nb, Ns, 1.)    
+    col = cm.rainbow(np.linspace(0,1,2**Ns))
+    base_hatch_SRC = ['/','-', '+', 'x']
+    hatches_SRC = [''.join([base_hatch_SRC[int(i)] for i in np.base_repr(ind,len(base_hatch_SRC))]) for ind in range(2**Nb)]
+    C2B = np.zeros(len(sourceA_const), int)
+    col = cm.rainbow(np.linspace(0,1,2**Ns)) 
+    if node == 'B':
+        bords = Get_Dec_Region_Boundaries(sourceA_const, 1.5) #prepare decision regions for relay constellation
+        for b in range(2**Nb):
+            for s in range(2**Ns):
+                indA = s * 2**Nb + b 
+                C2B[indA] = b 
+        Draw_dec_Boundaries(ax, bords, hatches_SRC, C2B, np.zeros(len(sourceA_const), bool))    
+    
+        for b in range(2**Nb):
+            for s in range(2**Ns):
+                c = basic_part[b] +  superposed_part[s] 
+                ax.plot(np.real(c), np.imag(c), 'o', color=col[s], mew=3, ms=16, fillstyle='left')
+    elif node == 'A':
+        bords = Get_Dec_Region_Boundaries(sourceB_const, 1.5) #prepare decision regions for relay constellation
+        for b in range(2**Nb):
+            for s in range(2**Ns):
+                indB = s * 2**Nb + b 
+                C2B[indB] = b 
+        Draw_dec_Boundaries(ax, bords, hatches_SRC, C2B, np.zeros(len(sourceA_const), bool))    
+    
+        for b in range(2**Nb):
+            for s in range(2**Ns):
+                c = basic_part[b] +  1j*superposed_part[s] 
+                ax.plot(np.real(c), np.imag(c), 'o', color=col[s], mew=3, ms=16, fillstyle='right')                    
+    ax.grid()    
+    ax.set_xlim([-1.5,1.5])
+    ax.set_ylim([-1.5,1.5])
+
+def Draw_Received_Dest_MAC_IC(ax, Nb, Ns):
+    (sourceA_const, sourceB_const, basic_part, superposed_part, relay_const, alpha) = const_design_XOR(Nb, Ns, 1.)    
+    base_hatch_SRC = ['/','-', '+', 'x']
+    hatches_SRC = [''.join([base_hatch_SRC[int(i)] for i in np.base_repr(ind,len(base_hatch_SRC))]) for ind in range(2**Nb)]
+    C2B = np.arange(len(basic_part))
+    bords = Get_Dec_Region_Boundaries(basic_part, 1.5) #prepare decision regions for relay constellation
+    Draw_dec_Boundaries(ax, bords, hatches_SRC, C2B, np.zeros(len(sourceA_const), bool))    
+
+    ax.plot(np.real(basic_part), np.imag(basic_part), 'o', color='k', mew=3, ms=16, fillstyle='none')
+    ax.grid()    
+    ax.set_xlim([-1.5,1.5])
+    ax.set_ylim([-1.5,1.5])
 
 def insert_legend(Nb, Ns, ax):
     col = cm.rainbow(np.linspace(0,1,2**Ns))
@@ -275,6 +367,104 @@ def insert_legend(Nb, Ns, ax):
 
     
 #%%
+def draw_Constellations_S2R(Nb, Ns, h):
+    '''
+    Draw constellations in sources and corresponding received constellation in relay for given
+    relative fading coefficient h
+    '''
+    fig = plt.figure(figsize=(15,10))
+
+    ax_dA = plt.subplot2grid((2,4), (0, 0));
+    Draw_SRC_Const(ax_dA, Nb, Ns, node = 'A')
+    ax_dA.set_title('Source A constellation - MAC')
+
+    ax_dB = plt.subplot2grid((2,4), (1, 0));
+    Draw_SRC_Const(ax_dB, Nb, Ns, node = 'B')
+    ax_dB.set_title('Source B constellation - MAC')
+
+    ax_R = plt.subplot2grid((2,4), (0, 1), colspan=2, rowspan=2)
+    Draw_Relay_Const(ax_R, Nb, Ns, h)
+    ax_R.set_title('Received Relay constellation - MAC')
+
+    ax_legend = plt.subplot2grid((2,4), (0, 3), rowspan=2)
+    insert_legend(Nb, Ns, ax_legend)
+
+def draw_Constellations(Nb, Ns, h):
+    fig = plt.figure(figsize=(15,10))
+
+    ax_SA = plt.subplot2grid((3,4), (0, 0));
+    Draw_SRC_Const(ax_SA, Nb, Ns, node = 'A')
+    ax_SA.set_title('Source A constellation - MAC')
+
+    ax_SB = plt.subplot2grid((3,4), (1, 0));
+    Draw_SRC_Const(ax_SB, Nb, Ns, node = 'B')
+    ax_SB.set_title('Source B constellation - MAC')
+
+    ax_R = plt.subplot2grid((3,4), (0, 1), colspan=2, rowspan=2)
+    Draw_Relay_Const(ax_R, Nb, Ns, h)
+    ax_R.set_title('Received Relay constellation - MAC')
+
+    ax_DA = plt.subplot2grid((3,4), (0, 3));
+    Draw_Received_Dest_MAC(ax_DA, Nb, Ns, node = 'A')
+    ax_DA.set_title('Received $D_A$ - MAC')
+
+    ax_DB = plt.subplot2grid((3,4), (1, 3));
+    Draw_Received_Dest_MAC(ax_DB, Nb, Ns, node = 'B')
+    ax_DB.set_title('Received $D_B$ - MAC')
+
+    ax_legend = plt.subplot2grid((3,4), (2, 0))
+    insert_legend(Nb, Ns, ax_legend)
+
+    ax_R_BC = plt.subplot2grid((3,4), (2, 1));
+    Draw_Relay_BC(ax_R_BC, Nb, Ns)
+    ax_R_BC.set_title('Relay Constellation - BC')
+
+    ax_DA_BC = plt.subplot2grid((3,4), (2, 2));
+    Draw_Destination_BC(ax_DA_BC, Nb, Ns)
+    ax_DA_BC.set_title('Received $D_A$ - BC')
+
+    ax_DB_BC = plt.subplot2grid((3,4), (2, 3));
+    Draw_Destination_BC(ax_DB_BC, Nb, Ns)
+    ax_DB_BC.set_title('Received $D_B$ - BC')
+
+
+def draw_Constellations_IC(Nb, Ns, h):
+    fig = plt.figure(figsize=(15,10))
+
+    ax_SA = plt.subplot2grid((3,4), (0, 0));
+    Draw_SRC_Const(ax_SA, Nb, Ns, node = 'A')
+    ax_SA.set_title('Source A constellation - MAC')
+
+    ax_SB = plt.subplot2grid((3,4), (1, 0));
+    Draw_SRC_Const(ax_SB, Nb, Ns, node = 'B')
+    ax_SB.set_title('Source B constellation - MAC')
+
+    ax_R = plt.subplot2grid((3,4), (0, 1), colspan=2, rowspan=2)
+    Draw_Relay_Const(ax_R, Nb, Ns, h)
+    ax_R.set_title('Received Relay constellation - MAC')
+
+    ax_DA = plt.subplot2grid((3,4), (0, 3));
+    Draw_Received_Dest_MAC_IC(ax_DA, Nb, Ns)
+    ax_DA.set_title('Received $D_A$ - MAC-IC')
+
+    ax_DB = plt.subplot2grid((3,4), (1, 3));
+    Draw_Received_Dest_MAC_IC(ax_DB, Nb, Ns)
+    ax_DB.set_title('Received $D_B$ - MAC-IC')
+
+    ax_legend = plt.subplot2grid((3,4), (2, 0))
+    insert_legend(Nb, Ns, ax_legend)
+
+    ax_R_BC = plt.subplot2grid((3,4), (2, 1));
+    Draw_Relay_BC(ax_R_BC, Nb, Ns)
+    ax_R_BC.set_title('Relay Constellation - BC')
+
+    ax_DA_BC = plt.subplot2grid((3,4), (2, 2));
+    Draw_Destination_BC(ax_DA_BC, Nb, Ns)
+    ax_DA_BC.set_title('Received $D_A$ - BC')
+
+    ax_DB_BC = plt.subplot2grid((3,4), (2, 3));
+    Draw_Destination_BC(ax_DB_BC, Nb, Ns)
+    ax_DB_BC.set_title('Received $D_B$ - BC')
 
 if __name__ == '__main__':
     Nb = 2

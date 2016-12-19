@@ -6,5 +6,6 @@
 <ol>
 <li><a href='Network_Information_Flow.html'>Network Information Flow</a></li>
 <li><a href='From_NIF_to_WNC.html'>From Network Information Flow to Wireless Network Coding</a></li>
+<li><a href='WNC_Demodulation.html'>WNC Demodulation and Performance</a></li>
 </ol>
 </html>
