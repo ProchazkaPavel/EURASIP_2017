@@ -358,18 +358,19 @@ def Draw_Received_Dest_MAC(ax, Nb, Ns, node='A'):
     ax.set_ylim([-1.5,1.5])
 
 def Draw_Received_Dest_MAC_IC(ax, Nb, Ns):
-    (sourceA_const, sourceB_const, basic_part, superposed_part, relay_const, alpha) = const_design_XOR(Nb, Ns, 1.)    
-    base_hatch_SRC = ['/','-', '+', 'x']
-    hatches_SRC = [''.join([base_hatch_SRC[int(i)] for i in np.base_repr(ind,len(base_hatch_SRC))]) for ind in range(2**Nb)]
-    C2B = np.arange(len(basic_part))
-    bords = Get_Dec_Region_Boundaries(basic_part, 1.5) #prepare decision regions for relay constellation
-    ax.axis('equal')
-    ax.set_xlim([-1.5,1.5])
-    ax.grid()    
-    #ax.set_ylim([-1.5,1.5])
-    Draw_dec_Boundaries(ax, bords, hatches_SRC, C2B, np.zeros(len(sourceA_const), bool))    
+    if Nb > 0:
+        (sourceA_const, sourceB_const, basic_part, superposed_part, relay_const, alpha) = const_design_XOR(Nb, Ns, 1.)    
+        base_hatch_SRC = ['/','-', '+', 'x']
+        hatches_SRC = [''.join([base_hatch_SRC[int(i)] for i in np.base_repr(ind,len(base_hatch_SRC))]) for ind in range(2**Nb)]
+        C2B = np.arange(len(basic_part))
+        bords = Get_Dec_Region_Boundaries(basic_part, 1.5) #prepare decision regions for relay constellation
+        ax.axis('equal')
+        ax.set_xlim([-1.5,1.5])
+        ax.grid()    
+        #ax.set_ylim([-1.5,1.5])
+        Draw_dec_Boundaries(ax, bords, hatches_SRC, C2B, np.zeros(len(sourceA_const), bool))    
 
-    ax.plot(np.real(basic_part), np.imag(basic_part), 'o', color='k', mew=3, ms=16, fillstyle='none')
+        ax.plot(np.real(basic_part), np.imag(basic_part), 'o', color='k', mew=3, ms=16, fillstyle='none')
 
 def insert_legend(Nb, Ns, ax):
     col = cm.rainbow(np.linspace(0,1,2**Ns))
@@ -509,12 +510,14 @@ def draw_Constellations_IC_withErrCirc(Nb, Ns, h, gMAC, gBC, gHSI):
 
     ax_DA = plt.subplot2grid((3,4), (0, 3));
     Draw_Received_Dest_MAC_IC(ax_DA, Nb, Ns)
-    Draw_Error_Circles(ax_DA, basic_part, gHSI)
+    if Nb > 0:
+        Draw_Error_Circles(ax_DA, basic_part, gHSI)
     ax_DA.set_title('Received $D_A$ - MAC-IC')
 
     ax_DB = plt.subplot2grid((3,4), (1, 3));
     Draw_Received_Dest_MAC_IC(ax_DB, Nb, Ns)
-    Draw_Error_Circles(ax_DB, basic_part, gHSI)
+    if Nb > 0:
+        Draw_Error_Circles(ax_DB, basic_part, gHSI)
     ax_DB.set_title('Received $D_B$ - MAC-IC')
 
     ax_legend = plt.subplot2grid((3,4), (2, 0))
