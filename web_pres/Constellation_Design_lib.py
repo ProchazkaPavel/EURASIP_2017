@@ -537,6 +537,107 @@ def draw_Constellations_IC_withErrCirc(Nb, Ns, h, gMAC, gBC, gHSI):
     ax_DB_BC.set_title('Received $D_B$ - BC')
     Draw_Error_Circles(ax_DB_BC, QAM(Nb+2*Ns)[0], gBC)
 
+def to_ind(dAs, dBs, db, Aq_b, Aq_s):
+    return dAs*(Aq_b*Aq_s) + dBs*Aq_b + db
+
+def to_streams(ind, Aq_b, Aq_s):
+    return (ind / (Aq_b * Aq_s), ((ind % (Aq_b * Aq_s)) / Aq_b), ind % Aq_b)
+
+def run_chain(Nb, Ns, h, gMAC, gBC, gHSI, L = 1000, hAR = 1., hBR = 1., hRA = 1., hBA = 1.):
+    Aq_b = 2**Nb # Cardinality of alphabet in sources
+    Aq_s = 2**Ns # Cardinality of alphabet in sources
+    
+    # Evaluation of Gaussian variances
+    sigma2wMAC = SNR2sigma2w(gMAC)
+    sigma2wBC = SNR2sigma2w(gBC)
+    sigma2wHSI = SNR2sigma2w(gHSI)
+
+    # Evaluation of proper constellations
+    (sA_const, sB_const, basic_part, superposed_part, relay_const, alpha) = \
+                const_design_XOR(Nb, Ns, hBR/hAR)
+    # Source data
+    dAb = np.random.randint(Aq_b, size=L)  # basic part of source A data
+    dAs = np.random.randint(Aq_s, size=L)  # superposed part of source A data
+    dBb = np.random.randint(Aq_b, size=L)  # basic part of source B data
+    dBs = np.random.randint(Aq_s, size=L)  # superposed part of source B data
+    dA = (dAs, dAb) # source A data
+    dB = (dBs, dBb) # source B data
+
+    # Constellation mappers in sources
+    sAb = basic_part[dAb]
+    sBb = basic_part[dBb]
+    sAs = superposed_part[dAs]
+    sBs = 1j*superposed_part[dBs]
+    sA = sAs + sAb # Modulated data sA
+    sB = sBs + sBb # Modulated data sB
+
+    # Sources to relay channel
+    wR = np.sqrt(sigma2wMAC/2) * (np.random.randn(L) + 1j * np.random.randn(L))
+    xR = hAR * sA + hBR * sB + wR 
+
+    # Site Link 
+    wDA_M = np.sqrt(sigma2wHSI/2) * (np.random.randn(L) + 1j * np.random.randn(L))
+    zA = hBA * sB + wDA_M
+
+    # Demodulator in relay
+    mudAs = np.zeros([L, Aq_s], float) # metric p(x|dAs)
+    mudBs = np.zeros([L, Aq_s], float) # metric p(x|dBs)
+    mudb = np.zeros([L, Aq_b], float) # metric p(x|dAb^dBb)
+
+    for iAb in range(Aq_b):
+        for iAs in range(Aq_s):
+            for iBb in range(Aq_b):
+                for iBs in range(Aq_s):    
+                    # Basic part index
+                    ind_b = iAb ^ iBb
+                    # likelihood p(x|dA,dB)
+                    m = np.exp(-np.abs(xR - hAR * (basic_part[iAb] + superposed_part[iAs])\
+                                    - hBR * (basic_part[iBb] + 1j*superposed_part[iBs]))**2/sigma2wMAC)
+                    # Marginalization - uniform data distribution assumed                
+                    mudb[:, ind_b] += m # times a prior probabilities about iAs, iBs
+                    mudAs[:, iAs] += m # times a prior probabilities about ib, iBs
+                    mudBs[:, iBs] += m # times a prior probabilities about iAs, ib
+    est_dAs = np.argmax(mudAs, axis = 1) # decision
+    est_dBs = np.argmax(mudBs, axis = 1) # decision
+    est_db = np.argmax(mudb, axis = 1) # decision
+
+    dR = (est_dAs, est_dBs, est_db)
+
+    nerr_R = (np.sum(est_dAs!=dAs), np.sum(est_dBs!=dBs), np.sum(est_db!=(dAb^dBb)))
+    rconst = QAM(2*Ns + Nb)[0] # Signal space mapping in Relay
+    iR = to_ind(est_dAs, est_dBs, est_db, Aq_b, Aq_s) # Information index in relay 
+    sR = rconst[iR]
+
+    # BC stage (Relay to dA link)
+    wDA_B = np.sqrt(sigma2wBC/2) * (np.random.randn(L) + 1j * np.random.randn(L))
+    yA = hRA * sR + wDA_B # Destination A observation
+
+    # Demodulator Destination  A -- link from relay
+    mud = np.zeros([L, len(rconst)], float) 
+    for i, r in enumerate(rconst):
+        mud[:,i] = np.exp(-np.abs(yA - hRA * r)**2/sigma2wBC)
+    est_d = np.argmax(mud, axis = 1)  # decision
+    est_dAs, est_dBs, est_db = to_streams(est_d, Aq_b, Aq_s)
+
+    # Interference cancellation utilizing the estimated dBs from relay
+    zA_IC = zA - hBA * 1j*superposed_part[est_dBs]
+
+    # Demodulation of complementary basic stream
+    mudBb = np.zeros([L, Aq_b], float) # metric p(x|dBb)
+    for iBb in range(Aq_b):
+        mudBb[:, iBb] = np.exp(-np.abs(zA_IC - hBA * basic_part[iBb])**2/sigma2wHSI)
+    est_dBb = np.argmax(mudBb, axis = 1) # decision
+
+    # Evaluation of the desired basic stream
+    est_dAb = est_dBb ^ est_db
+
+    # Finally, the desired data are given by
+    est_dA = (est_dAs, est_dAb)
+
+    # Evaluation of number of errors:
+    nerr_D = (np.sum(est_dAs!=dAs), np.sum(est_dAb!=dAb))
+    return nerr_R, nerr_D
+
 
 
 

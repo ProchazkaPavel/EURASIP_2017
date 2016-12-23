@@ -13,6 +13,7 @@
 \usepackage{setspace}
 \usepackage{wasysym}
 \usepackage{nomencl}
+\usepackage{url}
 % the following is useful when we have the old nomencl.sty package
 \providecommand{\printnomenclature}{\printglossary}
 \providecommand{\makenomenclature}{\makeglossary}
@@ -253,9 +254,9 @@ among vehicles and road-side infrastructure nodes for traffic information
 exchange on a bidirectional highway within two time slots \cite{Ho-Liew-Lu}.
 The direct channels between the intended source$\rightarrow$destination
 pairs are not available in WBN and thus the help of the intermediate
-relay node is necessary to enable end-to-end communication. Please
-note that in this paper we do not limit our attention to the above
-mentioned special example of a high-speed, vehicle-based WBN.
+relay node is necessary to enable end-to-end communication. Note that some partial 
+source material from the implementation of this model can be found in
+\cite{Prochazka_Tutorial_WNC}.
 
 
 \subsection{Relaying Strategy}
@@ -339,7 +340,7 @@ using a standard WNC decoding \cite{Sykora-Burr_2011-TVT})
 obtain the desired $\left[\mathbf{d}_{j}^{b};\mathbf{d}_{j}^{s}\right]$.\end{itemize}
 \tabularnewline
 \hline 
-\end{tabular}vskip1ex\caption{SC-based relaying scheme in uncoded WBN}.\label{tab:CTUpp_SC-relaying-scheme}
+\end{tabular}\caption{SC-based relaying scheme in uncoded WBN}.\label{tab:CTUpp_SC-relaying-scheme}
 \end{table}
 
 
@@ -1406,6 +1407,14 @@ Prochazka and Tomas Uricar was also partially supported by the Grant
 Agency of the Czech Technical University in Prague, SGS project SGS16/094/OHK3/1T/13.
 
 \section*{Availability of Data and Materials}
+We are aware that the presented topic is difficult to understand without very specific background in wireless
+network coding. To help the reader to overcame this problem, we created a short tutorial \cite{Prochazka_Tutorial_WNC}.
+The tutorial first motivates the constellation design, then it shortly introduces the wireless
+network coding principle, its relation to conventional network coding. Many visual demonstrations of
+the proposed constellation design can be also found there. In addition to this, the supplementary
+Python code is available to the reader so that one can touch the topic also by means of implemented
+algorithms.
+
 
 \bibliographystyle{bmc_template/bmc-mathphys}
 \bibliography{bib/bib,bib/uricar,bib/uricar-papers,bib/uricar-books,bib/sykora,bib/books}
