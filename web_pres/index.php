@@ -10,7 +10,8 @@ Therefore some derivations and statements are quite simplified at expanse of pre
 derivations and statements, please check available literature on wireless network coding.
 <p>
 Everybody is more than welcome to use materials presented on this site for learning and scientific
-purposes. For comments or support, please contact pavel at prochazka dot info.
+purposes. If one finds this material useful for his work, he is kindly ask to cite this site or the
+relevant referenced literature. For comments or support, please contact pavel at prochazka dot info.
 <p>
 <h3>Sections:</h3>
 <ol>
@@ -24,7 +25,7 @@ purposes. For comments or support, please contact pavel at prochazka dot info.
 To make the notebooks live, one need a Python installation (fully working with version 2.7.10) with
 NumPy and Matplotlib packages. Furthermore Ipython Notebook must be also installed
 <ul>
-<li> <a href=notebooks.zip>Source Ipython Notebooks (ver 0.2)</a> </li>
+<li> <a href=notebooks_v0.2.zip>Source Ipython Notebooks (ver 0.2)</a> </li>
 <li> <a href=Constellation_Design_lib.py>Supporting Python library</a> </li>
 </ul>
 </html>
