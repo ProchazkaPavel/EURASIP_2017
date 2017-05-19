@@ -1,0 +1,15 @@
+*.html
+*.pyc
+*.log
+*.dvi
+*.bib
+*.bbl
+*.aux
+*.blg
+*.zip
+*.nls
+*.nlo
+*.ilg
+*.bst
+*.pdf
+

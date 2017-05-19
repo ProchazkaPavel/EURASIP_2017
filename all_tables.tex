@@ -1,0 +1,57 @@
+\begin{table}
+\centering{}%
+\begin{tabular}{|>{\raggedright}p{0.95\columnwidth}|}
+\hline 
+\textbf{Step 1: Source transmission}
+\begin{itemize}
+\item Source $S_{i},\,i\in\left\{ A,B\right\} $ maps its data symbol $\mathbf{d}_{i}=\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]$
+into a $\left(N_{b}+N_{s}\right)$-bit superposition modulation symbol
+\begin{equation}
+s_{i}=\mathcal{A}^{i}\left(\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]\right),\label{eq:CTUpp_OverallSourceStreams}
+\end{equation}
+
+\item $S_{A},\,S_{B}$ simultaneously transmit their signals to the relay
+and unintended destinations (Fig.~\ref{fig:CTUpp_Information_flows}).
+\item Relay receives
+\begin{equation}
+x=h_{AR}\mathcal{A}^{A}\left(\left[\mathbf{d}_{A}^{b};\mathbf{d}_{A}^{s}\right]\right)+h_{BR}\mathcal{A}^{B}\left(\left[\mathbf{d}_{B}^{b};\mathbf{d}_{B}^{s}\right]\right)+w_{R}
+\end{equation}
+
+
+
+and decodes $\left[\mathbf{d}_{A}^{s};\mathbf{d}_{B}^{s};f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})\right]$,
+where $f$ is a hierarchical WNC function \cite{Sykora-Burr_2011-TVT}.
+
+\item $D_{j}$ receives
+\begin{equation}
+z_{j}=h_{ij}\mathcal{A}^{i}\left(\left[\mathbf{d}_{i}^{b};\mathbf{d}_{i}^{s}\right]\right)+w_{j},\label{eq:CTUpp_Dj_received}
+\end{equation}
+where $i,\,j\in\left\{ A,B\right\} ,\,i\neq j$ and stores the signal
+for further processing.\end{itemize}
+\tabularnewline
+\hline 
+\textbf{Step 2: Relay broadcast}
+\begin{itemize}
+\item Relay sends $N_{R}=2N_{s}+N_{b}$-bit modulation symbol to both destinations:
+\begin{equation}
+s_{R}=\mathcal{A}^{R}\left(\left[\mathbf{d}_{A}^{s};\mathbf{d}_{B}^{s};f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})\right]\right).\label{eq:CTUpp_relay_output}
+\end{equation}
+
+\item $D_{j}$ ($i,\,j\in\left\{ A,B\right\} ,\,i\neq j$) decodes:
+
+\begin{itemize}
+\item $\left[\mathbf{d}_{A}^{s};\mathbf{d}_{B}^{s};f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})\right]$
+(from the relay signal (\ref{eq:CTUpp_relay_output}))
+\item $\mathbf{d}_{i}^{b}$ (from the stored signal $z_{j}$ (\ref{eq:CTUpp_Dj_received}),
+after interference cancellation (IC) of known $\mathbf{d}_{i}^{s}$)
+\item $\mathbf{d}_{j}^{b}$ (from $\mathbf{d}_{i}^{b}$ and $f(\mathbf{d}_{A}^{b},\mathbf{d}_{B}^{b})$,
+using a standard WNC decoding \cite{Sykora-Burr_2011-TVT})
+\end{itemize}
+\item $D_{j}$ merges $\mathbf{d}_{j}^{b}$ with $\mathbf{d}_{j}^{s}$ to
+obtain the desired $\left[\mathbf{d}_{j}^{b};\mathbf{d}_{j}^{s}\right]$.\end{itemize}
+\tabularnewline
+\hline 
+\end{tabular}\caption{SC-based relaying scheme in uncoded WBN}.\label{tab:CTUpp_SC-relaying-scheme}
+\end{table}
+
+
