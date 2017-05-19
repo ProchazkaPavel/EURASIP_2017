@@ -1,0 +1,61 @@
+
+Reviewer #1: The authors look at the wireless butterfly network from a modulation perspective and provide extensive simulation and implementation results.
+
+The biggest advantage of this paper seems to be implementation part. Real world system implementation of wireless network coding under various settings (in particular, in real world channel conditions and where channel coding is combined) is desirable.
+The weak aspect of this paper is that the current paper is a small variation of a previous paper by the authors. The authors should further highlight the difference of this paper.
+
+The authors should edit the paper more carefully. For example, in Figure 5, the references are missing. Please go over the whole the paper and make sure similar issues do not exist.
+
+
+Reviewer #2: Strength:
+-The paper is well written in general and ideas are presented clearly.
+-The authors proposed a systematic constellation algorithm and demonstrated promising simulation result.
+-The authors also did the experiment in a physical hardware setup, the performance evaluation of this scheme is therefore complete and convincing.
+-The simulations are well designed and the tutorial provided is helpful to the reader.
+-I think this work has the potential to have a very significant impact if it generalizes to more complex network topologies or general linear coding strategies.
+
+Weakness:
+-Since this work builds upon previous work on the application of wireless network coding to the WBN, novelty is slightly lacking.
+-The proposed scheme appears to be quite specific to the WBN, I wonder if it is possible to generalize to other similar networks where linear codes yield a good performance.
+-The authors should also provide more insight or intuition on the design of the constellation and explain why the challenges to apply to other linear networks.
+
+General Comments:
+-The butterfly is a classical example where demonstrated the power of coding at nodes compared to routing schemes.
+-Since real world networks are usually more complicated, I think it would be really interesting if this systematic design can be generalized to all linear network coding schemes (e.g. random linear network coding).
+-If it cannot be easily generalized, it could be helpful to explain what are the difficulties in applying it to other coding schemes.
+-In general, I think this paper will be a useful addition to the community, especially to those investigating similar topics.
+
+Some small comments:
+-It might be useful to the reader to add a figure for the butterfly network in the setting of algebraic network coding for comparison.
+-Might be helpful if mention beforehand that the nomenclature is given at the end of the paper (For example, HW is throughout the paper and its definition is only given at the end of the paper).
+
+
+
+Reviewer #3: In this paper, the design of communication scheme in the 5-node wireless butterfly network (WBN) is exploited in details. The authors of this paper propose a constellation design algorithm which is shown to outperform conventional modulations in WBN. Binary channel coding scheme is further incorporated to enhance the throughput performance.
+
+Strong aspects:
+1. the algorithm and theoretical analysis are correct. Simulation results on the constellation design scheme match the theoretical results well.
+2. Hardware experiments are done for the throughput performance, where details hardware settings are described. This demonstrates the effectiveness of the transmission scheme in WBN under the assumed scenarios.
+
+Suggestions for revision:
+
+1. In figure 6, 7, 8, 9, the reference scheme using QPSK always has a zero throughput, which demonstrates that this reference modulation scheme does not work at all in WBN under the proposed SNRs. Then the proposed communication scheme is claimed to have performance enhancement for sure. However, logically, this only demonstrates that the proposed algorithm gives positive throughput in WBN instead of not working. But it is not enough to say it gives a "performance enhancement" comparing with a previous working scheme. So it would be better if the author can further compare some other modulation schemes which can also give some positive throughput in WBN.
+
+As far as we know, according to the 3GPP protocol, there is a Channel Quality Index (CQI) vs. modulation format table, which suggests the modulation scheme with respect to difference SNR range. According to this table, for example, for the SNR varying from 6dB to 20dB, the protocol suggests using 16QAM and 64QAM instead of QPSK. In WBN, it could be different from 3GPP, but I suggest the author to test some other reference modulation format and compare the difference.
+
+
+2. Although, in the future work, the authors have mentioned the fading channel case, it would still be better that the case of fading channels or of longer communication distance could be simulated and experimented. AWGN channel seems to be too ideal. If some initial results on the fading channel case can be added into the paper, it would be better.
+
+3. The robustness analysis is important, and the authors have done some simulations on this aspect. However, it would be more appreciated if a hardware experiment can be done on this aspect.
+
+4. In Fig. 15, the throughput enhancmence for the coding scheme is shown. It is interesting to see that the throughput enhancment has some "peak" and "valley" as the γ_MAC increases. If possible, please give some explanation. Or this is just a random instance that happens to be shown by the hardware experiment, that is also fine.
+
+5. There are also some minor context error or typos found:
+
+1) Eq.(5) appears before (1) to (4), please adjust the order
+
+2) Secgtion 8, first paragraph, "to virtually any SNR" should be "to virtulize any SNR"
+
+3) The label of Fig. 13 is too small, please enlarge them.
+
+

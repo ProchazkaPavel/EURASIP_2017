@@ -1,0 +1,203 @@
+%% LyX 2.1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+%\RequirePackage[loading]{tracefnt}
+\documentclass[10pt,a4paper,titlepage,conference]{article}
+\usepackage[T1]{fontenc}
+%\usepackage[latin9]{inputenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel} 
+\usepackage{units}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\documentclass[8pt,titlepage,a4paper]{article}%{/usr/share/texmf-dist/tex/latex/IEEEtran/IEEEtran}
+%\documentclass[11pt,titlepage,a4paper]{/usr/share/texmf-dist/tex/latex/IEEEtran/IEEEtran}
+%\usepackage[latin2]{inputenc}
+%\usepackage{times}
+%\renewcommand\baselinestretch{1.5}  % 
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{epsfig}
+%\usepackage{CoverPage}
+\usepackage{multirow}
+\usepackage{subfigure}
+\usepackage{holtpolt}
+\usepackage{turnstile}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{cite}
+\usepackage[multiple]{footmisc}
+%\usepackage{calrsfs}
+\usetikzlibrary[arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri]
+
+\def\bo#1{{\bf{#1}}}
+\def\E{{\rm{E}}}
+\def\grebo#1{\mbox{\boldmath$#1$}}
+\def\bold#1{\mbox{\boldmath$#1$}}
+\def\conv{*}
+
+\def\date#1{\def\@date{#1}}
+\def\version#1{\def\@version{#1}}
+\def\author#1{\def\@author{#1}}
+\def\title#1{\def\@title{#1}}
+\def\assignment#1{\def\@assignment{{\it #1}}}
+\newcommand{\var}{\rm{var}}
+
+\newcommand{\unfootnote}[1]{
+  \renewcommand{\@makefnmark}{}
+  \footnotetext{#1}
+  \renewcommand{\@makefnmark}{\mbox{$^{\@thefnmark}$}}
+}
+
+
+
+
+% \papertitle[title of the paper][Author(s)][Conference type][date + place] 
+%\graphicspath{{fig/}}
+
+
+\begin{document}
+
+\section{Common Questions and Corresponding Answers}
+\begin{itemize}
+  \item CQ1: \emph{Lacking novelty compared to ICC}
+  \item A1: Quoting the part of the cover letter for IEEE transaction submission:\newline
+  \sc{Compared with the conference version, the major contributions and differences of this submitted manuscript are summarized as follows:
+  \begin{enumerate} 
+  \item We introduce additional performance analysis results for constellations in an uncoded system and an in-depth discussion of the observed results.
+  \item We extend the section dealing with the adaptive constellation design in an uncoded system and we supplement additional HW evaluation results for the adaptive system in the whole range of observed channel SNRs. Again a close agreement between between the analytic and measurement results is shown.
+  \item We show how the channel coding can be integrated into the proposed constellation design, including the cut-set bound analysis of proper source transmission rates, which provides a hint for the setup of all channel encoders' rates in the system.
+  \item We evaluate numerically the performance of the resulting adaptive modulation-coding scheme
+  for a wide range of channel conditions in the WBN and we emphasise the performance gains with
+    respect to the uncoded system.
+  \item We perform a simple robustness analysis, demonstrating that the proposed modulation and coding strategy is viable even in the case when the real world condition induce some deviations from the mathematical system model assumed in the paper.
+  \end{enumerate}
+  }
+  I believe that this answer could be enough. (Actualization -TODO)
+\end{itemize}
+
+\begin{itemize}
+  \item CQ2: \emph{Better reference scenario?}
+  \item A2: Related with two-step vs 3(4) step comparison requiring additional derivations (TODO)
+\end{itemize}
+
+\begin{itemize}
+  \item CQ2: \emph{Typos and Formating Issues?}
+  \item A3: We have proofreaded the manuscript for typos. Regarding the formating issues, we prefer
+  to clean final version of the manuscript. (TODO)
+\end{itemize}
+
+\subsubsection*{Reviewer 1}
+\begin{itemize}
+  \item Q: \emph{The weak aspect of this paper is that the current paper is a small variation of a
+  previous paper by the authors. The authors should further highlight the difference of this paper.}
+  \item A: See A1
+\end{itemize}
+  
+\begin{itemize}
+  \item \emph{The authors should edit the paper more carefully. For example, in Figure 5, the
+  references are missing. Please go over the whole the paper and make sure similar issues do not
+  exist}
+  \item A: See A3
+\end{itemize}
+
+\subsubsection*{Reviewer 2}
+\begin{itemize}
+  \item Q: \emph{Since this work builds upon previous work on the application of wireless network
+  coding to the WBN, novelty is slightly lacking}
+  \item A: see A1
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{The proposed scheme appears to be quite specific to the WBN, I wonder if it is
+  possible to generalize to other similar networks where linear codes yield a good performance.}
+  \item A: We should stress that the modulation design covers both
+  wireless network coding and processing the signal from multiple stages. Join generalization of
+  both phenomenons in the way we did would be extremely challenging, because of synchronization,
+  pre-rotation, etc. Also note that our approach is basically a practical instance of a well known
+  theoretical principle with application of WNC to approximately equal power levels and
+  interference cancellation on significantly different power levels. So that its generalization in
+  theoretical level is already known. This answers also general comments.
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{The authors should also provide more insight or intuition on the design of the
+  constellation and explain why the challenges to apply to other linear networks.}
+  \item A: The intuition beyond the design could be partly found in ICC (TODO)
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{-It might be useful to the reader to add a figure for the butterfly network in the
+  setting of algebraic network coding for comparison.}
+  \item A: see A2
+\end{itemize}
+
+\subsubsection*{Reviewer 3}
+\begin{itemize}
+  \item Q: \emph{In figure 6, 7, 8, 9, the reference scheme using QPSK always has a zero throughput,
+  which demonstrates that this reference modulation scheme does not work at all in WBN under the
+  proposed SNRs. Then the proposed communication scheme is claimed to have performance enhancement
+  for sure. However, logically, this only demonstrates that the proposed algorithm gives positive
+    throughput in WBN instead of not working. But it is not enough to say it gives a "performance
+    enhancement" comparing with a previous working scheme. So it would be better if the author can
+    further compare some other modulation schemes which can also give some positive throughput in
+    WBN.}
+  \item A: partly see A2 for join decoding. Partly I remove throughput gain for (1,1) strategy
+  compared to QPSK (TODO) 
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{As far as we know, according to the 3GPP protocol, there is a Channel Quality Index
+  (CQI) vs. modulation format table, which suggests the modulation scheme with respect to difference
+  SNR range. According to this table, for example, for the SNR varying from 6dB to 20dB, the
+  protocol suggests using 16QAM and 64QAM instead of QPSK. In WBN, it could be different from 3GPP,
+  but I suggest the author to test some other reference modulation format and compare the
+  difference. }
+  \item A: The channel quality index is 3-dimensional (MAC, BC and HSI) in our case and we
+    have it basically presented in the manuscript in form some cuts shown in figures. Its comparison
+    with P2P case can be conducted in multiple ways (e.g. one can consider 4-step conventional P2P),
+    but we solve again the problem two-step versus 4-step stage (see A2).
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{Although, in the future work, the authors have mentioned the fading channel case, it would still be better that the case of fading channels or of longer communication distance could be simulated and experimented. AWGN channel seems to be too ideal. If some initial results on the fading channel case can be added into the paper, it would be better.}
+  \item A: TODO (possible to play with in the tutorial)
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{The robustness analysis is important, and the authors have done some simulations on this aspect. However, it would be more appreciated if a hardware experiment can be done on this aspect.}
+  \item A: It actually is - check Figure 17
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{In Fig. 15, the throughput enhancmence for the coding scheme is shown. It is
+  interesting to see that the throughput enhancment has some "peak" and "valley" as the γ\_MAC
+  increases. If possible, please give some explanation. Or this is just a random instance that
+  happens to be shown by the hardware experiment, that is also fine.}
+  \item A: The explanation here is quite straightforward, as it follows from the steep
+  gradients of the uncoded throughput as function of SNRs shown in Figure 10. On the other hand the
+  coded throughput as a function of SNRs is much smoother (Figure 14) and therefore their difference
+  induces peeks and valleys
+\end{itemize}
+
+\begin{itemize}
+  \item Q: \emph{There are also some minor context error or typos found}
+  \item A: See A3
+\end{itemize}
+
+
+\section{Major Changes Summary}
+\begin{itemize}
+\item
+\end{itemize}
+
+\end{document}
