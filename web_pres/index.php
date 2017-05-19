@@ -10,7 +10,7 @@ Therefore some derivations and statements are quite simplified at expanse of pre
 derivations and statements, please check available literature on wireless network coding.
 <p>
 Everybody is more than welcome to use materials presented on this site for learning and scientific
-purposes. If one finds this material useful for his work, he is kindly ask to cite this site or the
+purposes. If one finds this material useful for his work, he is kindly asked to cite this site or the
 relevant referenced literature. For comments or support, please contact pavel at prochazka dot info.
 <p>
 <h3>Sections:</h3>
