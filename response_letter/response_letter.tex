@@ -69,7 +69,7 @@
 
 \section{Common Questions and Corresponding Answers}
 \begin{itemize}
-  \item CQ1: \emph{Lacking novelty compared to ICC}
+  \item CQ1: \emph{Lacking novelty compared to \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}}
   \item A1: Quoting the part of the cover letter for IEEE transaction submission:\newline
   \sc{Compared with the conference version, the major contributions and differences of this submitted manuscript are summarized as follows:
   \begin{enumerate} 
@@ -82,7 +82,6 @@
   \item We perform a simple robustness analysis, demonstrating that the proposed modulation and coding strategy is viable even in the case when the real world condition induce some deviations from the mathematical system model assumed in the paper.
   \end{enumerate}
   }
-  I believe that this answer could be enough. (Actualization -TODO)
 \end{itemize}
 
 \begin{itemize}
@@ -120,7 +119,7 @@
 \begin{itemize}
   \item Q: \emph{The proposed scheme appears to be quite specific to the WBN, I wonder if it is
   possible to generalize to other similar networks where linear codes yield a good performance.}
-  \item A2-1: We should stress that the modulation design covers both
+  \item A2-1: We should stress that the proposed constellation design covers both
   wireless network coding and processing the signal from multiple stages. Join generalization of
   both techniques in the way we did would be extremely challenging, because of time 
   synchronization, pre-rotation, etc. Also note that our approach is basically a 
@@ -133,7 +132,17 @@
 \begin{itemize}
   \item Q: \emph{The authors should also provide more insight or intuition on the design of the
   constellation and explain why the challenges to apply to other linear networks.}
-  \item A: The intuition beyond the design could be partly found in ICC.  
+  \item A: The intuition beyond the design could be partly found in \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.  
+  Particularly, the idea is to consider bit streams that are divided among individual power levels.
+  We need to define 1) the scale of individual levels, 2) the constellation element for all levels.
+  Obviously, this design would differ for basic and superposed streams:
+  \begin{enumerate}
+    \item In case of superposed stream, we need to have both source streams decodable and thus we
+    need some kind of orthogonality. This orthogonality is achieved by considering real and
+    imaginary axis of the constellation space. 
+    \item
+  \end{enumerate}
+  Our solution considers the simplest possible constellation element (BPSK at given level)
 \end{itemize}
 
 \begin{itemize}
@@ -180,8 +189,16 @@
     enhancement" comparing with a previous working scheme. So it would be better if the author can
     further compare some other modulation schemes which can also give some positive throughput in
     WBN.}
-  \item A: partly see A2 for join decoding. Partly I remove throughput gain for (1,1) strategy
-  compared to QPSK (TODO) 
+  \item A: See A2. Considering the two time slot communication, there is indeed no state of the art solution
+      for joint decoding, that is the constellation design in sources such that the relay would reliably
+      jointly resolve data\footnote{We assume uncoded data in this context only.} from both sources. 
+      We thus decided to claim the performance of the proposed $N_b=0$, $N_s=2$ compared to the zero
+        throughput QPSK as the throughput gain. Nevertheless, the reviewer has point that it is unfair to claim the
+        performance of the proposed $N_b=1$, $N_s=1$ constellation as throughput gain compared to
+        zero-throughput QPSK, because a conventional wireless network coding with BPSK would give a
+        nonzero throughput in this case. We therefore drop this claim from our Figures 6-9 in
+        manuscript (check Figure \ref{Fig:Throughput_comparison}).
+        
 \end{itemize}
 
 \begin{itemize}
@@ -204,7 +221,10 @@
 
 \begin{itemize}
   \item Q: \emph{The robustness analysis is important, and the authors have done some simulations on this aspect. However, it would be more appreciated if a hardware experiment can be done on this aspect.}
-  \item A: It actually is - check Figure 17
+  \item A: We fully understand and agree that the robustness analysis deserves further deep
+      investigation. Nevertheless we provided some basic analysis including the hardware experiment
+        within our work (check Figure 17 in manuscript) giving quite promising results. A more detailed investigation is suited rather
+        for a standalone work than for this resubmission.
 \end{itemize}
 
 \begin{itemize}
@@ -225,8 +245,25 @@
 
 
 \section{Major Changes Summary}
-\begin{itemize}
-\item
-\end{itemize}
+\begin{figure}
+    %\begin{subfigure}[t]{0.5\textwidth}
+    \includegraphics[width=0.45\linewidth]{fig/old_Throughput_HSI_XOR_MAC16_BC20_N2.eps}
+    \includegraphics[width=0.45\linewidth]{fig/Throughput_HSI_XOR_MAC16_BC20_N2.eps}\\
+    \includegraphics[width=0.45\linewidth]{fig/old_Throughput_HSI_XOR_MAC20_BC20_N2.eps}
+    \includegraphics[width=0.45\linewidth]{fig/Throughput_HSI_XOR_MAC20_BC20_N2.eps}\\
+    \includegraphics[width=0.45\linewidth]{fig/old_Throughput_HSI_XOR_MAC20_BC16_N2.eps}
+    \includegraphics[width=0.45\linewidth]{fig/Throughput_HSI_XOR_MAC20_BC16_N2.eps}\\
+    \includegraphics[width=0.45\linewidth]{fig/old_Throughput_HSI_XOR_MAC17_BC17_N2.eps}
+    \includegraphics[width=0.45\linewidth]{fig/Throughput_HSI_XOR_MAC17_BC17_N2.eps}\\
+	\caption{Uncoded throughputs (old versions left, new versions right).}
+	\label{Fig:Throughput_comparison}
+	%\caption{Old uncoded throughput for $\gamma_{\mathrm{MAC}}=16$,$\gamma_{\mathrm{BC}}=20$.}
+    %\end{subfigure} 
+    %\begin{subfigure}[t]{0.45\textwidth}
+    %\caption{New the uncoded throughput for $\gamma_{\mathrm{MAC}}=16$,$\gamma_{\mathrm{BC}}=20$.}
+    %\end{subfigure} 
+\end{figure}
 
+\bibliographystyle{plain}
+\bibliography{Const_design}
 \end{document}

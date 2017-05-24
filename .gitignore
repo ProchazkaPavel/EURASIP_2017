@@ -12,4 +12,4 @@
 *.ilg
 *.bst
 *.pdf
-
+notebooks/.ipynb_checkpoints
