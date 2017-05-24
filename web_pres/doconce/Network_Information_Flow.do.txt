@@ -1,0 +1,131 @@
+TITLE: Symmetric Wireless Butterfly Network - Information Flow
+
+#
+# Pavel Prochazka
+# pavel@prochazka.info
+# v0.2.0 10.12.2016
+
+Prior the introduction of the constellation design in butterfly network, let introduce the system
+model and pure network information flow in eyes of framework proposed in
+cite{uricar-hynek-prochazka-sykora_2013-iswcs}. The symmetric butterfly network consists of 2 sources ($S_{A}$, $S_B$), one relay ($R$) and 2 destinations ($D_A$, $D_B$). The Source $S_{A}$ (likewise for $S_{B}$) wants to transmit their data $d_{A}$ to its respective destination $D_{A}$. There are no direct links $S_A\to D_A$ and $S_B\to D_B$ and thus the information must be passed through the relay.
+For efficient utilization of broadcast nature of the physical layer, it is assumed that there are 2 time slots for the communication: 1) <em>MAC stage</em>, where both sources transmit and the remaining nodes receive, that is $S_A,S_B\to R$, $S_A\to D_B$ and $S_B\to D_A$ links, 2) <em>BC stage</em>, where Relay transmits and both destinations receive, that is $R\to D_A, D_B$ links.
+#Our motivation is to efficiently utilize the side links ($S_A\to D_B$ and $S_B\to D_A$) in the MAC stage.
+
+!bc pyhid
+# Initialization
+import numpy as np 
+import matplotlib.pyplot as plt
+
+# General Definition
+N = 3 # N bits of data assumed in both sources
+Aq = 2**N # Cardinality of alphabet in sources
+L = 1 # Length of data vector
+!ec
+=== Maximal Utilization of Side Links (Network Coding) ===
+
+If the side links allow to pass at least the same information as the relay to destination links, a network coding paradigm cite{ahlswede-cai-etal_2000} can be utilized, which can be demonstrated as:
+
+!bc pycod
+# Source data
+dA = np.random.randint(Aq, size=L) # random data in source A
+dB = np.random.randint(Aq, size=L) # random data in source B
+!ec
+After the MAC phase: $d_A$, $d_B$ are available in $R$, $d_A$ is available in $D_B$ and $d_B$ is
+available in $D_A$. Now relay applies a network function (Galois Field addition in this case).
+
+!bc pyhid
+# Relay processing (network coding)
+dR = dA ^ dB # Exclusive OR network function (GF addition in our case)
+!ec
+The relay data $D_R$ are available in both destinations after BC phase. Both destinations then use the data available from the MAC stage to recover desired data as:
+
+!bc pycod
+# Destination A processing
+est_dA = dR ^ dB # dR is available from the BC phase and dB from the MAC phase
+# Destination B processing
+est_dB = dR ^ dA
+!ec
+One can assure that data are estimated properly in both destination
+
+!bc pycod
+print 'Number of errors in Da:%d'%(np.sum(dA!=est_dA))
+print 'Number of errors in Db:%d'%(np.sum(dB!=est_dB))
+!ec
+=== No Use of Side Links (Routing) ===
+
+A conventional routing approach pass all information through the relay. The relay processing is thus:
+
+!bc pyhid
+# Relay processing (routing)
+dR = (dA, dB) # Joint pair
+!ec
+After the BC stage, both destination have directly form their desired data.
+
+!bc pycod
+# Destination A processing
+est_dA = dR[0] # dR is available from the BC phase and dB from the MAC phase
+# Destination B processing
+est_dB = dR[1]
+!ec
+And not surprisingly
+
+!bc pycod
+print 'Number of errors in Da:%d'%(np.sum(dA!=est_dA))
+print 'Number of errors in Db:%d'%(np.sum(dB!=est_dB))
+!ec
+=== Demands on Individual Links Capacities ===
+
+It can be easily shown that both aforementioned scenarios need to reliably transmit $2N$ bits/symbol from sources to relay (that is the pair  $d_A, d_B$). While the routing does not need any information passed through the side links, the network coding needs reliable transmission of $N$ bits/symbol by each side link ($d_A$ in $S_A\to D_B$ link and $d_B$ in $S_B\to D_A$). On the other hand, the demand on BC channel is $2N$ bits/symbol in case of routing $d_R = (d_A, d_B)$, while network coding needs only $N$ bits/symbol $d_R = d_A\oplus d_B$, where $\oplus$ denotes GF addition.
+One can see that utilization of the side link can be highly beneficial in butterfly network, since it is inherently presented (for free). A considerable amount of energy can be saved by reducing the relay data cardinality, that is channels ($R\to D_A, D_B$) capacity demands. The main area of interest of this work is in case, where side links cannot reliably carry all N bits, but only a portion of that. The crucial question is how to take at least partially the advantage of network coding paradigm in that case.
+
+=== Partial Utilization of Site Links ===
+Suppose that site channels support reliable transmission of $N_b\le N$ bits. One can consider the network coding paradigm upon these $N_b$ bits and the remaining part $N_s = N - N_b$ must be passed fully through the relay. Thus both routing and network coding are simultaneously used.
+
+!bc pyhid
+# Definition of parameters for partial utilization of Side Links
+Nb = 2 # Nb bits can be reliably passed through the side channels
+Ns = N - Nb # Ns bits must be passed fully through the relay
+Aq_b = 2**Nb # Cardinality of alphabet in sources
+Aq_s = 2**Ns # Cardinality of alphabet in sources
+!ec
+The $N$-bit source data are split to two parts: 1) $N_b$-bit <em>basic part</em> that is supposed to use the network coding paradigm for maximal utilization of the side links and 2) $N_s$-bit <em>superposed part</em> that will be routed through the relay.
+
+!bc pycod
+# Source data
+dA_b = np.random.randint(Aq_b, size=L)  # basic part of source A data
+dA_s = np.random.randint(Aq_s, size=L)  # superposed part of source A data
+dB_b = np.random.randint(Aq_b, size=L)  # basic part of source B data
+dB_s = np.random.randint(Aq_s, size=L)  # superposed part of source B data
+dA = (dA_s, dA_b) # source A data
+dB = (dB_s, dB_b) # source B data
+!ec
+The relay data consists of the tuple given by both superposed parts from sources and the network coded basic parts, that is $d_R = (d_A^s, d_B^s, d_A^b \oplus d_B^b)$.
+
+!bc pyhid
+# Relay processing (network coding)
+dR = (dA_s, dB_s, dA_b ^ dB_b) # Exclusive OR network function (GF addition in our case)
+!ec
+The destinations reliably receive basic parts from complementary sources in MAC stage and the relay data. The superposed part of the desired data is directly available in relay data and basic part is recovered as in case of network coding.
+
+!bc pyhid
+# Destination A processing 
+est_dA_b = dR[2] ^ dB_b # inverse of network function for basic part
+est_dA_s = dR[0] # inverse of network function for basic part
+est_dA = (est_dA_s, est_dA_b)
+
+# Destination B processing
+est_dB_b = dR[2] ^ dA_b # inverse of network function for basic part
+est_dB_s = dR[1] # inverse of network function for basic part
+est_dB = (est_dB_s, est_dB_b)
+!ec
+One can again ensure that no error occurred in destinations. Note that this error-free data recovery in both destinations is conditioned by reliability of <em>all</em> links.
+
+!bc pycod
+print 'Number of errors in Da:%d'%(np.sum(dA!=est_dA))
+print 'Number of errors in Db:%d'%(np.sum(dB!=est_dB))
+!ec
+Both network coding and routing can be seen as special cases of this generalized approach, where $N_s=0$ for Network Coding and $N_b=0$ for routing. This approach maximally uses the site channels by $N_b$ bits and reduces the requests to $R\to D_A, D_B$ links to $N_b+2N_s$ bits per symbol. Further sections introduce and investigate the constellation design taking into account this approach.
+
+======= References =======
+
+BIBFILE: papers.pub

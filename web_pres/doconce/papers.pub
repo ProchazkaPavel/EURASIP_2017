@@ -1,0 +1,112 @@
+* articles
+** Nonbinary Channel Coded Physical Layer Network Coding Over Modulo-Sum Algebraic Ring Structures
+   key:       prochazka-2016
+   author:    Pavel Prochazka
+   year:      2016
+   journal:   IEEE Communications Letters
+   publisher: IEEE
+   volume:    20
+   number:    3
+   pages:     538--541
+   status:    published
+   entrytype: article
+** Karhunen-Lo\`eve Based Reduced-Complexity Representation of the Mixed-Density Messages in SPA on Factor Graph and Its Impact on BER
+   key:       prochazka-sykora_2010
+   author:    Pavel Prochazka, Jan Sykora
+   year:      2010
+   journal:   EURASIP Journal on Wireless Communications and Networking
+   volume:    2010
+   number:    
+   pages:     11
+   status:    published
+   entrytype: article
+   month:     dec
+** Layered Design of Hierarchical Exclusive Codebook and Its Capacity Regions for HDF Strategy in Parametric Wireless 2-WRC
+   key:       sykora-burr_2011
+   author:    Jan Sykora, Alister Burr
+   year:      2011
+   journal:   IEEE Transactions on Vehicular Technology
+   publisher: IEEE
+   volume:    60
+   number:    7
+   pages:     3241--3252
+   status:    published
+   entrytype: article
+** Network Information Flow
+   key:       ahlswede-cai-etal_2000
+   author:    Rudolf Ahlswede, Ning Cai, Shuo-Yen Robert Li, Raymond W. Yeung
+   year:      2000
+   journal:   IEEE Trans. Inf. Theory
+   volume:    46
+   number:    4
+   pages:     1204--1216
+   status:    published
+   entrytype: article
+   month:     jul
+* proceedings
+** Relaying in Butterfly Networks: Superposition Constellation Design for Wireless Network Coding
+   key:          prochazka-uricar-halls-sykora_2015-icc
+   author:       Pavel Prochazka, Tomas Uricar, David Halls, Jan Sykora
+   year:         2015
+   booktitle:    2015 IEEE International Conference on Communication Workshop (ICCW)
+   pages:        2168--2174
+   status:       published
+   address:      London, UK
+   entrytype:    inproceedings
+   month:        jun
+   organization: IEEE
+** Wireless-Aware Network Coding: Solving a Puzzle in Acyclic Multi-Stage Cloud Networks
+   key:       uricar-hynek-prochazka-sykora_2013-iswcs
+   author:    Tomas Uricar, Tomas Hynek, Pavel Prochazka, Jan Sykora
+   year:      2013
+   booktitle: "Proc. Int. Symp. of Wireless Communication Systems (ISWCS)"
+   pages:     612--616
+   status:    published
+   address:   Ilmenau, Germany
+   entrytype: inproceedings
+   month:     aug
+** Performance Evaluation of the Factor Graph {CPM} Phase Discriminator Decoder With Canonical Messages and Modulo Mean Updates
+   key:       sykora-prochazka_2008-apcc
+   author:    Jan Sykora, Pavel Prochazka
+   year:      2008
+   booktitle: "Proc. IEEE Asia-Pacific Conf. on Communications (APCC)"
+   pages:     1--5
+   url:       http://radio.feld.cvut.cz/\~sykora/publications/papers/Sykora-Prochazka_2008-APCC.pdf
+   status:    published
+   address:   Tokyo, Japan
+   entrytype: inproceedings
+   month:     oct
+** A Flexible Hardware-in-the-Loop Test Platform for Physical Resource Sharing Mechanisms in Wireless Networks
+   key:       luo-kortke-etal_2011
+   author:    Jian Luo, A. Kortke, W. Keusgen, Jianhui Li, M. Haardt, P. Prochazka, J. Sykora
+   year:      2011
+   booktitle: Future Network Mobile Summit (FutureNetw), 2011
+   pages:     1-8
+   status:    published
+   entrytype: inproceedings
+** Successive Decoding With Hierarchical Interference Cancellation in Wireless (Physical Layer) Network Coding Systems
+   key:          uricar-prochazka-sykora_2014-ew
+   author:       Tomas Uricar, Pavel Prochazka, Jan Sykora
+   year:         2014
+   booktitle:    European Wireless 2014; 20th European Wireless Conference; Proceedings of
+   pages:        1--6
+   status:       published
+   address:      Barcelona, Spain
+   entrytype:    inproceedings
+   organization: VDE
+** Generic Efficient Fg-Spa Implementation Framework Based on the Best Linear Canonical Message Representation in Mse Sense
+   key:          prochazka-sykora_2013-ew
+   author:       Pavel Prochazka, Jan Sykora
+   year:         2013
+   booktitle:    Wireless Conference (EW), Proceedings of the 2013 19th European
+   pages:        1--6
+   status:       published
+   entrytype:    inproceedings
+   organization: VDE
+** Denoising Maps and Constellations for Wireless Network Coding in Two-Way Relaying Systems
+   key:       koike-popovski-tarokh_2008
+   author:    Toshiaki Koike-Akino, Petar Popovski, Vahid Tarokh
+   year:      2008
+   booktitle: Proc. IEEE Global Telecommunications Conf. (GlobeCom)
+   status:    published
+   entrytype: inproceedings

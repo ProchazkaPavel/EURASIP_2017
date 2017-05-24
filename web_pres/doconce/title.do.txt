@@ -1,0 +1,36 @@
+TITLE:  WNC Tutorial - Constellation Design for Butterfly Network
+AUTHOR: Pavel Prochazka Email: pavel@prochazka.info {copyright}  
+DATE: December 31, 2016
+
+=== Introduction: ===
+
+This site contains a short tutorial on generic constellation design suited for wireless butterfly
+network. It uses Python code to demonstrate the discussed algorithms. Since constellation design is
+in fact a geometry task, a graphical demonstration is widely used. The author aims to enable the
+reader a quick inside into the topic and also the ability to touch the problem using the code.
+Therefore some derivations and statements are quite simplified at expanse of precision. For rigor
+derivations and statements, please check available literature on wireless network coding.
+
+Everybody is more than welcome to use materials presented on this site for learning and scientific
+purposes. If one finds this material useful for his work, he is kindly asked to cite this site or the relevant referenced literature. For comments or support, please contact pavel at prochazka dot info.
+
+==== Sections: ====
+
+
+# #include Network_Information_Flow.do.txt
+#  o "From Network Information Flow to Wireless Network Coding": "From_NIF_to_WNC.html"
+#  o "WNC Demodulation and Performance": "WNC_Demodulation.html"
+#  o "Numerical Simulation" : "Simulation.html"
+
+
+
+=== Source Materials ===
+
+To make the notebooks live, one need a Python installation (fully working with version 2.7.10) with NumPy and Matplotlib packages. Furthermore IPython Notebook must be also installed.
+
+
+  *  "Source IPython Notebooks (ver 0.2)": "notebooks_v0.2.zip"
+  *  "Supporting Python library": "Constellation_Design_lib.py"
+
+
+

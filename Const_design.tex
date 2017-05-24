@@ -54,6 +54,8 @@
 
 \usepackage{setspace}
 
+\graphicspath{{fig/}}
+
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 
@@ -1364,6 +1366,58 @@ a zero-error rate. However, $\gamma_{{\rm {BC}}}$ is not affected
 in this case, as the channel pre-rotation does not have any impact
 on the relay$\rightarrow$destination performance.
 \end{itemize}
+
+\subsection{Three-Step Reference Scenario}
+For a more relevant comparison of the proposed method, we consider two conventional \emph{3-step}
+communication scenarios. 
+
+The first scenario is equivalent to a conventional routing, where the sources subsequently transmit
+their data packet towards the relay. Relay then sends a complete source information (no NC coding is
+applied) and thus the HSI channels are completely ignored.
+
+In the second scenario both sources again transmit their information one by one, but the relay is
+allowed to combine the received (fully decoded) data packets into the network coded packet
+$f(d_{A},d_{B})=d_{A}\oplus d_{B}$ and HSI channels are necessary to retrieve the desired
+information at both sources.
+
+To provide a fair comparison, in both reference scenarios we assume that the sources transmit at
+double power, as they transmit time is essentially halved when compared with the 2-step scenarios.
+
+\begin{figure}
+\begin{centering}
+%\includegraphics[width=0.75\columnwidth]{fig/2-SRN-sc_principle_BC-TWT_referenceB}
+\includegraphics[width=0.75\columnwidth]{fig/2-SRN-sc_principle_BC-TWT_referenceB}
+%\input{fig/2-SRN-sc_principle_BC-TWT_referenceB.eps_tex}
+\par\end{centering}
+
+\centering{}\caption{Three-step reference scenario with conventional network coding.\label{fig:CTUpp_ref3stepNC}}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.75\columnwidth]{fig/2-SRN-sc_principle_BC-TWT_referenceB1}
+\par\end{centering}
+
+\centering{}\caption{Three-step reference scenario with conventional routing.\label{fig:CTUpp_ref3stepRouting}}
+\end{figure}
+
+
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.75\columnwidth]{fig/scheme_a}
+\par\end{centering}
+\centering{}\caption{Performance comparison .\label{fig:CTUpp_comparison-schemaa}}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.75\columnwidth]{fig/scheme_b}
+\par\end{centering}
+\centering{}\caption{Performance comparison .\label{fig:CTUpp_comparison-schemab}}
+\end{figure}
+
+
 
 \section{Conclusions and Future Work\label{sec:CTUpp_DiscussionConclusions-etc}}
 
