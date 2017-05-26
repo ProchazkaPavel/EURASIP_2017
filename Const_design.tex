@@ -233,6 +233,8 @@ modulation and coding} scheme for a wide range of channel conditions
 in the WBN.
 \item We show that the proposed design is viable even if the real-world
 conditions induce some deviation from the assumed system model.
+\item We compare the proposed design with state of the art reference scherios to highlight its
+superior performance.
 \end{enumerate}
 The rest of the paper is organized as follows. The system model, including
 all necessary definitions and details about WNC processing in WBNs
@@ -1050,7 +1052,7 @@ and then finally recover the desired data (see Fig.~\ref{fig:CTUpp_Information-f
 for the details).
 
 
-\subsection{Analysis of Transmission Rates}
+\subsection{Analysis of Transmission Rates}\label{Sec:Transmission_Rates}
 
 The last step in the design of a feasible modulation and coding scheme
 for WBN (see Fig.~\ref{fig:CTUpp_Information-flow-coded-block-scheme})
@@ -1374,21 +1376,42 @@ on the relay$\rightarrow$destination performance.
 \label{fig:CTUpp_Robustenss_analysis}}
 \end{figure*}
 
-\subsection{Three-Step Reference Scenario}
+\subsection{Benchmarking with the State of the Art Three-Step Scenarios}
 For a more advanced comparison of the proposed method, we consider two conventional \emph{3-step}
 communication scenarios. 
 
-The first scenario is equivalent to a conventional routing, where the sources subsequently transmit
+\subsubsection{Reference Three-Step Scenarios}\label{Sec:Reference-3step-models}
+The first scenario both sources again transmit their information one by one, but the relay is
+allowed to combine the received (fully decoded) data packets into the network coded packet
+$f(d_{A},d_{B})=d_{A}\oplus d_{B}$ and HSI channels are necessary to retrieve the desired
+information at both sources, that is the traditional network coding approach (see Figure
+\ref{fig:CTUpp_ref3stepNC}).
+
+In the scenario is equivalent to a conventional routing, where the sources subsequently transmit
 their data packet towards the relay. Relay then sends a complete source information (no NC coding is
 applied) and thus the HSI channels are completely ignored (see Figure \ref{fig:CTUpp_ref3stepRouting}).
 
-In the second scenario both sources again transmit their information one by one, but the relay is
-allowed to combine the received (fully decoded) data packets into the network coded packet
-$f(d_{A},d_{B})=d_{A}\oplus d_{B}$ and HSI channels are necessary to retrieve the desired
-information at both sources (see Figure \ref{fig:CTUpp_ref3stepNC}).
-
+\subsubsection{Implementation Details for Reference Scenarios}
 To provide a fair comparison, in both reference scenarios we assume that the sources transmit at
 double power, as they transmit time is essentially halved when compared with the 2-step scenarios.
+We assume QAM($N$) constellation and adaptively look for $N, r$ maximizing the throughput as in the
+proposed Section \ref{sub:Maximal-Throughput-of}.
+
+\subsubsection{Maximum Transmission Rates for the Three-Step Reference Scenarios}
+The theoretical limits for the considered 3-step scenarios can be easily derived (see
+\cite{Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC}) as
+\begin{eqnarray}
+  r^{\mathrm{3step}}_{\mathrm{route}} &\le& \min\left\{\frac{2\mathrm{Ca}(\gamma_{MAC})}{2},\frac{2\mathrm{Ca}(\gamma_{BC})}{2}\right\}\label{eq:cap3strout}\\
+  r^{\mathrm{3step}}_{\mathrm{NC}} &\le& \min\left\{\frac{2\mathrm{Ca}(2\gamma_{MAC})}{2},\frac{2\mathrm{Ca}(\gamma_{HSI})}{2}, \mathrm{Ca}(\gamma_{BC})\right\},\label{eq:cap3stNC}
+\end{eqnarray}
+where $\mathrm{CA}(\gamma)=\log_2(1+\gamma)$ denotes conventional point to point channel capacity for Gaussian
+channel \cite{Cover-Thomas_ElemInfTheory}.
+
+These bounds serve as an initial step for the tuple (rate, alphabet cardinality) optimization as in
+Section \ref{Sec:Transmission_Rates} but also as an ultimate theoretical bound of the individual
+reference strategies.
+
+
 
 \begin{figure}
 \begin{centering}
@@ -1408,12 +1431,39 @@ double power, as they transmit time is essentially halved when compared with the
 \centering{}\caption{Three-step reference scenario with conventional routing.\label{fig:CTUpp_ref3stepRouting}}
 \end{figure}
 
-We compared throughput of the proposed adaptive constellation design from Section
-\ref{sub:Maximal-Throughput-of} on the USRP devices with optimized tuple ($r_b, r_s, N_b, N_s$) for
-each measured point (HW-pre-rotation on) with the reference scenarios in Figures \ref{fig:CTUpp_comparison-schemaa} and
-\ref{fig:CTUpp_comparison-schemab}. We also considered the proposed method with
-pre-rotation turned off as in Section \ref{sub:Robustness_Analysis} for comparison. Finally, we
-added two theoretical limits for the 3-step scenarios, where ideal Gaussian alphabets are assumed.
+
+
+\subsubsection{Numerical Results}
+Within this experiment, we evaluated on our USRP platform the following situations:
+\begin{itemize}
+  \item The proposed adaptive constellation design from Section \ref{sub:Maximal-Throughput-of} 
+  with optimized tuple ($r_b, r_s, N_b, N_s$) for each measured point
+  (HW-pre-rotation on).
+  \item The proposed adaptive constellation design with violated assumptions (pre-rotation off)
+  \item Both 3-step reference scenarios introduced in Section \ref{Sec:Reference-3step-models}.
+  \item Fundamental theoretical limits for the conventional reference 3-step scenarios.
+\end{itemize}
+
+We considered two setups:
+\begin{itemize}
+  \item Strong HSI and equal MA and BC. This scenario is suited for standard wireless network
+  coding, because it can efficiently utilize the strong HSI channel. See Figure
+  \ref{fig:CTUpp_comparison-schemaa} for the corresponding result. As one can see, the proposed
+  framework significantly outperforms both reference 3-step scenarios as well the corresponding
+  theoretical limits even if the pre-rotation is off! The bottleneck for the 3-step routing is BC
+  channel, because it needs to pass twice amount of data from relay to destinations compared to
+  all other schemes. The 3-step NC approach does not suffer from this and therefore its performance
+  is a bit better, nevertheless we pay for orthogonality in the MA stage. The proposed performance
+  of the proposed framework is superior to both reference models.
+  \item Strong BC channel refers (among others) to a case with high relay power. The result is shown
+  in Figure \ref{fig:CTUpp_comparison-schemab}. The 3-step routing works much better compared to the previous
+  case, because of the strong BC channel. The conventional 3-step network coding suffers from weak
+  HSI channel. The proposed design again significantly outperforms both reference 3-step scenarios.
+  We should stress, that the performance gain is also caused by a \emph{partial usage} of the weak
+  HSI channel.
+\end{itemize}
+
+
 
 \begin{figure}
 \begin{centering}
@@ -1434,8 +1484,6 @@ $\gamma_{\mathrm{BC}}\approx\gamma_{\mathrm{MAC}}$+5dB and
 $\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$-1dB
 .\label{fig:CTUpp_comparison-schemab}}
 \end{figure}
-
-One can observe that 
 
 \section{Conclusions and Future Work\label{sec:CTUpp_DiscussionConclusions-etc}}
 
