@@ -1381,13 +1381,13 @@ For a more advanced comparison of the proposed method, we consider two conventio
 communication scenarios. 
 
 \subsubsection{Reference Three-Step Scenarios}\label{Sec:Reference-3step-models}
-The first scenario both sources again transmit their information one by one, but the relay is
+In the first scenario both sources transmit their information one by one, but the relay is
 allowed to combine the received (fully decoded) data packets into the network coded packet
 $f(d_{A},d_{B})=d_{A}\oplus d_{B}$ and HSI channels are necessary to retrieve the desired
 information at both sources, that is the traditional network coding approach (see Figure
 \ref{fig:CTUpp_ref3stepNC}).
 
-In the scenario is equivalent to a conventional routing, where the sources subsequently transmit
+The second scenario is equivalent to a conventional routing, where the sources subsequently transmit
 their data packet towards the relay. Relay then sends a complete source information (no NC coding is
 applied) and thus the HSI channels are completely ignored (see Figure \ref{fig:CTUpp_ref3stepRouting}).
 
@@ -1434,15 +1434,25 @@ reference strategies.
 
 
 \subsubsection{Numerical Results}
-Within this experiment, we evaluated on our USRP platform the following situations:
+Within this experiment, we evaluated the following situations on our \emph{USRP platform}:
 \begin{itemize}
   \item The proposed adaptive constellation design from Section \ref{sub:Maximal-Throughput-of} 
-  with optimized tuple ($r_b, r_s, N_b, N_s$) for each measured point
+  with based on the optimized tuple ($r_b, r_s, N_b, N_s$) for each measured point
   (HW-pre-rotation on).
-  \item The proposed adaptive constellation design with violated assumptions (pre-rotation off)
+  \item The proposed adaptive constellation design with violated assumptions (pre-rotation off).
   \item Both 3-step reference scenarios introduced in Section \ref{Sec:Reference-3step-models}.
   \item Fundamental theoretical limits for the conventional reference 3-step scenarios.
 \end{itemize}
+In all measured cases, we manually selected the tuple maximizing the throughput. Our starting
+point was the theoretical analysis, but this analysis does not take into account the imperfect
+channel code and available discrete channel code rates (0.4, 0.5, \dots, 0.9). We also considered
+$N_b
+\le 2$, $N_s \le 1$ for simplicity\footnote{The higher order strategies like $(N_b=4, N_s=0)$
+performed similarly as considered $(N_b=2, N_s=1)$ in our simulations. Note that much stronger
+solution based
+on the modulo-sum channel coding and wireless network coding function is available
+\cite{Prochazka-2016}, nevertheless implementation of the 
+non-binary channel code suitable for the USRP is challenging.}.
 
 We considered two setups:
 \begin{itemize}
@@ -1453,7 +1463,7 @@ We considered two setups:
   theoretical limits even if the pre-rotation is off! The bottleneck for the 3-step routing is BC
   channel, because it needs to pass twice amount of data from relay to destinations compared to
   all other schemes. The 3-step NC approach does not suffer from this and therefore its performance
-  is a bit better, nevertheless we pay for orthogonality in the MA stage. The proposed performance
+  is a bit better, nevertheless we pay for orthogonality in the MA stage. The performance
   of the proposed framework is superior to both reference models.
   \item Strong BC channel refers (among others) to a case with high relay power. The result is shown
   in Figure \ref{fig:CTUpp_comparison-schemab}. The 3-step routing works much better compared to the previous
@@ -1463,6 +1473,9 @@ We considered two setups:
   HSI channel.
 \end{itemize}
 
+The saturation of the reference 3-step strategies for high SNRs is a consequence of weaker
+performance of the underlaying channel code, where the rate of the code is adjusted by means of
+puncturing technique. 
 
 
 \begin{figure}
@@ -1471,8 +1484,10 @@ We considered two setups:
 \par\end{centering}
 \centering{}\caption{Performance comparison for the setup
 $\gamma_{\mathrm{BC}}\approx\gamma_{\mathrm{MAC}}$ and
-$\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$+3dB
-.\label{fig:CTUpp_comparison-schemaa}}
+$\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$+3dB. The numbers in boxes correspond with a
+particular values (first row:$(N_b, r_b)$, second row:$(N_s, r_s)$) 
+achieving a given maximal throughput. 
+\label{fig:CTUpp_comparison-schemaa}}
 \end{figure}
 
 \begin{figure}
@@ -1481,8 +1496,11 @@ $\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$+3dB
 \par\end{centering}
 \centering{}\caption{Performance comparison for the setup
 $\gamma_{\mathrm{BC}}\approx\gamma_{\mathrm{MAC}}$+5dB and
-$\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$-1dB
-.\label{fig:CTUpp_comparison-schemab}}
+$\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$-1dB.
+The numbers in boxes correspond with a
+particular values (first row:$(N_b, r_b)$, second row:$(N_s, r_s)$)
+achieving a given maximal throughput.
+\label{fig:CTUpp_comparison-schemab}}
 \end{figure}
 
 \section{Conclusions and Future Work\label{sec:CTUpp_DiscussionConclusions-etc}}
