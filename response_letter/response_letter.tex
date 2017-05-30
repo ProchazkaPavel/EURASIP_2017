@@ -8,6 +8,7 @@
 %\usepackage[english]{babel} 
 \usepackage{units}
 \usepackage{bm}
+\usepackage{url}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
@@ -75,7 +76,8 @@ Wireless Network Coding in 5-node Butterfly Networks}
 \maketitle
 \newpage
 
-We would like to thank all the reviewers for their valuable comments and suggestions. We first reply
+First of all, we would like to thank all the reviewers for their valuable comments and suggestions
+that help to improve our manuscript. We first reply
 to the most common and important questions and then we answer the individual questions and comments
 individually.
 
@@ -83,7 +85,7 @@ individually.
 \section{Common Questions and Corresponding Answers}
 \begin{itemize}
   \item CQ1: \emph{Lacking novelty compared to \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.}
-  \item A1: Compared with the conference version \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}, the major contributions and differences of this submitted manuscript are summarized as follows:
+  \item A1: Compared with the conference paper \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}, the major contributions and differences of this submitted manuscript are summarized as follows:
   \begin{enumerate} 
   \item We introduce additional performance analysis results for constellations in an uncoded system and an in-depth discussion of the observed results.
   \item We extend the section dealing with the adaptive constellation design in an uncoded system and we supplement additional HW evaluation results for the adaptive system in the whole range of observed channel SNRs. Again a close agreement between between the analytic and measurement results is shown.
@@ -111,7 +113,7 @@ individually.
   the HW implementation of the proposed adaptive constellation design outperforms the reference
   scenarios even with the relaxed assumption (pre-rotation off). The good performance of the proposed
   design without pre-rotation is very important, because the
-  pre-rotation stands for an implementation challenge requiring the feedback channel. Finally we shown that the
+  pre-rotation stands for a serious implementation challenge requiring the feedback channel. Finally we shown that the
   performance of the proposed framework is even above the corresponding 3-step reference theoretical limits.
 \end{itemize}
 
@@ -124,11 +126,52 @@ individually.
 \end{itemize}
 
 \begin{itemize}
-  \item CQ4: \emph{Generalization of the proposed Adaptive Constellation Design}
-  \item A4: The proposed constellation design is indeed suited for the butterfly network. Regarding
-  the generalization, we can take the idea beyond the constellation design also for other
-  topologies. For instance, the design of the basic part only is relevant for the two-way relay
-  channel (actually)
+  \item CQ4: \emph{Motivation beyond the proposed Adaptive Constellation Design and its
+  Generalization}
+  \item A4: We answer this question in two levels. We split the problem to 1) the wireless
+  aware network coding, that is to determine the information flow within the network
+  \cite{Uricar-Hynek-Prochazka-Sykora_2013} and 2) the particular constellations 
+  design suited for a given information stream. Note that the motivation can be found also in
+  \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.
+
+  The network information flow within the butterfly network can be seen as a combination of the
+  cases, when a) all information is passed through the relay b) maximal information is passed
+  through the site links as it is explained in \cite{Prochazka_Tutorial_WNC}. Finding a proper
+  network information flow within a general wireless network can be a nutshell. Intuitively, the
+  wireless network paradigm should be exploited as much as possible due to its higher spectral
+  efficiency. To the best of our knowledge, no such approach is available for a general network
+  in the current state of the art. The random network coding does not take advantage to be 
+  "wireless aware" due to its randomness. There remains a white space for research to bring light
+  into a proper network information flow design within a general network.
+
+  The second part of the design assumes a given network information flow and the goal is to find
+  the best possible constellation design across the nodes within the network for the given flow.
+  Within this design, we consider two building blocks  for multiple access channel, that is: 
+  i) orthogonal constellation design enabling resulting to non-overlapping superimposed
+  constellation in the receiving node enabling joint (full) decoding and ii) hierarchical
+  constellation design allowing some overlaps in the received constellation, such that only a
+  network function of the data can be recovered (not both individual data streams). Finally, one
+  needs to properly combine the aforementioned building blocks.
+
+  In case of the orthogonal design, we chosen ASK source constellations shifted by $\pi/2$ to 
+  form the QAM constellation in the received node. The hierarchical design depends on a particular
+  network function (exclusive OR in our case). Prior explaining the composition of the 
+  hierarchical constellation, we clarify our goal, that is the received constellation with maximal
+  minimum distance between the \emph{network coded data}. To provide a simple example, consider
+  two BPSK constellations $s\in\{-1,1\}$. 
+
+  Within the butterfly network, the orthogonal stream is called \emph{superposed} stream and the
+  hierarchical as \emph{basic} stream. Since the basic stream is needed in destinations, it is
+  placed at higher power level compared to the superposed stream. Please see Figures 3,4 in the
+  manuscript for demonstration.
+ 
+  Regarding to the generalization of the principle to general network, one can of cause consider
+  with advantage the proposed building blocks or even try to generalize them for more than two
+  sources. A design of some useful rules for the proposed building block utilization in general 
+  network stands for a white space for further research. One should also keep in mind that the
+  severity of the synchronization and pre-rotation issues would dramatically grow with the network
+  size.
+
 \end{itemize}
 
 \subsubsection*{Reviewer 1}
@@ -155,30 +198,13 @@ individually.
 \begin{itemize}
   \item Q: \emph{The proposed scheme appears to be quite specific to the WBN, I wonder if it is
   possible to generalize to other similar networks where linear codes yield a good performance.}
-  \item A: See A4.  We should stress that the proposed constellation design covers both
-  wireless network coding and processing the signal from multiple stages. Join generalization of
-  both techniques in the way we did would be extremely challenging, because of time 
-  synchronization, pre-rotation, etc. Also note that our approach is basically a 
-  practical instance of a well known
-  theoretical principle with application of WNC to approximately equal power levels and
-  interference cancellation on significantly different power levels. So that its generalization in
-  theoretical level is already known. 
+  \item A: See A4.  
 \end{itemize}
 
 \begin{itemize}
   \item Q: \emph{The authors should also provide more insight or intuition on the design of the
   constellation and explain why the challenges to apply to other linear networks.}
-  \item A: The intuition beyond the design could be partly found in \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}.  
-  Particularly, the idea is to consider bit streams that are divided among individual power levels.
-  We need to define 1) the scale of individual levels, 2) the constellation element for all levels.
-  Obviously, this design would differ for basic and superposed streams:
-  \begin{enumerate}
-    \item In case of superposed stream, we need to have both source streams decodable and thus we
-    need some kind of orthogonality. This orthogonality is achieved by considering real and
-    imaginary axis of the constellation space. 
-    \item
-  \end{enumerate}
-  Our solution considers the simplest possible constellation element (BPSK at given level)
+  \item A: See A4
 \end{itemize}
 
 \begin{itemize}
@@ -189,9 +215,10 @@ individually.
 
 \begin{itemize}
   \item Q: \emph{Since real world networks are usually more complicated, I think it would be really interesting if this systematic design can be generalized to all linear network coding schemes (e.g. random linear network coding).}
+  \item A: see A4 
   \item Q: \emph{If it cannot be easily generalized, it could be helpful to explain what are the
   difficulties in applying it to other coding schemes.}
-  \item A: 
+  \item A: see A4 
 \end{itemize}
 
 \begin{itemize}
@@ -211,16 +238,22 @@ individually.
     enhancement" comparing with a previous working scheme. So it would be better if the author can
     further compare some other modulation schemes which can also give some positive throughput in
     WBN.}
-  \item A: See A2. Considering the two time slot communication, there is indeed no state of the art solution
-      for joint decoding, that is the constellation design in sources such that the relay would reliably
-      jointly resolve data\footnote{We assume uncoded data in this context only.} from both sources. 
-      We thus decided to claim the performance of the proposed $N_b=0$, $N_s=2$ compared to the zero
-        throughput QPSK as the throughput gain. Nevertheless, the reviewer has point that it is unfair to claim the
-        performance of the proposed $N_b=1$, $N_s=1$ constellation as throughput gain compared to
-        zero-throughput QPSK, because a conventional wireless network coding with BPSK would give a
-        nonzero throughput in this case. We therefore drop this claim from our Figures 6-9 in
-        manuscript (check Figure \ref{Fig:Throughput_comparison}).
-        
+  \item A: See A2 for the coded case. Considering the two time slot communication, there is 
+  indeed no state of the art solution for joint decoding, that is the constellation design in 
+  sources such that the relay would reliably jointly resolve data\footnote{We assume uncoded data
+  in this context only.} from both sources. We thus decided to claim the performance of the 
+  proposed $N_b=0$, $N_s=2$ compared to the zero throughput QPSK as the throughput gain. 
+  
+  Nevertheless, the reviewer has point that it is unfair to claim the performance of the proposed
+  $N_b=1$, $N_s=1$ constellation as throughput gain compared to the zero-throughput QPSK, because
+  the proposed constellation design uses the site link and it should be rather compared with some
+  reference that is able to use the site link as well. For this purpose, the conventional wireless
+  network coding with BPSK constellation with nonzero throughput can be considered for instance,
+  however to keep the figure readable, we decided not to add another curve into the plot, because 
+  the BPSK performs similarly as  $(N_b=2, N_s=0)$ strategy already shown in the figures.
+  Therefore the performance gain statement between $N_b=1$, $N_s=1$ and the
+  reference QPSK is omitted in Figures 6-9 in the revised manuscript. Check Figure 
+  \ref{Fig:Throughput_comparison}) in this response letter to see the change in the figure. 
 \end{itemize}
 
 \begin{itemize}
@@ -230,15 +263,24 @@ individually.
   protocol suggests using 16QAM and 64QAM instead of QPSK. In WBN, it could be different from 3GPP,
   but I suggest the author to test some other reference modulation format and compare the
   difference. }
-  \item A: The channel quality index is 3-dimensional (MAC, BC and HSI) in the current state. Its
-  evaluation can be easily done according to the theoretical analysis. Nevertheless we observed that 
-  Although this table would undoubtedly much simplify the implementation, based on our experience,
-  we 
+  \item A: The channel quality index is 3-dimensional (MAC, BC and HSI) within our model. Although
+  its evaluation can be easily done according to the theoretical analysis, its practical impact is
+  questionable, because of more degrees of freedom that comes into
+  the consideration in real scenario, like a concrete code, violation of the symmetry 
+  assumption, strength of the
+  direct link, etc. Within our experiment, we manually found some "optimal" table values for a 
+  small collection of  SNR tuples in the new section 7.4 (Figures 20, 21), but we would be 
+  careful to fix the parameters $(N_b, N_s, r_b r_s)$ purely according to the SNR triplet in 
+  other experiment.
 \end{itemize}
 
 \begin{itemize}
   \item Q: \emph{Although, in the future work, the authors have mentioned the fading channel case, it would still be better that the case of fading channels or of longer communication distance could be simulated and experimented. AWGN channel seems to be too ideal. If some initial results on the fading channel case can be added into the paper, it would be better.}
-  \item A: TODO (possible to play with in the tutorial)
+  \item A: We agree that the investigation of the behavior in the fading channels is an important
+  step. We have already some initial results available, because without the 
+  pre-rotation, we face efficiently to the (phase only) fading channel. 
+  A more detailed analysis of the proposed constellation design fading channels will be
+  investigated in further work.
 \end{itemize}
 
 \begin{itemize}
@@ -266,13 +308,6 @@ individually.
 \end{itemize}
 
 
-\section{Major Changes Summary}
-\begin{itemize}
-  \item New section 7.4 containing a more advanced comparison of the proposed framework with the
-  state of the art strategies.
-  \item Redrawn Figures (see changes in Figures \ref{Fig:Throughput_comparison} and
-  \ref{Fig:AchievedRates}).
-\end{itemize}
 \begin{figure}
     %\begin{subfigure}[t]{0.5\textwidth}
     \includegraphics[width=0.45\linewidth]{fig/old_Throughput_HSI_XOR_MAC16_BC20_N2.eps}
