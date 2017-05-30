@@ -109,8 +109,10 @@ individually.
   
   Within this new section, we shown that
   the HW implementation of the proposed adaptive constellation design outperforms the reference
-  scenarios even with the relaxed assumption (pre-rotation off). In addition we shown that the
-  performance of the proposed framework is even above the corresponding reference theoretical limits.
+  scenarios even with the relaxed assumption (pre-rotation off). The good performance of the proposed
+  design without pre-rotation is very important, because the
+  pre-rotation stands for an implementation challenge requiring the feedback channel. Finally we shown that the
+  performance of the proposed framework is even above the corresponding 3-step reference theoretical limits.
 \end{itemize}
 
 \begin{itemize}
@@ -123,7 +125,10 @@ individually.
 
 \begin{itemize}
   \item CQ4: \emph{Generalization of the proposed Adaptive Constellation Design}
-  \item A4:
+  \item A4: The proposed constellation design is indeed suited for the butterfly network. Regarding
+  the generalization, we can take the idea beyond the constellation design also for other
+  topologies. For instance, the design of the basic part only is relevant for the two-way relay
+  channel (actually)
 \end{itemize}
 
 \subsubsection*{Reviewer 1}
@@ -179,35 +184,21 @@ individually.
 \begin{itemize}
   \item Q: \emph{It might be useful to the reader to add a figure for the butterfly network in the
   setting of algebraic network coding for comparison.}
-  \item A: see A2
-\end{itemize}
-
-\begin{itemize}
-  \item Q: \emph{It might be useful to the reader to add a figure for the butterfly network in the
-  setting of algebraic network coding for comparison.}
-  \item A: see A2
+  \item A: see A2 and the new section 7.4 in the manuscript
 \end{itemize}
 
 \begin{itemize}
   \item Q: \emph{Since real world networks are usually more complicated, I think it would be really interesting if this systematic design can be generalized to all linear network coding schemes (e.g. random linear network coding).}
-  \item A: see A2
-\end{itemize}
-\begin{itemize}
   \item Q: \emph{If it cannot be easily generalized, it could be helpful to explain what are the
   difficulties in applying it to other coding schemes.}
   \item A: 
 \end{itemize}
 
 \begin{itemize}
-  \item Q: \emph{It might be useful to the reader to add a figure for the butterfly network in the
-	  setting of algebraic network coding for comparison.}
-  \item A: 
-\end{itemize}
-
-\begin{itemize}
   \item Q: \emph{Might be helpful if mention beforehand that the nomenclature is given at the end of the paper (For
 	  example, HW is throughout the paper and its definition is only given at the end of the paper)}.
-  \item A: The nomenclature is placed according to the EURASIP-author's guidelines.
+  \item A: The nomenclature is placed according to the EURASIP-author's guidelines. The HW
+  abbreviation was overlooked - it is now defined also in its first appearance within the text.
 \end{itemize}
 
 \subsubsection*{Reviewer 3}
@@ -239,10 +230,10 @@ individually.
   protocol suggests using 16QAM and 64QAM instead of QPSK. In WBN, it could be different from 3GPP,
   but I suggest the author to test some other reference modulation format and compare the
   difference. }
-  \item A: The channel quality index is 3-dimensional (MAC, BC and HSI) in our case and we
-    have it basically presented in the manuscript in form some cuts shown in figures. Its comparison
-    with P2P case can be conducted in multiple ways (e.g. one can consider 4-step conventional P2P),
-    but we solve again the problem two-step versus 4-step stage (see A2).
+  \item A: The channel quality index is 3-dimensional (MAC, BC and HSI) in the current state. Its
+  evaluation can be easily done according to the theoretical analysis. Nevertheless we observed that 
+  Although this table would undoubtedly much simplify the implementation, based on our experience,
+  we 
 \end{itemize}
 
 \begin{itemize}
