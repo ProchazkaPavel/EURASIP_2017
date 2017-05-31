@@ -153,24 +153,29 @@ individually.
   network function of the data can be recovered (not both individual data streams). Finally, one
   needs to properly combine the aforementioned building blocks.
 
-  In case of the orthogonal design, we chosen ASK source constellations shifted by $\pi/2$ to 
-  form the QAM constellation in the received node. The hierarchical design depends on a particular
-  network function (exclusive OR in our case). Prior explaining the composition of the 
-  hierarchical constellation, we clarify our goal, that is the received constellation with maximal
-  minimum distance between the \emph{network coded data}. To provide a simple example, consider
-  two BPSK constellations $s\in\{-1,1\}$. 
+  In case of the orthogonal design, we chosen ASK source constellations mutually shifted by $\pi/2$
+  to form the QAM constellation in the received node. This assumes exactly two transmitting nodes.
+  For generalization to more sources, some way to preserve join decodability must be found, for
+  instance additional resources.  
+  The hierarchical design depends on a particular
+  network function (exclusive OR in our case). The goal is the received constellation with maximal
+  minimum distance between the \emph{network coded data}, where overlaps within the network function
+  are allowed. Actually these overlaps enable to improve the minimal distance compared to the
+  orthogonal design. Since both ASK and the proposed hierarchical constellation can be written as
+  composition of properly scaled BPSK constellations, the constellations are fully determined by 
+  scaling level for individual bit streams. 
 
   Within the butterfly network, the orthogonal stream is called \emph{superposed} stream and the
   hierarchical as \emph{basic} stream. Since the basic stream is needed in destinations, it is
-  placed at higher power level compared to the superposed stream. Please see Figures 3,4 in the
-  manuscript for demonstration.
+  placed at higher power level compared to the superposed stream. Please find Figures 3,4 in the
+  manuscript for demonstration of this composition.
  
-  Regarding to the generalization of the principle to general network, one can of cause consider
+  Regarding to the generalization of the principle to a general network, one can of cause consider
   with advantage the proposed building blocks or even try to generalize them for more than two
   sources. A design of some useful rules for the proposed building block utilization in general 
-  network stands for a white space for further research. One should also keep in mind that the
-  severity of the synchronization and pre-rotation issues would dramatically grow with the network
-  size.
+  network stands for a white space for further research. However one should also keep in mind that 
+  severity of the real world issues as the synchronization and pre-rotation would dramatically grow
+  with the network size.
 
 \end{itemize}
 
