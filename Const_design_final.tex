@@ -54,6 +54,8 @@
 
 \usepackage{setspace}
 
+\graphicspath{{fig/}}
+
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 
@@ -124,12 +126,12 @@ Wireless Network Coding in 5-node Butterfly Networks}
 \begin{abstractbox}
 
 \begin{abstract} % abstract
-In this paper we focus on the design of a reliable communication scheme
+In this paper, we focus on the design of a reliable communication scheme
 for generic 5-node Wireless Butterfly Networks (WBN). Since the WBN
 represents a natural extension of the basic 2-way relay communication
 channel, we follow the paradigm of \emph{Wireless Physical Layer Network
-Coding} and we show that the design of novel adaptive constellations\emph{
-} is desirable to exploit the promising performance of wireless network coding in WBN.
+Coding} and we show that the design of novel adaptive constellations
+ is desirable to exploit the promising performance of wireless network coding in WBN.
 We introduce a \emph{systematic constellation design} algorithm and
 we show that the proposed constellations are capable of outperforming
 conventional point-to-point modulations in WBN over the whole range
@@ -167,7 +169,7 @@ conditions.
 
 \section{Introduction}
 
-The invention of Wireless Network Coding\emph{ }(WNC) has indeed provided
+The invention of Wireless Network Coding\emph{ }(WNC) has provided
 a means for a significant enhancement in wireless system performance
 \cite{Popovski-Yomo_2007a,Nazer-Gastpar_2011-IEEE-P,Zhang-Liew-Lu_2012}.
 However, WNC processing has also revealed several non-trivial research
@@ -182,7 +184,7 @@ can call also for novel constellation design approaches (see e.g.
 In WNC the transmitted information symbols are allowed to interact
 directly in the constellation space, inducing a specific set of requirements
 on the constellations' properties and characteristics (see e.g. \cite{Uricar-Sykora_2011,Prochazka-Uricar-Halls-Sykora_2015-ICC}).
-Generally we can declare \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}
+Generally, we can declare \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}
 that any constellation suitable for the specific nature of WNC processing
 should be able to form\emph{ a superimposed constellation} with an
 appropriate structure at all receiving nodes (allowing direct decoding
@@ -209,7 +211,7 @@ However, the results presented in \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}
 are limited to an uncoded system, which significantly limits its practical
 applicability. 
 
-In this paper we extend the communication scheme from \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}
+In this paper, we extend the communication scheme from \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}
 by appending appropriate \emph{error protection coding} to the system,
 resulting in a practical channel-coded adaptive communication scheme
 for WBN. We provide the following results and contributions:
@@ -220,7 +222,7 @@ additional numerical results analysing its promising performance.
 \item We revise and extend the results discussing the \emph{adaptive capabilities
 of the constellations, }including \emph{the constellation mapping
 regions} for adaptive WBN relaying\emph{.}
-\item We validate the proposed design in a \emph{real-world HW setup}, including
+\item We validate the proposed design in a \emph{real-world hardware (HW) setup}, including
 the HW evaluation of adaptive system performance.
 \item We show how the \emph{channel coding} can be integrated into the proposed
 constellation design, including the analysis of proper source transmission
@@ -230,6 +232,8 @@ modulation and coding} scheme for a wide range of channel conditions
 in the WBN.
 \item We show that the proposed design is viable even if the real-world
 conditions induce some deviation from the assumed system model.
+\item We compare the proposed design with state of the art reference scenarios to highlight its
+superior performance.
 \end{enumerate}
 The rest of the paper is organized as follows. The system model, including
 all necessary definitions and details about WNC processing in WBNs
@@ -242,7 +246,7 @@ an adaptive constellation design and Section~\ref{sec:CTUpp_Channel-Coding}
 introduces the channel coding extension to the system. The performance
 of the novel adaptive modulation and coding scheme is analyzed in
 Section~\ref{sec:CTUpp_Performance-Analysis-Coded}, including a
-simple robustness analyzis. Concluding remarks are summarized in Section~\ref{sec:CTUpp_DiscussionConclusions-etc}.
+simple robustness analysis. Concluding remarks are presented in Section~\ref{sec:CTUpp_DiscussionConclusions-etc}.
 
 
 \section{WNC Relaying in Wireless Butterfly Network\label{sec:CTUpp_SystemModel}}
@@ -409,8 +413,8 @@ where $L_{n}^{b},\,L_{n}^{s}$ are \emph{Superposition Modulation}
 
 The coefficients $L_{n}^{b},\,L_{n}^{s}$ (\ref{eq:CTUpp_superpositionModulation})
 are generally taken from the set of complex numbers. However, for
-the sake of simplicity we limit the scaling coefficients $L_{n}^{b},\,L_{n}^{s}$
-to a purely imaginary or real numbers. Even though that this simplified
+the sake of simplicity, we limit the scaling coefficients $L_{n}^{b},\,L_{n}^{s}$
+to purely imaginary or real numbers. Even though this simplified
 approach can potentially result in a sub-optimal performance in fading
 channels (complex channel coefficients $h_{iR}$, $i\in\{A,B\}$ can
 rotate the component superposition constellations), we follow this
@@ -518,10 +522,10 @@ as $L'_{n}=L_{n}e^{-\jj\measuredangle h_{SR}}$, where $h_{SR}$ is
 the corresponding source$\rightarrow$relay channel.} (i.e. $h_{iR}=1$ for $i\in\{A,B\}$). We evaluate the throughput
 analytically as $(N_{b}+N_{s})\cdot(1-P_{e}^{\mathrm{FER}})$, where
 $P_{e}^{\mathrm{FER}}$ denotes the frame error rate. Due to the system
-symmetry we evaluate the throughput of $S_{A}\to D_{A}$ only. We
+symmetry, we evaluate the throughput of $S_{A}\to D_{A}$ only. We
 set the frame length to $M=768$ symbols (to match the HW evaluation)
 and the relay output mapper $\mathcal{A}^{R}$ will be defined as
-a conventional ($2^{N_{b}+2N_{s}}$$)$-QAM constellation. All performance
+a conventional $(2^{N_{b}+2N_{s}})$-QAM constellation. All performance
 metrics in the symmetric WBN are evaluated as a function of the actual
 SNRs ($\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}},\,\gamma_{{\rm {BC}}}$).
 \begin{figure*}
@@ -630,7 +634,7 @@ In this paper, the MIMO cable is used to synchronize the frequency
 of the two source USRPs, as well as to achieve sample-level timing
 synchronization. The latter avoids asynchronism in the superimposed
 constellations at the relays; more details about the impact of asynchronism
-in WNC can be found in \cite{Diwine_D512}. Furthermore an Ettus Octoclock
+in WNC can be found in \cite{Diwine_D512}. Furthermore, an Ettus Octoclock
 clock distribution system \cite{Ettus_OctoClock} is used to provide
 external frequency synchronization signals to all nodes. This allows
 us to show system performance, and compare with the theoretical and
@@ -643,7 +647,7 @@ channel used in the theoretical work as closely as possible) the channel
 does not change significantly over the frame duration. The USRPs are
 closely located in line-of-sight to ensure the channel between them
 is fairly static, without fading, thus mimicking the channel used
-in the theoretical work. Moreover as cabled synchronisation is used,
+in the theoretical work. Moreover, as cabled synchronisation is used,
 it is desirable to minimize the cable length. Low SNRs are achieved
 between the USRPs using low transmit powers.
 
@@ -816,7 +820,7 @@ optimal choice of $N_{b}^{{\rm I}},\,N_{s}^{{\rm I}}$, are shown
 as a function of $\gamma_{{\rm {MAC}}},\,\gamma_{{\rm {HSI}}}$ for
 $\gamma_{{\rm {BC}}}\in\{15\,\mathrm{dB},\,17\,\mathrm{dB},20\,\mathrm{dB},25\,\mathrm{dB}\}$
 in Fig.~\ref{fig:CTUpp_SNR_map_BC15-17-20-25}. Several interesting
-phenomenas can be again observed in the figure:
+phenomena can be again observed in the figure:
 \begin{itemize}
 \item Since the transmission schemes with ($N_{b}=0,\,N_{s}>0$) constellations
 can ignore the HSI channels (Table~\ref{tab:CTUpp_SC-relaying-scheme}),
@@ -1032,7 +1036,7 @@ and then finally recover the desired data (see Fig.~\ref{fig:CTUpp_Information-f
 for the details).
 
 
-\subsection{Analysis of Transmission Rates}
+\subsection{Analysis of Transmission Rates}\label{Sec:Transmission_Rates}
 
 The last step in the design of a feasible modulation and coding scheme
 for WBN (see Fig.~\ref{fig:CTUpp_Information-flow-coded-block-scheme})
@@ -1229,7 +1233,7 @@ providing the set of optimal (in the sense of maximal throughput)
 constellation/encoder parameters for the given SNR conditions ($\hat{\gamma}_{{\rm {MAC}}},\,\hat{\gamma}_{{\rm {BC}}},\,\hat{\gamma}_{{\rm {HSI}}}$).
 Note that, in general, all adaptive system parameters are functions
 of the actual SNR conditions in the system. However, we mostly omit
-the explicit notation in the following text for to aid readability.
+the explicit notation in the following text to aid readability.
 
 The desired adaptive system parameters can be obtained in the following
 two-step procedure. First of all, we analyze the cut-set bound rate
@@ -1259,7 +1263,7 @@ and $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$.\label{fig:CTUpp_Coded_SNR_map} }
 \begin{figure*}
 \centering{}
 \caption{Throughput enhancement $\Delta T_{C}=T_{C}^{\mathrm{max}}-T_{\mathrm{LB}}$
-{[}bits/channel use{]} of the coded over uncoded WBN system for $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
+[bits/channel use] of the coded over uncoded WBN system for $\gamma_{{\rm {BC}}}=7.5\,\mathrm{dB}$
 and $\gamma_{{\rm {BC}}}=15\,\mathrm{dB}$. Note that $0.75\leq\Delta T_{C}\leq2$
 in the analyzed range of channel SNRs.\label{fig:CTUpp_Coded_ThroughputGain}}
 \end{figure*}
@@ -1277,16 +1281,16 @@ of observed SNRs. This observation justifies the viability of the
 proposed channel coding scheme.
 
 
-\subsection{Robustness Analysis}
+\subsection{Robustness Analysis}\label{sub:Robustness_Analysis}
 
 In this section we show that the proposed modulation and coding scheme
 is viable even if the real world conditions induce some deviations
 from the system model assumed in this paper. From a practical point
 of view, we would be interested mainly in the situation, where a direct
 channel between a source and its desired destination is present (see
-Fig.~\ref{fig:CTUpp_DirectChannel}). Even though that this \textquotedbl{}direct\textquotedbl{}
+Fig.~\ref{fig:CTUpp_DirectChannel}). Even though this \textquotedbl{}direct\textquotedbl{}
 channel can be relatively weak, it inevitably affects the destinations'
-HSI observations. In addition to this, we analyse the system where
+HSI observations. In addition to this, we analyze the system where
 source phase pre-rotation is switched off (or ineffective due to rapid
 channel dynamics), and thus the relay faces a multiple-access channel
 with a varying source channel phase offset. This assumption is valid
@@ -1299,7 +1303,7 @@ by the Monte-Carlo numerical evaluation (see section \ref{sub:Numerical-Simulati
 with USRP HW measurements. While in the numerical evaluation we still
 keep the idealized assumptions as defined by our system model (i.e.
 no direct source$\rightarrow$destination channels, perfect channel
-phase pre-rotation), in the HW measurements we now let all data communication
+phase pre-rotation), in the HW measurements we now allow all data communication
 to be performed through real wireless channels (compare with the HW
 setup in section~\ref{sub:CTUpp_Hardware_Verification}), introducing
 inevitably some direct channel observation at both destinations. In
@@ -1327,7 +1331,7 @@ both destinations. This SNR triplet then defines the lower-most corner
 of the SNR region where a zero error rate performance can be achieved
 (see Fig. \ref{fig:CTUpp_Robustenss_analysis}). We can conclude that:
 \begin{itemize}
-\item The presence of direct links requires only a slightly increased values
+\item The presence of direct links requires only slightly increased values
 of ($\gamma_{{\rm {MAC}}},\gamma_{{\rm {HSI}}}$, $\gamma_{{\rm {BC}}}$)
 to ensure a zero error-rate performance for the fixed $(N_{B},N_{S},r_{b},r_{s})$.
 However, it is evident that a modification of the proposed modulation
@@ -1342,6 +1346,134 @@ in this case, as the channel pre-rotation does not have any impact
 on the relay$\rightarrow$destination performance.
 \end{itemize}
 
+\begin{figure*}
+\caption{Robustness analysis for two fixed $(N_{b},N_{s},r_{b},r_{s})$ scenarios.
+\label{fig:CTUpp_Robustenss_analysis}}
+\end{figure*}
+
+\subsection{Benchmarking with the State of the Art Three-Step Scenarios}
+For a more advanced comparison of the proposed method, we consider two conventional \emph{3-step}
+communication scenarios. 
+
+\subsubsection{Reference Three-Step Scenarios}\label{Sec:Reference-3step-models}
+In the first scenario both sources transmit their information one by one, but the relay is
+allowed to combine the received (fully decoded) data packets into the network coded packet
+$f(d_{A},d_{B})=d_{A}\oplus d_{B}$ and HSI channels are necessary to retrieve the desired
+information at both sources. This is the traditional network coding approach (see Figure
+\ref{fig:CTUpp_ref3stepNC}).
+
+The second scenario is equivalent to conventional routing, where the sources subsequently transmit
+their data packet towards the relay. The relay then sends complete source information (no NC coding is
+applied) and thus the HSI channels are completely ignored (see Figure \ref{fig:CTUpp_ref3stepRouting}).
+
+\subsubsection{Implementation Details for Reference Scenarios}
+To provide a fair comparison, in both reference scenarios we assume that the sources transmit with
+twice the power, as their transmit time is essentially halved when compared with the 2-step scenarios.
+We assume QAM($N$) constellation and adaptively look for $N, r$ maximizing the throughput as in the
+proposed Section \ref{sub:Maximal-Throughput-of}.
+
+\subsubsection{Maximum Transmission Rates for the Three-Step Reference Scenarios}
+The theoretical limits for the considered 3-step scenarios can easily be derived (see
+\cite{Uricar-Qian-Sykora-Mow_2014-IEEE-T-WC}) as
+\begin{eqnarray}
+  r^{\mathrm{3step}}_{\mathrm{route}} &\le& \min\left\{\frac{2\mathrm{Ca}(\gamma_{MAC})}{2},\frac{2\mathrm{Ca}(\gamma_{BC})}{2}\right\}\label{eq:cap3strout}\\
+  r^{\mathrm{3step}}_{\mathrm{NC}} &\le& \min\left\{\frac{2\mathrm{Ca}(2\gamma_{MAC})}{2},\frac{2\mathrm{Ca}(\gamma_{HSI})}{2}, \mathrm{Ca}(\gamma_{BC})\right\},\label{eq:cap3stNC}
+\end{eqnarray}
+where $\mathrm{CA}(\gamma)=\log_2(1+\gamma)$ denotes the conventional point-to-point channel capacity for Gaussian
+channels \cite{Cover-Thomas_ElemInfTheory}.
+
+These bounds serve as an initial step for the tuple (rate, alphabet cardinality) optimization as in
+Section \ref{Sec:Transmission_Rates} but also as an ultimate theoretical bound of the individual
+reference strategies.
+
+
+
+\begin{figure}
+\begin{centering}
+%\input{fig/2-SRN-sc_principle_BC-TWT_referenceB.eps_tex}
+\par\end{centering}
+
+\centering{}\caption{Three-step reference scenario with conventional network coding.\label{fig:CTUpp_ref3stepNC}}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+\par\end{centering}
+
+\centering{}\caption{Three-step reference scenario with conventional routing.\label{fig:CTUpp_ref3stepRouting}}
+\end{figure}
+
+
+
+\subsubsection{Numerical Results}
+Within this experiment, we evaluated the following situations on our \emph{USRP platform}:
+\begin{itemize}
+  \item The proposed adaptive constellation design from Section \ref{sub:Maximal-Throughput-of} 
+  based on the optimized tuple ($r_b, r_s, N_b, N_s$) for each measured point
+  (HW-pre-rotation on).
+  \item The proposed adaptive constellation design with assumptions violated (pre-rotation off).
+  \item Both 3-step reference scenarios introduced in Section \ref{Sec:Reference-3step-models}.
+  \item Fundamental theoretical limits for the conventional reference 3-step scenarios.
+\end{itemize}
+In all measured cases, we manually selected the tuple maximizing the throughput. Our starting
+point was the theoretical analysis, but this analysis does not take into account the imperfect
+channel code and available discrete channel code rates (0.4, 0.5, \dots, 0.9). We also considered
+$N_b
+\le 2$, $N_s \le 1$ for simplicity\footnote{The higher order strategies like $(N_b=4, N_s=0)$
+performed similarly as considered $(N_b=2, N_s=1)$ in our simulations. Note that much stronger
+solution based
+on the modulo-sum channel coding and wireless network coding function is available
+\cite{Prochazka-2016}, nevertheless implementation of the 
+non-binary channel code suitable for the USRP is challenging.}.
+
+We considered two setups:
+\begin{itemize}
+  \item Strong HSI and equal MA and BC. This scenario is suited for standard wireless network
+  coding, because it can efficiently utilize the strong HSI channel. See Figure
+  \ref{fig:CTUpp_comparison-schemaa} for the corresponding result. As one can see, the proposed
+  framework significantly outperforms both reference 3-step scenarios as well the corresponding
+  theoretical limits even if the pre-rotation is off! The bottleneck for the 3-step routing is the BC
+  channel, because it needs to pass twice the amount of data from relay to destinations compared to
+  all other schemes. The 3-step NC approach does not suffer from this and therefore its performance
+  is a bit better, nevertheless we pay for orthogonality in the MA stage. The performance
+  of the proposed framework is superior to both reference models.
+  \item Strong BC channel refers (among others) to a case with high relay power. The result is shown
+  in Figure \ref{fig:CTUpp_comparison-schemab}. The 3-step routing works much better when compared to the previous
+  case, because of the strong BC channel. The conventional 3-step network coding scheme suffers
+  with a weak
+  HSI channel. The proposed design again significantly outperforms both reference 3-step scenarios.
+  We should stress, that the performance gain is also achieved with \emph{partial usage} of the weak
+  HSI channel.
+\end{itemize}
+
+The saturation of the reference 3-step strategies for high SNRs is a consequence of weaker
+performance of the underlaying channel code, where the rate of the code is adjusted by means of
+puncturing technique. 
+
+
+\begin{figure}
+\begin{centering}
+\par\end{centering}
+\centering{}\caption{Performance comparison for the setup
+$\gamma_{\mathrm{BC}}\approx\gamma_{\mathrm{MAC}}$ and
+$\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$+3dB. The numbers in boxes correspond with 
+particular values (first row:$(N_b, r_b)$, second row:$(N_s, r_s)$) 
+achieving a given maximal throughput. 
+\label{fig:CTUpp_comparison-schemaa}}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+\par\end{centering}
+\centering{}\caption{Performance comparison for the setup
+$\gamma_{\mathrm{BC}}\approx\gamma_{\mathrm{MAC}}$+5dB and
+$\gamma_{\mathrm{HSI}}\approx\gamma_{\mathrm{MAC}}$-1dB.
+The numbers in boxes correspond with 
+particular values (first row:$(N_b, r_b)$, second row:$(N_s, r_s)$)
+achieving a given maximal throughput.
+\label{fig:CTUpp_comparison-schemab}}
+\end{figure}
+
 \section{Conclusions and Future Work\label{sec:CTUpp_DiscussionConclusions-etc}}
 
 In this paper we have proposed a systematic algorithm for the design
@@ -1349,8 +1481,8 @@ of two-source constellations in the WBN system. The Algorithm~\ref{alg:CTUpp_But
 allows the matching of the constellation parameters to virtually any
 SNR conditions in the system, enabling a direct implementation of
 the adaptive constellation mapping scheme. The viability of the proposed
-constellation design was verified by a means of numerical analysis
-and simulations and also by a real-world HW experiment (based on Ettus
+constellation design was verified by means of numerical analysis,
+ simulations and through real-world HW experiments (based on Ettus
 Research USRPs), including a HW-based robustness analysis.
 
 Even in the uncoded scenario, the proposed constellations are able
@@ -1368,10 +1500,6 @@ of the proposed system, where the impact of several other parameters
 (e.g. channel fading and dynamics, asymmetry of channel gains etc.)
 can significantly affect the system performance and possibly even
 require some modifications of the adaptive system design.
-\begin{figure*}
-\caption{Robustness analysis for two fixed $(N_{b},N_{s},r_{b},r_{s})$ scenarios.
-\label{fig:CTUpp_Robustenss_analysis}}
-\end{figure*}
 
 
 \begin{backmatter}

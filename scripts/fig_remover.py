@@ -1,5 +1,5 @@
-infile = open('Const_design.tex', 'r')
-outfile = open('Const_design_final.tex', 'w')
+infile = open('../Const_design.tex', 'r')
+outfile = open('../Const_design_final.tex', 'w')
 fig_list = open('fig_list', 'w')
 for line in infile:
     if not 'includegraphics' in line:

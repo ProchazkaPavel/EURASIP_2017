@@ -1,6 +1,6 @@
-infile = open('Const_design.tex', 'r')
-outfile_fig = open('all_figures.tex', 'w')
-outfile_tab = open('all_tables.tex', 'w')
+infile = open('../Const_design.tex', 'r')
+outfile_fig = open('../all_figures.tex', 'w')
+outfile_tab = open('../all_tables.tex', 'w')
 extract_block_fig = False
 extract_block_tab = False
 for line in infile:
