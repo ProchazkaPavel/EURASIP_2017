@@ -88,12 +88,15 @@ individually.
   \item A1: Compared with the conference paper \cite{Prochazka-Uricar-Halls-Sykora_2015-ICC}, the major contributions and differences of this submitted manuscript are summarized as follows:
   \begin{enumerate} 
   \item We introduce additional performance analysis results for constellations in an uncoded system and an in-depth discussion of the observed results.
-  \item We extend the section dealing with the adaptive constellation design in an uncoded system and we supplement additional HW evaluation results for the adaptive system in the whole range of observed channel SNRs. Again a close agreement between between the analytic and measurement results is shown.
+  \item We extend the section dealing with the adaptive constellation design in an uncoded system
+  and we supplement additional HW evaluation results for the adaptive system in the whole range of
+  observed channel SNRs. Again, a close agreement between the analytic and measurement results is shown.
   \item We show how the channel coding can be integrated into the proposed constellation design, including the cut-set bound analysis of proper source transmission rates, which provides a hint for the setup of all channel encoders' rates in the system.
   \item We evaluate numerically the performance of the resulting adaptive modulation-coding scheme
   for a wide range of channel conditions in the WBN and we emphasise the performance gains with
     respect to the uncoded system.
-  \item We perform a simple robustness analysis, demonstrating that the proposed modulation and coding strategy is viable even in the case when the real world condition induce some deviations from the mathematical system model assumed in the paper.
+  \item We perform a simple robustness analysis, demonstrating that the proposed modulation and
+  coding strategy is viable even in the case when the real-world conditions induce some deviations from the mathematical system model assumed in the paper.
   \item We conducted a comparison with the state of the art reference scenarios (traditional network
   coding and routing) for the proposed channel coded adaptive constellation design.
   \end{enumerate}
@@ -101,12 +104,12 @@ individually.
 
 \begin{itemize}
   \item CQ2: \emph{Better reference scenario.}
-  \item A2: We definitely agree that the zero throughput uncoded QPSK reference scenario is not a very good
-  to demonstrate the performance gain of the proposed constellation design. 
-  Although, the 2-step scenario does not offer other state of the art solution, we
+  \item A2: We definitely agree that the zero throughput uncoded QPSK reference scenario is not
+  ideal for the performance gain demonstration of the proposed constellation design. 
+  There are no equivalent 2-step state of the art strategies, so we
   decided to consider a comparison with traditional network coding and routing strategies. These
   strategies require 3 steps and therefore some attention is required to provide a fair comparison
-  with the proposed 2-step framework. We added a completely new section 7.4 into the manuscript
+  with the proposed 2-step framework. We added a completely new section, 7.4, into the manuscript
   dedicated to this comparison  with the conventional techniques. 
   
   Within this new section, we shown that
@@ -121,8 +124,8 @@ individually.
   \item CQ3: \emph{Typos and Formatting Issues}
   \item A3: The manuscript was carefully proofread by native speaker for typos. Regarding the
   formatting issues, we searched and corrected the issues we found. Nevertheless, we should stress
-  that the manuscript will be transformed to the EURASIP template prior publishing and there will
-  be time for final tuning of these issues.
+  that the manuscript will be transformed to the EURASIP template prior to publishing and there will
+  be time for fine tuning.
 \end{itemize}
 
 \begin{itemize}
@@ -243,13 +246,13 @@ individually.
     enhancement" comparing with a previous working scheme. So it would be better if the author can
     further compare some other modulation schemes which can also give some positive throughput in
     WBN.}
-  \item A: See A2 for the coded case. Considering the two time slot communication, there is 
-  indeed no state of the art solution for joint decoding, that is the constellation design in 
-  sources such that the relay would reliably jointly resolve data\footnote{We assume uncoded data
+  \item A: See A2 for the coded case. Considering the two time slot communication schemes, there is 
+  indeed no state of the art solution for joint decoding, whereby the constellation design at the 
+  sources is such that the relay would reliably jointly resolve data\footnote{We assume uncoded data
   in this context only.} from both sources. We thus decided to claim the performance of the 
   proposed $N_b=0$, $N_s=2$ compared to the zero throughput QPSK as the throughput gain. 
   
-  Nevertheless, the reviewer has point that it is unfair to claim the performance of the proposed
+  Nevertheless, the reviewer has a point that it is unfair to claim the performance of the proposed
   $N_b=1$, $N_s=1$ constellation as throughput gain compared to the zero-throughput QPSK, because
   the proposed constellation design uses the site link and it should be rather compared with some
   reference that is able to use the site link as well. For this purpose, the conventional wireless
@@ -271,7 +274,7 @@ individually.
   \item A: The channel quality index is 3-dimensional (MAC, BC and HSI) within our model. Although
   its evaluation can be easily done according to the theoretical analysis, its practical impact is
   questionable, because of more degrees of freedom that comes into
-  the consideration in real scenario, like a concrete code, violation of the symmetry 
+  the consideration in real scenario, like a particular channel code, violation of the idealistic symmetry 
   assumption, strength of the
   direct link, etc. Within our experiment, we manually found some "optimal" table values for a 
   small collection of  SNR tuples in the new section 7.4 (Figures 20, 21), but we would be 
@@ -282,16 +285,15 @@ individually.
 \begin{itemize}
   \item Q: \emph{Although, in the future work, the authors have mentioned the fading channel case, it would still be better that the case of fading channels or of longer communication distance could be simulated and experimented. AWGN channel seems to be too ideal. If some initial results on the fading channel case can be added into the paper, it would be better.}
   \item A: We agree that the investigation of the behavior in the fading channels is an important
-  step. We have already some initial results available, because without the 
-  pre-rotation, we face efficiently to the (phase only) fading channel. 
-  A more detailed analysis of the proposed constellation design fading channels will be
-  investigated in further work.
+  step. We have already some initial results available, because we face efficiently to the fading
+  channel without the pre-rotation, where the amplitude is close (but not equal) to 1.   
+  A more detailed analysis of the proposed constellation design in fading channels is postponed for further work.
 \end{itemize}
 
 \begin{itemize}
   \item Q: \emph{The robustness analysis is important, and the authors have done some simulations on this aspect. However, it would be more appreciated if a hardware experiment can be done on this aspect.}
   \item A: We fully understand and agree that the robustness analysis deserves further deep
-      investigation. Nevertheless we provided some basic analysis including the hardware experiment
+      investigation. Nevertheless, we provided some basic analysis including the hardware experiment
         within our work (check Figure 17 in manuscript) giving quite promising results. A more detailed investigation is suited rather
         for a standalone work than for this resubmission.
 \end{itemize}
@@ -304,7 +306,7 @@ individually.
   \item A: The explanation here is quite straightforward, as it follows from the steep
   gradients of the uncoded throughput as function of SNRs shown in Figure 10. On the other hand the
   coded throughput as a function of SNRs is much smoother (Figure 14) and therefore their difference
-  induces peeks and valleys
+  induces peaks and valleys
 \end{itemize}
 
 \begin{itemize}
