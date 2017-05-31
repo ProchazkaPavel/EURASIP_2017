@@ -150,23 +150,23 @@ individually.
   The second part of the design assumes a given network information flow and the goal is to find
   the best possible constellation design across the nodes within the network for the given flow.
   Within this design, we consider two building blocks  for multiple access channel, that is: 
-  i) orthogonal constellation design enabling resulting to non-overlapping superimposed
+  i) orthogonal constellation design forming a non-overlapping superimposed
   constellation in the receiving node enabling joint (full) decoding and ii) hierarchical
   constellation design allowing some overlaps in the received constellation, such that only a
   network function of the data can be recovered (not both individual data streams). Finally, one
-  needs to properly combine the aforementioned building blocks.
+  needs to properly combine the aforementioned building blocks by means of superposition coding. 
 
   In case of the orthogonal design, we chosen ASK source constellations mutually shifted by $\pi/2$
   to form the QAM constellation in the received node. This assumes exactly two transmitting nodes.
   For generalization to more sources, some way to preserve join decodability must be found, for
-  instance additional resources.  
-  The hierarchical design depends on a particular
-  network function (exclusive OR in our case). The goal is the received constellation with maximal
-  minimum distance between the \emph{network coded data}, where overlaps within the network function
+  instance additional resources. The hierarchical design depends on a particular
+  network function (exclusive OR in our case). The goal is a received constellation with maximal
+  free distance between the \emph{network coded data}, where overlaps within the network function
   are allowed. Actually these overlaps enable to improve the minimal distance compared to the
   orthogonal design. Since both ASK and the proposed hierarchical constellation can be written as
   composition of properly scaled BPSK constellations, the constellations are fully determined by 
-  scaling level for individual bit streams. 
+  scaling levels\footnote{Determination of those levels can be found in Algorithm 1, line 3 for
+  superposed part and lines 6,7 for basic part.} for individual bit streams.  
 
   Within the butterfly network, the orthogonal stream is called \emph{superposed} stream and the
   hierarchical as \emph{basic} stream. Since the basic stream is needed in destinations, it is
@@ -278,7 +278,7 @@ individually.
   assumption, strength of the
   direct link, etc. Within our experiment, we manually found some "optimal" table values for a 
   small collection of  SNR tuples in the new section 7.4 (Figures 20, 21), but we would be 
-  careful to fix the parameters $(N_b, N_s, r_b r_s)$ purely according to the SNR triplet in 
+  careful to fix the parameters $(N_b, N_s, r_b, r_s)$ purely according to the SNR triplet in 
   other experiment.
 \end{itemize}
 
@@ -286,7 +286,11 @@ individually.
   \item Q: \emph{Although, in the future work, the authors have mentioned the fading channel case, it would still be better that the case of fading channels or of longer communication distance could be simulated and experimented. AWGN channel seems to be too ideal. If some initial results on the fading channel case can be added into the paper, it would be better.}
   \item A: We agree that the investigation of the behavior in the fading channels is an important
   step. We have already some initial results available, because we face efficiently to the fading
-  channel without the pre-rotation, where the amplitude is close (but not equal) to 1.   
+  channel without the pre-rotation, where the amplitude of the fading coefficients related to the sources
+  to relay links is almost (but not completely) equal\footnote{It can be not intuitive that the
+  superimposed constellation is determined by relative fading given by the ratio $h=h_A/h_B$ in the 2-step
+  setup. The absolute value of fading coefficients can be equally modelled by a corresponding SNR
+  value modification.}.   
   A more detailed analysis of the proposed constellation design in fading channels is postponed for further work.
 \end{itemize}
 
